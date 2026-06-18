@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Linux System Admin Academy</title>
+  <script>
+    (function() {
+      var segmentCount = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        '/linux-admin-learning-platform/' +
+        l.pathname.split('/').slice(segmentCount + 1).join('/').replace(/&/g, '~and~') +
+        (l.search ? '?' + l.search.split('&').join('~and~') : '') +
+        (l.hash)
+      );
+    })();
+  </script>
+</head>
+<body>
+  <noscript>
+    <p>JavaScript is required to redirect to the correct page.</p>
+    <p>
+      <a href="/linux-admin-learning-platform/">Go to the homepage</a>
+    </p>
+  </noscript>
+</body>
+</html>
