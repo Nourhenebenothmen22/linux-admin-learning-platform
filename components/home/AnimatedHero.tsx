@@ -133,7 +133,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
               src={`${BASE_PATH}/Linux-Logo.jpg`}
               alt="Linux Tux Penguin Mascot"
               width={400}
-              height={400}
+              height={470}
               priority
               className="rounded-2xl drop-shadow-[0_25px_50px_rgba(34,197,94,0.3)]"
             />
