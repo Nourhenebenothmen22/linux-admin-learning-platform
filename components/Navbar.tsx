@@ -51,8 +51,8 @@ const Navbar = memo(function Navbar(): JSX.Element {
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-1 md:gap-2">
+        {/* Desktop links - using max-md:hidden to avoid CSS conflict with inline .flex{display:flex} */}
+        <div className="max-md:hidden flex items-center gap-1 md:gap-2">
           <Link
             href="/course"
             className="px-3 md:px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"

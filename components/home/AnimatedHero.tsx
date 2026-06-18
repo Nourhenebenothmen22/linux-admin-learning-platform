@@ -188,22 +188,22 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           </div>
 
           {/* Distro badges floating around the logo */}
-          <div className="absolute top-4 right-2 animate-float-slow z-20">
+          <div className="absolute top-4 right-2 animate-float-slow z-20 max-sm:hidden">
             <DistroBadge name="Ubuntu" letter="U" color="orange" />
           </div>
-          <div className="absolute top-12 left-0 animate-float-slow animation-delay-200 z-20">
+          <div className="absolute top-12 left-0 animate-float-slow animation-delay-200 z-20 max-sm:hidden">
             <DistroBadge name="Debian" letter="D" color="red" />
           </div>
-          <div className="absolute top-1/2 left-0 -translate-y-8 animate-float-slow animation-delay-400 z-20">
+          <div className="absolute top-1/2 left-0 -translate-y-8 animate-float-slow animation-delay-400 z-20 max-sm:hidden">
             <DistroBadge name="Fedora" letter="F" color="blue" />
           </div>
-          <div className="absolute top-1/2 right-0 -translate-y-8 animate-float-slow animation-delay-100 z-20">
+          <div className="absolute top-1/2 right-0 -translate-y-8 animate-float-slow animation-delay-100 z-20 max-sm:hidden">
             <DistroBadge name="Arch" letter="A" color="cyan" />
           </div>
           <div className="absolute bottom-16 left-4 animate-float-slow animation-delay-300 z-20">
             <DistroBadge name="CentOS" letter="C" color="purple" />
           </div>
-          <div className="absolute bottom-8 right-8 animate-float-slow animation-delay-500 z-20">
+          <div className="absolute bottom-8 right-8 animate-float-slow animation-delay-500 z-20 max-sm:hidden">
             <DistroBadge name="Kali" letter="K" color="zinc" />
           </div>
         </div>
