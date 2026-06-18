@@ -24,23 +24,6 @@ const FeaturesCarousel = dynamic(() => import("@/components/home/FeaturesCarouse
   ),
 })
 
-const DistroShowcase = dynamic(() => import("@/components/home/DistroShowcase"), {
-  ssr: true,
-  loading: (): JSX.Element => (
-    <section className="max-w-7xl mx-auto px-6 py-20" aria-busy="true">
-      <div className="text-center mb-12">
-        <div className="h-8 bg-zinc-800 rounded w-64 mx-auto mb-3 animate-pulse" />
-        <div className="h-4 bg-zinc-800 rounded w-96 mx-auto animate-pulse" />
-      </div>
-      <div className="grid grid-cols-6 gap-4">
-        {Array.from({ length: 6 }, (_: unknown, i: number): JSX.Element => (
-          <div key={i} className="h-32 bg-zinc-900 border border-zinc-800 rounded-xl animate-pulse" />
-        ))}
-      </div>
-    </section>
-  ),
-})
-
 const LiveTerminal = dynamic(() => import("@/components/home/LiveTerminal"), {
   ssr: true,
   loading: (): JSX.Element => (
@@ -90,7 +73,6 @@ export default function HomePage(): JSX.Element {
       <AnimatedHero />
       <StatsBar />
       <FeaturesCarousel />
-      <DistroShowcase />
       <LiveTerminal />
       <CommandCheatsheet />
       <CTASection />
