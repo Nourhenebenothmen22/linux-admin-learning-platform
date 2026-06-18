@@ -10,7 +10,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
   return (
     <section
       aria-label="Hero"
-      className="relative overflow-hidden min-h-[90vh] flex items-center bg-zinc-950"
+      className="relative overflow-hidden flex-1 flex items-center bg-zinc-950"
     >
       <div
         className="absolute inset-0 opacity-[0.08] pointer-events-none"
