@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import ErrorBoundary from "../components/ErrorBoundary";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -65,7 +66,6 @@ export default function RootLayout({
         <link rel="icon" href="/linux-admin-learning-platform/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/linux-admin-learning-platform/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/linux-admin-learning-platform/favicon.svg" />
-        <link rel="manifest" href="/linux-admin-learning-platform/site.webmanifest" />
         <meta name="theme-color" content="#22c55e" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />
@@ -73,12 +73,13 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Linux Academy" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
+        />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed] font-sans">
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </body>
     </html>
   );
