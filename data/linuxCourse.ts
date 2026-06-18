@@ -1,9 +1,19 @@
-﻿export interface LessonCommand {
+﻿export interface LessonCommandOption {
+  flag: string;
+  description: string;
+}
+
+export interface LessonCommand {
   command: string;
   explanation: string;
-  options: { flag: string; description: string }[];
+  options: LessonCommandOption[];
   example: string;
-  output: string;
+  output?: string;
+}
+
+export interface LessonPractice {
+  task: string;
+  hint: string;
 }
 
 export interface LessonQuiz {
@@ -13,17 +23,19 @@ export interface LessonQuiz {
   explanation: string;
 }
 
+export type LessonLevel = "Beginner" | "Intermediate" | "Advanced";
+
 export interface Lesson {
   id: string;
   title: string;
-  level: "Beginner" | "Intermediate" | "Advanced";
+  level: LessonLevel;
   estimatedTime: string;
   description: string;
   commands: LessonCommand[];
   notes: string[];
   warnings: string[];
   useCases: string[];
-  practice: { task: string; hint: string }[];
+  practice: LessonPractice[];
   quiz: LessonQuiz[];
   summary: string;
 }

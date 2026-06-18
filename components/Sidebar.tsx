@@ -1,22 +1,23 @@
 ﻿'use client'
 import { Terminal } from 'lucide-react'
+import type { LessonLevel } from '../data/linuxCourse'
 import SearchLessons from './SearchLessons'
 import ProgressBar from './ProgressBar'
 import SidebarSection from './SidebarSection'
 
-interface Lesson {
+interface SidebarLesson {
   id: string
   title: string
-  level: string
+  level: LessonLevel
 }
 
-interface Section {
+interface SidebarSectionData {
   sectionTitle: string
-  lessons: Lesson[]
+  lessons: SidebarLesson[]
 }
 
 interface SidebarProps {
-  sections: Section[]
+  sections: SidebarSectionData[]
   activeLessonId: string
   onLessonClick: (id: string) => void
   completedLessons: string[]
@@ -32,7 +33,7 @@ export default function Sidebar({
   searchQuery,
   onSearch,
 }: SidebarProps) {
-  const totalLessons = sections.reduce((sum, s) => sum + s.lessons.length, 0)
+  const totalLessons: number = sections.reduce((sum: number, s: SidebarSectionData) => sum + s.lessons.length, 0)
 
   return (
     <aside className="fixed left-0 top-0 bottom-0 w-72 bg-[#111111] border-r border-zinc-800 flex flex-col z-30">
@@ -47,10 +48,10 @@ export default function Sidebar({
       </div>
 
       <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-0.5">
-        {sections.map((section) => {
-          const hasActive = section.lessons.some((l) => l.id === activeLessonId)
+        {sections.map((section: SidebarSectionData) => {
+          const hasActive: boolean = section.lessons.some((l: SidebarLesson) => l.id === activeLessonId)
 
-          const filtered = section.lessons.filter((l) =>
+          const filtered: SidebarLesson[] = section.lessons.filter((l: SidebarLesson) =>
             l.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             section.sectionTitle.toLowerCase().includes(searchQuery.toLowerCase())
           )

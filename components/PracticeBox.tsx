@@ -8,7 +8,7 @@ interface PracticeBoxProps {
 }
 
 export default function PracticeBox({ task, hint }: PracticeBoxProps) {
-  const [showHint, setShowHint] = useState(false)
+  const [showHint, setShowHint] = useState<boolean>(false)
 
   return (
     <div className="bg-[#1a1a1a] rounded-lg border border-zinc-800 p-5 my-4">
@@ -20,7 +20,7 @@ export default function PracticeBox({ task, hint }: PracticeBoxProps) {
       <p className="text-sm text-zinc-300 leading-relaxed mb-4">{task}</p>
 
       <button
-        onClick={() => setShowHint(!showHint)}
+        onClick={(): void => setShowHint(!showHint)}
         className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-green-400 transition-colors"
       >
         <ChevronDown

@@ -6,7 +6,7 @@ interface AlertBoxProps {
 }
 
 export default function AlertBox({ type, children }: AlertBoxProps) {
-  const isWarning = type === 'warning'
+  const isWarning: boolean = type === 'warning'
 
   return (
     <div

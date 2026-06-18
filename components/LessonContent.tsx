@@ -1,45 +1,11 @@
 ﻿'use client'
 import { useEffect, useRef } from 'react'
 import { StickyNote, Briefcase, CheckCircle } from 'lucide-react'
+import type { Lesson, LessonLevel } from '../data/linuxCourse'
 import CodeBlock from './CodeBlock'
 import AlertBox from './AlertBox'
 import PracticeBox from './PracticeBox'
 import QuizCard from './QuizCard'
-
-interface LessonCommand {
-  command: string
-  explanation: string
-  options?: { flag: string; description: string }[]
-  example: string
-  output?: string
-}
-
-interface LessonPractice {
-  task: string
-  hint: string
-}
-
-interface LessonQuiz {
-  question: string
-  options: string[]
-  correctAnswer: number
-  explanation: string
-}
-
-export interface Lesson {
-  id: string
-  title: string
-  level: string
-  estimatedTime: string
-  description: string
-  commands: LessonCommand[]
-  notes: string[]
-  warnings?: string[]
-  useCases: string[]
-  practice: LessonPractice[]
-  quiz: LessonQuiz[]
-  summary: string
-}
 
 interface LessonContentProps {
   lesson: Lesson | null
@@ -47,10 +13,26 @@ interface LessonContentProps {
   isCompleted?: boolean
 }
 
-const levelBadgeColors: Record<string, string> = {
+const levelBadgeColors: Record<LessonLevel, string> = {
   Beginner: 'bg-green-500/10 text-green-400 border-green-500/20',
   Intermediate: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
   Advanced: 'bg-red-500/10 text-red-400 border-red-500/20',
+}
+
+function TerminalIcon() {
+  return (
+    <svg className="w-16 h-16 text-green-500/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+  )
+}
+
+function ClockIcon() {
+  return (
+    <svg className="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )
 }
 
 export default function LessonContent({ lesson, onMarkComplete, isCompleted }: LessonContentProps) {
@@ -60,6 +42,7 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
     if (lesson && contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: 'smooth' })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson?.id])
 
   if (!lesson) {
@@ -80,7 +63,7 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
         <h1 className="text-2xl font-bold text-zinc-100">{lesson.title}</h1>
         <span
           className={`text-xs px-2 py-0.5 rounded border ${
-            levelBadgeColors[lesson.level] || 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20'
+            levelBadgeColors[lesson.level]
           }`}
         >
           {lesson.level}
@@ -229,21 +212,5 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
         </button>
       </div>
     </div>
-  )
-}
-
-function TerminalIcon() {
-  return (
-    <svg className="w-16 h-16 text-green-500/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-    </svg>
-  )
-}
-
-function ClockIcon() {
-  return (
-    <svg className="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
   )
 }

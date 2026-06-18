@@ -4,7 +4,7 @@
 }
 
 export default function ProgressBar({ completed, total }: ProgressBarProps) {
-  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
+  const percentage: number = total > 0 ? Math.round((completed / total) * 100) : 0
 
   return (
     <div className="flex flex-col gap-2">

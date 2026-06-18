@@ -1,22 +1,23 @@
 ﻿'use client'
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { ChevronDown } from 'lucide-react'
+import type { LessonLevel } from '../data/linuxCourse'
 
-interface Lesson {
+interface SidebarLesson {
   id: string
   title: string
-  level: string
+  level: LessonLevel
 }
 
 interface SidebarSectionProps {
   title: string
-  lessons: Lesson[]
+  lessons: SidebarLesson[]
   activeLessonId: string
   onLessonClick: (id: string) => void
   defaultOpen?: boolean
 }
 
-const levelColors: Record<string, string> = {
+const levelColors: Record<LessonLevel, string> = {
   Beginner: 'bg-green-500',
   Intermediate: 'bg-yellow-500',
   Advanced: 'bg-red-500',
@@ -29,16 +30,17 @@ export default function SidebarSection({
   onLessonClick,
   defaultOpen = false,
 }: SidebarSectionProps) {
-  const [expanded, setExpanded] = useState(defaultOpen)
+  const [userExpanded, setUserExpanded] = useState<boolean | null>(null)
+  const expanded: boolean = userExpanded !== null ? userExpanded : defaultOpen
 
-  useEffect(() => {
-    setExpanded(defaultOpen)
+  const handleToggle = useCallback((): void => {
+    setUserExpanded((prev: boolean | null) => !(prev !== null ? prev : defaultOpen))
   }, [defaultOpen])
 
   return (
     <div className="mb-1">
       <button
-        onClick={() => setExpanded(!expanded)}
+        onClick={handleToggle}
         className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-zinc-800/50 transition-colors"
       >
         <div className="flex items-center gap-2 min-w-0">
@@ -56,13 +58,13 @@ export default function SidebarSection({
 
       {expanded && (
         <div className="ml-2 mt-1 flex flex-col gap-0.5 animate-slide-down">
-          {lessons.map((lesson) => {
-            const isActive = lesson.id === activeLessonId
+          {lessons.map((lesson: SidebarLesson) => {
+            const isActive: boolean = lesson.id === activeLessonId
 
             return (
               <button
                 key={lesson.id}
-                onClick={() => onLessonClick(lesson.id)}
+                onClick={(): void => onLessonClick(lesson.id)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-left transition-all ${
                   isActive
                     ? 'bg-green-500/10 text-green-400 border-l-2 border-green-500'
@@ -71,7 +73,7 @@ export default function SidebarSection({
               >
                 <span
                   className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                    levelColors[lesson.level] || 'bg-zinc-500'
+                    levelColors[lesson.level]
                   }`}
                 />
                 <span className="truncate">{lesson.title}</span>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import {
   Terminal,
   BookOpen,
@@ -12,8 +13,16 @@ import {
   Server,
   ArrowLeft,
 } from "lucide-react";
+import type { LessonLevel } from "../../data/linuxCourse";
 
-const roadmapSteps = [
+interface RoadmapStep {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  level: LessonLevel;
+}
+
+const roadmapSteps: RoadmapStep[] = [
   {
     icon: BookOpen,
     title: "Linux Basics",
@@ -86,13 +95,13 @@ const roadmapSteps = [
   },
 ];
 
-const levelColors: Record<string, string> = {
+const levelColors: Record<LessonLevel, string> = {
   Beginner: "bg-green-500/10 text-green-400 border-green-500/20",
   Intermediate: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
   Advanced: "bg-red-500/10 text-red-400 border-red-500/20",
 };
 
-const levelLineColors: Record<string, string> = {
+const levelLineColors: Record<LessonLevel, string> = {
   Beginner: "bg-green-500/30",
   Intermediate: "bg-yellow-500/30",
   Advanced: "bg-red-500/30",
@@ -148,7 +157,7 @@ export default function RoadmapPage() {
           <div className="absolute left-6 top-0 bottom-0 w-px bg-zinc-800 hidden md:block" />
 
           <div className="flex flex-col gap-8">
-            {roadmapSteps.map((step, index) => (
+            {roadmapSteps.map((step: RoadmapStep, index: number) => (
               <div key={index} className="relative md:pl-16">
                 <div className="hidden md:flex absolute left-4 top-6 -translate-x-1/2">
                   <div
@@ -187,7 +196,7 @@ export default function RoadmapPage() {
                       {index < roadmapSteps.length - 1 && (
                         <div className="mt-4 flex items-center gap-2">
                           <div
-                            className={`h-px flex-1 ${levelLineColors[step.level] || "bg-zinc-800"}`}
+                            className={`h-px flex-1 ${levelLineColors[step.level]}`}
                           />
                           <svg
                             className={`w-4 h-4 ${step.level === "Advanced" ? "text-red-500/30" : step.level === "Intermediate" ? "text-yellow-500/30" : "text-green-500/30"}`}

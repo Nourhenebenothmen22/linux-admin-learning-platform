@@ -11,23 +11,23 @@ interface QuizCardProps {
 
 export default function QuizCard({ question, options, correctAnswer, explanation }: QuizCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
-  const [showExplanation, setShowExplanation] = useState(false)
+  const [showExplanation, setShowExplanation] = useState<boolean>(false)
 
-  const handleSelect = (index: number) => {
+  const handleSelect = (index: number): void => {
     if (selectedAnswer !== null) return
     setSelectedAnswer(index)
     setShowExplanation(true)
   }
 
-  const isCorrect = selectedAnswer === correctAnswer
+  const isCorrect: boolean = selectedAnswer === correctAnswer
 
   return (
     <div className="bg-[#1a1a1a] rounded-lg border border-zinc-800 p-5 my-4">
       <p className="text-sm font-semibold text-zinc-200 mb-4">{question}</p>
 
       <div className="flex flex-col gap-2">
-        {options.map((option, index) => {
-          let optionStyle = 'bg-zinc-800/50 border-zinc-700 text-zinc-300 hover:bg-zinc-700/50 hover:border-zinc-600'
+        {options.map((option: string, index: number) => {
+          let optionStyle: string = 'bg-zinc-800/50 border-zinc-700 text-zinc-300 hover:bg-zinc-700/50 hover:border-zinc-600'
 
           if (selectedAnswer !== null) {
             if (index === correctAnswer) {
@@ -42,7 +42,7 @@ export default function QuizCard({ question, options, correctAnswer, explanation
           return (
             <button
               key={index}
-              onClick={() => handleSelect(index)}
+              onClick={(): void => handleSelect(index)}
               disabled={selectedAnswer !== null}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border text-sm text-left transition-all ${optionStyle}`}
             >

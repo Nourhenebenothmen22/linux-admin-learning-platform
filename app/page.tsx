@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import {
   Terminal,
   BookOpen,
@@ -10,7 +11,13 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const features = [
+interface Feature {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
   {
     icon: Terminal,
     title: "Commands",
@@ -124,7 +131,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((feature) => (
+            {features.map((feature: Feature) => (
               <div
                 key={feature.title}
                 className="bg-[#1a1a1a] rounded-xl border border-zinc-800 p-6 hover:border-green-500/30 transition-all group"

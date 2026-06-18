@@ -4,14 +4,14 @@ import { useState, useCallback, useMemo } from 'react'
 import Sidebar from '../../components/Sidebar'
 import LessonContent from '../../components/LessonContent'
 import { linuxCourse } from '../../data/linuxCourse'
-import type { Lesson } from '../../components/LessonContent'
+import type { Lesson } from '../../data/linuxCourse'
 
 export default function CoursePage() {
   const [activeLessonId, setActiveLessonId] = useState<string>(
     linuxCourse[0]?.lessons[0]?.id ?? ''
   )
   const [completedLessons, setCompletedLessons] = useState<string[]>([])
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
   const sidebarSections = useMemo(
     () =>
@@ -26,25 +26,25 @@ export default function CoursePage() {
     []
   )
 
-  const activeLesson: Lesson | null = useMemo(() => {
+  const activeLesson: Lesson | null = useMemo((): Lesson | null => {
     for (const section of linuxCourse) {
-      const found = section.lessons.find((l) => l.id === activeLessonId)
-      if (found) return found as unknown as Lesson
+      const found: Lesson | undefined = section.lessons.find((l: Lesson): boolean => l.id === activeLessonId)
+      if (found) return found
     }
     return null
   }, [activeLessonId])
 
-  const handleLessonClick = useCallback((id: string) => {
+  const handleLessonClick = useCallback((id: string): void => {
     setActiveLessonId(id)
   }, [])
 
-  const handleSearch = useCallback((query: string) => {
+  const handleSearch = useCallback((query: string): void => {
     setSearchQuery(query)
   }, [])
 
-  const handleMarkComplete = useCallback(() => {
+  const handleMarkComplete = useCallback((): void => {
     if (activeLessonId && !completedLessons.includes(activeLessonId)) {
-      setCompletedLessons((prev) => [...prev, activeLessonId])
+      setCompletedLessons((prev: string[]) => [...prev, activeLessonId])
     }
   }, [activeLessonId, completedLessons])
 

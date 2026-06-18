@@ -9,12 +9,23 @@ interface CodeBlockProps {
 }
 
 export default function CodeBlock({ command, language, label }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState<boolean>(false)
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(command)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const handleCopy = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText(command)
+      setCopied(true)
+      setTimeout((): void => setCopied(false), 2000)
+    } catch {
+      const textArea: HTMLTextAreaElement = document.createElement('textarea')
+      textArea.value = command
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      setCopied(true)
+      setTimeout((): void => setCopied(false), 2000)
+    }
   }
 
   return (

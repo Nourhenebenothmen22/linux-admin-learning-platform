@@ -1,12 +1,14 @@
 ﻿'use client'
+import type { LessonLevel } from '../data/linuxCourse'
+
 interface LessonCardProps {
   title: string
-  level: 'Beginner' | 'Intermediate' | 'Advanced'
+  level: LessonLevel
   estimatedTime: string
   onClick: () => void
 }
 
-const levelStyles: Record<string, string> = {
+const levelStyles: Record<LessonLevel, string> = {
   Beginner: 'bg-green-500/10 text-green-400 border-green-500/20',
   Intermediate: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
   Advanced: 'bg-red-500/10 text-red-400 border-red-500/20',
