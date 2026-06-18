@@ -137,7 +137,6 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
               height={400}
               loading="eager"
               decoding="async"
-              fetchPriority="high"
               className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] object-contain drop-shadow-[0_25px_50px_rgba(34,197,94,0.4)] rounded-3xl"
             />
           </div>
