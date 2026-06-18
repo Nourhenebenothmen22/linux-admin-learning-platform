@@ -1,0 +1,3063 @@
+﻿export interface LessonCommand {
+  command: string;
+  explanation: string;
+  options: { flag: string; description: string }[];
+  example: string;
+  output: string;
+}
+
+export interface LessonQuiz {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
+export interface Lesson {
+  id: string;
+  title: string;
+  level: "Beginner" | "Intermediate" | "Advanced";
+  estimatedTime: string;
+  description: string;
+  commands: LessonCommand[];
+  notes: string[];
+  warnings: string[];
+  useCases: string[];
+  practice: { task: string; hint: string }[];
+  quiz: LessonQuiz[];
+  summary: string;
+}
+
+export interface CourseSection {
+  sectionTitle: string;
+  lessons: Lesson[];
+}
+
+export const linuxCourse: CourseSection[] = [
+  {
+    sectionTitle: "Linux Beginner",
+    lessons: [
+      {
+        id: "what-is-linux",
+        title: "What is Linux?",
+        level: "Beginner",
+        estimatedTime: "15 min",
+        description: "Linux is a free, open-source operating system kernel created by Linus Torvalds in 1991. This lesson introduces the history, philosophy, and core components of the Linux operating system.",
+        commands: [
+          {
+            command: "uname -a",
+            explanation: "Displays all system information including kernel name, hostname, kernel release, kernel version, machine hardware name, and operating system.",
+            options: [
+              { flag: "-a", description: "Show all system information" },
+              { flag: "-r", description: "Print the kernel release" },
+              { flag: "-v", description: "Print the kernel version" }
+            ],
+            example: "uname -a",
+            output: "Linux ubuntu-server 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux"
+          },
+          {
+            command: "cat /etc/os-release",
+            explanation: "Displays operating system identification data including distribution name, version, and ID.",
+            options: [
+              { flag: "No common flags", description: "The file is read directly with cat" }
+            ],
+            example: "cat /etc/os-release",
+            output: "PRETTY_NAME=\"Ubuntu 22.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.3 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy"
+          }
+        ],
+        notes: [
+          "Linux is released under the GNU General Public License (GPL), ensuring it remains free and open-source",
+          "The Linux kernel manages hardware resources, process scheduling, memory management, and device drivers",
+          "Linux powers over 90% of cloud infrastructure, the majority of supercomputers, and most Android devices",
+          "The term 'Linux' technically refers only to the kernel, while 'GNU/Linux' includes the userland tools"
+        ],
+        warnings: [
+          "Linux is not immune to malware; always install software from trusted repositories and keep your system updated"
+        ],
+        useCases: [
+          "Web servers: Linux powers Apache, Nginx, and other web server software for hosting websites",
+          "Embedded systems: Linux runs on routers, smart TVs, IoT devices, and automotive infotainment systems"
+        ],
+        practice: [
+          { task: "Run uname -a and identify your kernel version and architecture", hint: "Use uname -a and look for the kernel version number (e.g., 5.15.0) and the architecture (e.g., x86_64)" }
+        ],
+        quiz: [
+          {
+            question: "Who created the Linux kernel?",
+            options: ["Richard Stallman", "Linus Torvalds", "Ken Thompson", "Dennis Ritchie"],
+            correctAnswer: 1,
+            explanation: "Linus Torvalds created the Linux kernel in 1991 while a student at the University of Helsinki."
+          }
+        ],
+        summary: "Linux is a free, open-source operating system kernel that powers everything from embedded devices to supercomputers, known for its stability, security, and flexibility."
+      },
+      {
+        id: "linux-distributions",
+        title: "Linux Distributions",
+        level: "Beginner",
+        estimatedTime: "20 min",
+        description: "A Linux distribution (distro) is a complete operating system built on the Linux kernel, package manager, and desktop environment. This lesson covers major distribution families and how to choose the right one.",
+        commands: [
+          {
+            command: "cat /etc/os-release",
+            explanation: "Shows the distribution name, version, and ID for any modern Linux system.",
+            options: [
+              { flag: "-f", description: "With lsb_release, shows distribution description" }
+            ],
+            example: "cat /etc/os-release",
+            output: "PRETTY_NAME=\"Ubuntu 22.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.3 LTS (Jammy Jellyfish)\"\nID=ubuntu\nID_LIKE=debian"
+          },
+          {
+            command: "lsb_release -a",
+            explanation: "Displays LSB (Linux Standard Base) information about the distribution including distributor ID, release number, and codename.",
+            options: [
+              { flag: "-a", description: "Show all available LSB information" },
+              { flag: "-d", description: "Show only the distribution description" },
+              { flag: "-r", description: "Show only the release number" },
+              { flag: "-c", description: "Show only the codename" }
+            ],
+            example: "lsb_release -a",
+            output: "No LSB modules are available.\nDistributor ID: Ubuntu\nDescription:    Ubuntu 22.04.3 LTS\nRelease:        22.04\nCodename:       jammy"
+          }
+        ],
+        notes: [
+          "Debian-based distros (Ubuntu, Mint) use APT package management with .deb packages",
+          "Red Hat-based distros (RHEL, Fedora, CentOS) use RPM package management with yum or dnf",
+          "Arch Linux uses a rolling release model with the pacman package manager and is known for its cutting-edge software",
+          "Server environments commonly use Ubuntu LTS or RHEL for their long-term support and stability"
+        ],
+        warnings: [
+          "Do not mix package managers from different distribution families; using RPM packages on a Debian system can break your system"
+        ],
+        useCases: [
+          "Ubuntu: Ideal for beginners, desktops, and cloud servers with excellent documentation and community support",
+          "RHEL/CentOS: Enterprise environments requiring certified stability, support contracts, and compliance"
+        ],
+        practice: [
+          { task: "Check your distribution information using /etc/os-release and lsb_release", hint: "Run both 'cat /etc/os-release' and 'lsb_release -a' and compare the output" }
+        ],
+        quiz: [
+          {
+            question: "Which package manager is used by Debian-based distributions?",
+            options: ["YUM", "Pacman", "APT", "RPM"],
+            correctAnswer: 2,
+            explanation: "Debian-based distributions like Ubuntu use APT (Advanced Package Tool) for package management."
+          }
+        ],
+        summary: "Linux distributions package the kernel with software, package managers, and support, with Debian-based and Red Hat-based families being the most popular for servers."
+      },
+      {
+        id: "terminal-basics",
+        title: "Terminal Basics",
+        level: "Beginner",
+        estimatedTime: "20 min",
+        description: "The terminal (or shell) is the primary interface for interacting with a Linux system. This lesson covers essential terminal concepts, shell types, and basic navigation.",
+        commands: [
+          {
+            command: "echo $SHELL",
+            explanation: "Displays the path of the current shell program being used.",
+            options: [
+              { flag: "$SHELL", description: "Environment variable containing the path to the current shell" }
+            ],
+            example: "echo $SHELL",
+            output: "/bin/bash"
+          },
+          {
+            command: "which bash",
+            explanation: "Locates the binary file of a command, showing its full path in the filesystem.",
+            options: [
+              { flag: "-a", description: "Show all matching executables, not just the first" },
+              { flag: "-s", description: "Silent mode, only return exit status" }
+            ],
+            example: "which bash",
+            output: "/usr/bin/bash"
+          }
+        ],
+        notes: [
+          "The prompt typically shows username@hostname:current_directory$, with # indicating root user",
+          "Tab completion auto-completes commands, file paths, and arguments to save typing effort",
+          "The history command shows previously executed commands; use up/down arrows to recall them",
+          "Ctrl+C kills the currently running process, Ctrl+D exits the shell or ends input"
+        ],
+        warnings: [
+          "Be careful with the Enter key; commands execute immediately with no undo function"
+        ],
+        useCases: [
+          "Running administrative tasks: Using the terminal for system updates, user management, and service control",
+          "Scripting automation: Combining terminal commands into shell scripts for automated maintenance tasks"
+        ],
+        practice: [
+          { task: "Use tab completion to navigate to /var/log and list its contents", hint: "Type 'cd /va' and press Tab to auto-complete, then continue with '/log' and press Enter, then type 'ls'" }
+        ],
+        quiz: [
+          {
+            question: "How do you cancel a running command in the terminal?",
+            options: ["Ctrl+D", "Ctrl+C", "Ctrl+Z", "Ctrl+X"],
+            correctAnswer: 1,
+            explanation: "Ctrl+C sends the SIGINT signal to terminate the currently running foreground process."
+          }
+        ],
+        summary: "The terminal is the command-line interface to Linux, providing powerful control through shell commands, tab completion, and keyboard shortcuts."
+      },
+      {
+        id: "file-system-structure",
+        title: "File System Structure",
+        level: "Beginner",
+        estimatedTime: "25 min",
+        description: "Linux follows the Filesystem Hierarchy Standard (FHS) which defines the directory structure. This lesson explains the purpose of each major system directory.",
+        commands: [
+          {
+            command: "ls -la /",
+            explanation: "Lists all files and directories at the root of the filesystem with detailed information including permissions, ownership, size, and modification dates.",
+            options: [
+              { flag: "-l", description: "Use long listing format showing permissions, links, owner, group, size, and time" },
+              { flag: "-a", description: "Show all files including hidden ones (those starting with a dot)" },
+              { flag: "-h", description: "Human-readable sizes (e.g., 1K, 234M, 2G)" }
+            ],
+            example: "ls -la /",
+            output: "total 72\ndrwxr-xr-x  20 root root  4096 Dec 15 10:30 .\ndrwxr-xr-x  20 root root  4096 Dec 15 10:30 ..\nlrwxrwxrwx   1 root root     7 Jul 20  2023 bin -> usr/bin\ndrwxr-xr-x   4 root root  4096 Dec 15 10:28 boot\ndrwxr-xr-x  20 root root  3980 Dec 15 10:30 dev\ndrwxr-xr-x 146 root root 12288 Dec 15 10:30 etc\ndrwxr-xr-x   3 root root  4096 Dec 10 14:15 home\ndrwxr-xr-x  32 root root  4096 Oct 22 14:30 lib\ndrwxr-xr-x   2 root root  4096 Oct 22 14:30 lib64\ndrwxr-xr-x   2 root root 16384 Dec 10 14:15 lost+found\ndrwxr-xr-x   4 root root  4096 Dec 15 10:28 media\ndrwxr-xr-x   2 root root  4096 Oct 22 14:30 mnt\ndrwxr-xr-x   2 root root  4096 Oct 22 14:30 opt\ndr-xr-xr-x 288 root root     0 Dec 15 10:30 proc\ndrwx------   7 root root  4096 Dec 15 10:28 root\ndrwxr-xr-x  36 root root  1060 Dec 15 10:30 run\ndrwxr-xr-x   6 root root  4096 Dec 15 10:30 sbin -> usr/sbin\ndrwxr-xr-x   2 root root  4096 Oct 22 14:30 srv\ndr-xr-xr-x  13 root root     0 Dec 15 10:30 sys\ndrwxrwxrwt  14 root root  4096 Dec 15 10:30 tmp\ndrwxr-xr-x  14 root root  4096 Oct 22 14:30 usr\ndrwxr-xr-x  13 root root  4096 Oct 22 14:30 var"
+          },
+          {
+            command: "df -h",
+            explanation: "Reports file system disk space usage for all mounted partitions in human-readable format.",
+            options: [
+              { flag: "-h", description: "Human-readable sizes (MB, GB)" },
+              { flag: "-T", description: "Show file system type" },
+              { flag: "-i", description: "Show inode information instead of block usage" }
+            ],
+            example: "df -h",
+            output: "Filesystem      Size  Used Avail Use% Mounted on\ntmpfs           1.6G  2.1M  1.6G   1% /run\nefivarfs        256M  256K  256M   1% /sys/firmware/efi/efivars\ndevtmpfs        789M     0  789M   0% /dev\n/dev/sda2       234G   32G  190G  15% /\ntmpfs           7.7G   48K  7.7G   1% /dev/shm\ntmpfs           5.0M  4.0K  5.0M   1% /run/lock\ntmpfs           7.7G     0  7.7G   0% /run/qemu"
+          }
+        ],
+        notes: [
+          "/etc contains system-wide configuration files; most system settings are stored here as plain text files",
+          "/var holds variable data like logs (/var/log), databases (/var/lib), and spool files (/var/spool)",
+          "/proc is a virtual filesystem that provides process and kernel information as files",
+          "/tmp is world-writable and used for temporary files; contents may be cleared on reboot"
+        ],
+        warnings: [
+          "Never delete directories like /etc, /usr, or /var unless you are certain of the consequences; removing critical system directories can break the OS"
+        ],
+        useCases: [
+          "Finding log files: System logs are stored in /var/log, where you can troubleshoot application and system issues",
+          "Configuring services: Application and service configuration files in /etc can be edited to customize behavior"
+        ],
+        practice: [
+          { task: "Explore the root directory and identify the purpose of at least 5 directories using ls -la /", hint: "Use 'ls -la /' then research each directory like /etc, /var, /usr, /tmp, and /proc using 'man hier' or online documentation" }
+        ],
+        quiz: [
+          {
+            question: "Which directory contains system-wide configuration files?",
+            options: ["/var", "/home", "/etc", "/usr"],
+            correctAnswer: 2,
+            explanation: "/etc is the directory for system-wide configuration files, such as network settings, user accounts, and service configurations."
+          }
+        ],
+        summary: "The Linux filesystem follows the FHS standard with specific directories for configuration (/etc), variable data (/var), user files (/home), and system binaries (/usr/bin)."
+      },
+      {
+        id: "basic-commands",
+        title: "Basic Commands",
+        level: "Beginner",
+        estimatedTime: "30 min",
+        description: "This lesson introduces the most essential Linux commands that every administrator must know for file operations, text processing, and system information.",
+        commands: [
+          {
+            command: "echo \"Hello World\"",
+            explanation: "Prints text to the standard output. Used for displaying messages, variable values, and generating output in scripts.",
+            options: [
+              { flag: "-e", description: "Enable interpretation of backslash escapes (\\n, \\t, etc.)" },
+              { flag: "-n", description: "Do not output the trailing newline" }
+            ],
+            example: "echo -e \"Line 1\\nLine 2\"",
+            output: "Line 1\nLine 2"
+          },
+          {
+            command: "man ls",
+            explanation: "Displays the manual page for the ls command, showing detailed documentation including syntax, options, and examples.",
+            options: [
+              { flag: "-k", description: "Search for keywords in manual page descriptions" },
+              { flag: "-f", description: "Display only the short description from the whatis database" }
+            ],
+            example: "man ls",
+            output: "LS(1)                            User Commands                           LS(1)\n\nNAME\n       ls - list directory contents\n\nSYNOPSIS\n       ls [OPTION]... [FILE]...\n\nDESCRIPTION\n       List information about the FILEs (the current directory by default).\n       Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.\n\n       Mandatory arguments to long options are mandatory for short options too.\n\n       -a, --all\n              do not ignore entries starting with .\n\n       -l     use a long listing format\n"
+          }
+        ],
+        notes: [
+          "Use man command to access the manual for any command; press 'q' to exit the viewer",
+          "Clear the terminal screen with the clear command or Ctrl+L keyboard shortcut",
+          "Use the type command to check if a command is a built-in shell command or an external binary",
+          "Commands can be chained with && (run if previous succeeded) or || (run if previous failed)"
+        ],
+        warnings: [
+          "Always read the man page before using unfamiliar options, especially those involving file deletion or system modification"
+        ],
+        useCases: [
+          "Quick file inspection: Use head, tail, wc, and file commands to inspect file contents without opening an editor",
+          "System diagnostics: Combine echo, cat, and grep to extract specific information from system files"
+        ],
+        practice: [
+          { task: "Read the man page for the ls command and learn how to sort files by modification time", hint: "Run 'man ls' and search for 'sort' by typing /sort while viewing the man page" }
+        ],
+        quiz: [
+          {
+            question: "How do you access the manual page for a Linux command?",
+            options: ["help command", "man command", "info command", "doc command"],
+            correctAnswer: 1,
+            explanation: "The man (manual) command displays the documentation for a given command, providing detailed usage information."
+          }
+        ],
+        summary: "Basic Linux commands like echo, man, and clear are the foundation for system administration, enabling file operations, text processing, and system information retrieval."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Files and Directories",
+    lessons: [
+      {
+        id: "pwd-ls-cd",
+        title: "pwd, ls, cd",
+        level: "Beginner",
+        estimatedTime: "20 min",
+        description: "Navigation is the most fundamental skill in Linux. This lesson covers pwd (print working directory), ls (list directory contents), and cd (change directory) for traversing the filesystem.",
+        commands: [
+          {
+            command: "pwd",
+            explanation: "Prints the full absolute path of the current working directory. Essential for knowing where you are in the filesystem.",
+            options: [
+              { flag: "-L", description: "Use PWD from environment, even if it contains symlinks (default)" },
+              { flag: "-P", description: "Show the physical location, resolving all symlinks" }
+            ],
+            example: "pwd",
+            output: "/home/administrator"
+          },
+          {
+            command: "ls -la /var/log",
+            explanation: "Lists all files including hidden ones in /var/log with detailed information: permissions, owner, group, size, and modification time.",
+            options: [
+              { flag: "-l", description: "Long format showing permissions, links, owner, group, size, and date" },
+              { flag: "-a", description: "Include hidden files (those starting with a dot)" },
+              { flag: "-h", description: "Human-readable file sizes" },
+              { flag: "-S", description: "Sort by file size, largest first" },
+              { flag: "-t", description: "Sort by modification time, newest first" }
+            ],
+            example: "ls -la /var/log",
+            output: "total 12384\ndrwxr-xr-x  13 root          root              4096 Dec 15 10:30 .\ndrwxr-xr-x  14 root          root              4096 Dec 15 10:30 ..\ndrwxr-xr-x   2 root          root              4096 Dec 10 14:20 apt\ndrwxr-xr-x   2 root          root              4096 Dec 12 08:15 auth\ndrwxr-xr-x   2 root          root              4096 Dec 13 14:30 cups\ndrwxr-xr-x   2 root          root              4096 Dec 15 10:30 dist-upgrade\ndrwxr-xr-x   2 root          root              4096 Dec 12 06:00 hp\ndrwxr-xr-x   2 root          root              4096 Dec 14 20:45 installer\ndrwxr-xr-x   2 root          root              4096 Oct 22 14:30 journal\ndrwxr-xr-x   2 root          root              4096 Dec 15 10:30 nginx\ndrwxr-xr-x   2 root          root              4096 Sep 10 12:00 ntpstats\n-rw-r-----   1 syslog        adm             20480 Dec 15 10:30 syslog\n-rw-r--r--   1 root          root            169425 Dec 14 23:59 dpkg.log\n-rw-rw-r--   1 root          utmp          292292 Dec 15 10:30 lastlog\n-rw-rw-r--   1 root          utmp          153600 Dec 15 10:30 wtmp"
+          },
+          {
+            command: "cd /usr/local/bin",
+            explanation: "Changes the current directory to /usr/local/bin. Can use absolute paths (starting with /) or relative paths.",
+            options: [
+              { flag: "-", description: "Go back to the previous directory" },
+              { flag: "~", description: "Shortcut for the user's home directory" },
+              { flag: "..", description: "Parent directory of the current location" }
+            ],
+            example: "cd /usr/local/bin && pwd",
+            output: "/usr/local/bin"
+          }
+        ],
+        notes: [
+          "Use cd - to toggle between two directories; this is useful when working in multiple locations",
+          "The tilde (~) represents the current user's home directory, e.g., cd ~/Documents",
+          "Use cd .. to go up one level, cd ../.. to go up two levels",
+          "Relative paths do not start with / and are based on your current location"
+        ],
+        warnings: [
+          "Be mindful of your current directory when running destructive commands; always use pwd to confirm your location first"
+        ],
+        useCases: [
+          "Navigating log directories: cd /var/log then ls to view log files for troubleshooting",
+          "Moving between project directories: Use cd - to quickly switch between two working directories"
+        ],
+        practice: [
+          { task: "Navigate from your home directory to /etc, then to /var/log, and back to your home directory using absolute and relative paths", hint: "Start with 'cd /etc', then use 'cd ../var/log', then 'cd ~' to return home" }
+        ],
+        quiz: [
+          {
+            question: "What does the command 'pwd' display?",
+            options: ["Your username", "The current directory path", "The password file", "A list of processes"],
+            correctAnswer: 1,
+            explanation: "pwd stands for 'print working directory' and displays the absolute path of your current location in the filesystem."
+          }
+        ],
+        summary: "The pwd, ls, and cd commands form the foundation of filesystem navigation, allowing you to identify your location, explore directory contents, and move between directories."
+      },
+      {
+        id: "mkdir-touch-cp-mv-rm",
+        title: "mkdir, touch, cp, mv, rm",
+        level: "Beginner",
+        estimatedTime: "25 min",
+        description: "File and directory management is essential for organizing a Linux system. This lesson covers creating, copying, moving, and deleting files and directories.",
+        commands: [
+          {
+            command: "mkdir -p projects/website/css",
+            explanation: "Creates a directory and all parent directories as needed. The -p flag suppresses errors if the directory exists.",
+            options: [
+              { flag: "-p", description: "Create parent directories as needed; no error if existing" },
+              { flag: "-v", description: "Print a message for each created directory" },
+              { flag: "-m", description: "Set file permissions (mode) for the new directory" }
+            ],
+            example: "mkdir -p projects/website/css",
+            output: ""
+
+          },
+          {
+            command: "cp -r /etc/nginx /backup/nginx",
+            explanation: "Recursively copies the /etc/nginx directory and all its contents to /backup/nginx. Preserves directory structure.",
+            options: [
+              { flag: "-r", description: "Recursively copy directories and their contents" },
+              { flag: "-p", description: "Preserve original file attributes (permissions, timestamps)" },
+              { flag: "-i", description: "Prompt before overwriting existing files" },
+              { flag: "-u", description: "Copy only when the source file is newer than the destination" }
+            ],
+            example: "cp -rp /etc/nginx /backup/nginx",
+            output: ""
+
+          },
+          {
+            command: "mv /var/log/old.log /var/log/archive/old.log",
+            explanation: "Moves (renames) a file from one location to another. Works both within and across filesystems.",
+            options: [
+              { flag: "-i", description: "Prompt before overwriting an existing file" },
+              { flag: "-u", description: "Move only when the source is newer than the destination" },
+              { flag: "-v", description: "Verbose, show what is being moved" },
+              { flag: "-n", description: "Do not overwrite an existing file" }
+            ],
+            example: "mv -v report.txt reports/final-report.txt",
+            output: "renamed 'report.txt' -> 'reports/final-report.txt'"
+          },
+          {
+            command: "rm -r temp_directory",
+            explanation: "Removes a directory and all of its contents recursively. This is a destructive operation with no trash bin.",
+            options: [
+              { flag: "-r", description: "Recursively remove directories and their contents" },
+              { flag: "-f", description: "Force removal without prompting, ignore nonexistent files" },
+              { flag: "-i", description: "Prompt before every removal" },
+              { flag: "-v", description: "Verbose, show what is being removed" }
+            ],
+            example: "rm -ri old_project",
+            output: "rm: descend into directory 'old_project'? y\nrm: remove regular file 'old_project/file1.txt'? y\nrm: remove regular file 'old_project/file2.txt'? y\nrm: remove directory 'old_project'? y"
+          }
+        ],
+        notes: [
+          "touch creates an empty file if it does not exist, or updates the access and modification timestamps if it does",
+          "cp with -a (archive) is equivalent to cp -dR --preserve=all, ideal for making complete backups",
+          "mv is atomic within the same filesystem, making it safe for replacing configuration files",
+          "Use rm -i interactively to confirm each deletion and avoid accidental data loss"
+        ],
+        warnings: [
+          "NEVER run 'rm -rf /' as it recursively deletes the entire filesystem; also avoid 'rm -rf .*' in your home directory"
+        ],
+        useCases: [
+          "Backup configuration: Use cp -a /etc/nginx /etc/nginx.backup before making configuration changes",
+          "Organizing log files: Use mv to archive old log files into dated subdirectories for retention"
+        ],
+        practice: [
+          { task: "Create a directory structure for a web project with subdirectories for css, js, and images, then copy a file into each", hint: "Use 'mkdir -p project/{css,js,images}' then 'touch project/css/style.css project/js/app.js project/images/logo.png'" }
+        ],
+        quiz: [
+          {
+            question: "What does the -p flag do with the mkdir command?",
+            options: ["Sets permissions", "Creates parent directories", "Prints output", "Protects the directory"],
+            correctAnswer: 1,
+            explanation: "The -p flag creates parent directories as needed, allowing you to create nested directory structures in one command."
+          }
+        ],
+        summary: "mkdir, touch, cp, mv, and rm are the core file management commands for creating, copying, moving, and deleting files and directories on a Linux system."
+      },
+      {
+        id: "cat-less-head-tail",
+        title: "cat, less, head, tail",
+        level: "Beginner",
+        estimatedTime: "20 min",
+        description: "Viewing file contents is a frequent task in Linux administration. This lesson covers four essential commands for reading and processing text files.",
+        commands: [
+          {
+            command: "cat /etc/passwd",
+            explanation: "Concatenates and displays the entire contents of a file. Useful for viewing small configuration files quickly.",
+            options: [
+              { flag: "-n", description: "Number all output lines" },
+              { flag: "-b", description: "Number non-blank lines" },
+              { flag: "-s", description: "Squeeze multiple consecutive blank lines into one" },
+              { flag: "-E", description: "Show $ at the end of each line" }
+            ],
+            example: "cat -n /etc/passwd",
+            output: "     1  root:x:0:0:root:/root:/bin/bash\n     2  daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\n     3  bin:x:2:2:bin:/bin:/usr/sbin/nologin\n     4  sys:x:3:3:sys:/dev:/usr/sbin/nologin\n     5  sync:x:4:65534:sync:/bin:/bin/sync\n     6  games:x:5:60:games:/usr/games:/usr/sbin/nologin\n     7  man:x:6:12:man:/var/cache/man:/usr/sbin/nologin\n     8  lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\n     9  mail:x:8:8:mail:/var/mail:/usr/sbin/nologin\n    10  news:x:9:9:news:/var/spool/news:/usr/sbin/nologin"
+          },
+          {
+            command: "head -n 20 /var/log/syslog",
+            explanation: "Displays the first 20 lines of a file. Useful for previewing large files or checking recent log entries from the beginning.",
+            options: [
+              { flag: "-n", description: "Number of lines to display (default is 10)" },
+              { flag: "-c", description: "Number of bytes to display instead of lines" },
+              { flag: "-q", description: "Never print headers with file names" }
+            ],
+            example: "head -5 /etc/fstab",
+            output: "# /etc/fstab: static file system information.\n#\n# Use 'blkid' to print the universally unique identifier for a\n# device; this may be used with UUID= as a more robust way to name devices\n# that works even if disks are added and removed. See fstab(5).\n#"
+          },
+          {
+            command: "tail -f /var/log/nginx/access.log",
+            explanation: "Displays the last 10 lines of a file and follows new content as it is appended. Essential for monitoring log files in real time.",
+            options: [
+              { flag: "-n", description: "Number of lines to display from the end" },
+              { flag: "-f", description: "Follow mode - output appended data as the file grows" },
+              { flag: "-F", description: "Follow with retry - useful for log rotation" },
+              { flag: "-c", description: "Number of bytes from the end" }
+            ],
+            example: "tail -20 /var/log/auth.log",
+            output: "Dec 15 10:30:01 server sshd[2345]: Accepted publickey for admin from 192.168.1.100 port 54321\nDec 15 10:30:01 server sshd[2345]: pam_unix(sshd:session): session opened for user admin\nDec 15 10:31:15 server sudo:   admin : TTY=pts/0 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/systemctl restart nginx\nDec 15 10:32:00 server sshd[2346]: Failed password for root from 10.0.0.50 port 45678 ssh2\nDec 15 10:32:05 server sshd[2346]: Failed password for root from 10.0.0.50 port 45678 ssh2"
+          }
+        ],
+        notes: [
+          "Use less instead of cat for large files; less allows scrolling both forward and backward, and searching",
+          "tail -f is the standard way to monitor log files in real time during troubleshooting",
+          "head and tail can be piped together: tail -n +500 file | head -n 50 shows lines 500-550",
+          "less supports vi-like navigation with / for search, g for beginning, G for end"
+        ],
+        warnings: [
+          "Using cat on very large files (hundreds of MB) can consume significant memory; use less or tail instead"
+        ],
+        useCases: [
+          "Monitor web server access: Use tail -f /var/log/nginx/access.log to watch incoming requests in real time",
+          "Check system authentication: Use tail -50 /var/log/auth.log to review recent login attempts and sudo usage"
+        ],
+        practice: [
+          { task: "Use tail -f to monitor /var/log/syslog while running other commands in another terminal, then observe new log entries appearing", hint: "Open two terminals; in one run 'tail -f /var/log/syslog', in the other run commands like 'sudo systemctl restart ssh' to generate log entries" }
+        ],
+        quiz: [
+          {
+            question: "Which command is best for viewing a large log file one page at a time?",
+            options: ["cat", "head", "less", "tail"],
+            correctAnswer: 2,
+            explanation: "less allows you to scroll through a file page by page, search for content, and navigate both forward and backward, making it ideal for large files."
+          }
+        ],
+        summary: "cat, less, head, and tail provide different ways to view file contents, from full display to paginated viewing to real-time log monitoring."
+      },
+      {
+        id: "find-locate",
+        title: "find and locate",
+        level: "Intermediate",
+        estimatedTime: "25 min",
+        description: "Finding files on a Linux system is a critical skill. This lesson covers the find command for real-time searching with powerful criteria and locate for fast database-backed lookups.",
+        commands: [
+          {
+            command: "find /var/log -name \"*.log\" -mtime -7",
+            explanation: "Searches recursively in /var/log for files ending in .log that were modified in the last 7 days. Real-time search with flexible criteria.",
+            options: [
+              { flag: "-name", description: "Match files by name pattern (supports wildcards)" },
+              { flag: "-mtime", description: "Filter by modification time in days (+ for older than, - for newer than)" },
+              { flag: "-size", description: "Filter by file size (e.g., +100M for files larger than 100MB)" },
+              { flag: "-type", description: "Filter by type: f (file), d (directory), l (symlink)" },
+              { flag: "-exec", description: "Execute a command on each found file" }
+            ],
+            example: "find /tmp -name \"*.tmp\" -type f -mtime +1 -delete",
+            output: ""
+
+          },
+          {
+            command: "locate nginx.conf",
+            explanation: "Searches a pre-built database of filenames, returning results almost instantly. The database must be updated regularly with updatedb.",
+            options: [
+              { flag: "-i", description: "Case-insensitive search" },
+              { flag: "-c", description: "Show count of matching entries instead of listing them" },
+              { flag: "-l", description: "Limit the number of results (e.g., -l 20)" },
+              { flag: "-r", description: "Use a regular expression for the search pattern" }
+            ],
+            example: "locate -i nginx.conf",
+            output: "/etc/nginx/nginx.conf\n/etc/nginx/sites-available/default.conf\n/usr/share/doc/nginx/examples/nginx.conf\n/usr/share/nginx/modules/example.conf"
+          }
+        ],
+        notes: [
+          "find searches the actual filesystem in real time, so it is always accurate but slower for large directories",
+          "locate uses a database typically updated daily by cron; run 'sudo updatedb' to refresh it manually",
+          "find supports complex logical operators: -and, -or, -not for combining multiple criteria",
+          "The -exec option in find runs commands on matching files; use {} as a placeholder and terminate with \\;"
+        ],
+        warnings: [
+          "Be extremely careful with 'find ... -delete' or 'find ... -exec rm {} \\;' as they permanently delete files matching the criteria"
+        ],
+        useCases: [
+          "Clean old temporary files: find /tmp -type f -atime +7 -delete removes files not accessed in a week",
+          "Find large files: find / -type f -size +500M -exec ls -lh {} \\; identifies large files consuming disk space"
+        ],
+        practice: [
+          { task: "Find all files modified in the last 24 hours in the /etc directory that have .conf extensions", hint: "Use 'find /etc -name \"*.conf\" -mtime 0' (mtime 0 means modified in the last 24 hours)" }
+        ],
+        quiz: [
+          {
+            question: "What is the main advantage of locate over find?",
+            options: ["Searches in real time", "Supports more search criteria", "Returns results much faster", "Can execute commands on results"],
+            correctAnswer: 2,
+            explanation: "locate searches a pre-built database and returns results almost instantly, while find searches the filesystem in real time which is slower but always accurate."
+          }
+        ],
+        summary: "find provides powerful real-time file searching with complex criteria and actions, while locate offers instant results from a pre-built filename database."
+      },
+      {
+        id: "file-compression",
+        title: "File Compression",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "Compressing files saves disk space and bandwidth for transfers. This lesson covers tar, gzip, bzip2, and xz for creating and extracting archives.",
+        commands: [
+          {
+            command: "tar -czvf backup.tar.gz /var/www/html",
+            explanation: "Creates a compressed archive of the /var/www/html directory using gzip compression. The -c flag creates the archive, -z uses gzip.",
+            options: [
+              { flag: "-c", description: "Create a new archive" },
+              { flag: "-x", description: "Extract from an archive" },
+              { flag: "-z", description: "Filter through gzip compression" },
+              { flag: "-j", description: "Filter through bzip2 compression" },
+              { flag: "-J", description: "Filter through xz compression" },
+              { flag: "-v", description: "Verbose, list files being processed" },
+              { flag: "-f", description: "Specify the archive file name" },
+              { flag: "-t", description: "List contents of an archive" }
+            ],
+            example: "tar -czvf etc-backup.tar.gz /etc/nginx",
+            output: "etc/nginx/\netc/nginx/nginx.conf\netc/nginx/sites-available/\netc/nginx/sites-available/default\netc/nginx/modules-enabled/\netc/nginx/modules-enabled/50-mod-http-geoip2.conf\netc/nginx/sites-enabled/\netc/nginx/sites-enabled/default"
+          },
+          {
+            command: "gzip -k largefile.log",
+            explanation: "Compresses a file using gzip, replacing it with largefile.log.gz. The -k option keeps the original file.",
+            options: [
+              { flag: "-k", description: "Keep the original file (do not delete)" },
+              { flag: "-d", description: "Decompress (same as gunzip)" },
+              { flag: "-r", description: "Recursively compress files in directories" },
+              { flag: "-v", description: "Verbose, show compression ratio" },
+              { flag: "-1 to -9", description: "Compression level: 1=fastest, 9=best compression" }
+            ],
+            example: "gzip -v access.log",
+            output: "access.log:         79.1% -- replaced with access.log.gz"
+          }
+        ],
+        notes: [
+          "tar originally stood for 'tape archive' and is the standard archiving tool on Unix-like systems",
+          "gzip provides fast compression with good ratios, bzip2 compresses better but slower, xz offers the best compression",
+          "Always use .tar.gz or .tgz for gzip, .tar.bz2 for bzip2, and .tar.xz for xz compressed tar archives",
+          "The -k flag is useful in gzip when you want to keep the original uncompressed file"
+        ],
+        warnings: [
+          "Compressed archives can be corrupted; always verify archives with 'tar -tzf file.tar.gz' after creation"
+        ],
+        useCases: [
+          "Backup web directories: tar -czf website-$(date +%Y%m%d).tar.gz /var/www/html for daily backups",
+          "Distribute software: Package application files into a tar.gz archive for distribution and deployment"
+        ],
+        practice: [
+          { task: "Create a compressed archive of /etc/ssh, then list its contents without extracting", hint: "Use 'sudo tar -czf ssh-backup.tar.gz /etc/ssh' then 'tar -tzf ssh-backup.tar.gz' to list contents" }
+        ],
+        quiz: [
+          {
+            question: "What flag in tar extracts files from an archive?",
+            options: ["-c", "-x", "-e", "-r"],
+            correctAnswer: 1,
+            explanation: "The -x flag extracts files from an archive. Combine it with -z for gzip, -j for bzip2, or -J for xz compressed archives."
+          }
+        ],
+        summary: "tar archives files into a single bundle, while gzip, bzip2, and xz provide compression at different speed-to-ratio tradeoffs."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Users and Permissions",
+    lessons: [
+      {
+        id: "users-groups",
+        title: "Users and Groups",
+        level: "Beginner",
+        estimatedTime: "25 min",
+        description: "Linux is a multi-user system where access is controlled through user accounts and groups. This lesson explains user and group management, account files, and how to create and modify accounts.",
+        commands: [
+          {
+            command: "useradd -m -s /bin/bash -G sudo alice",
+            explanation: "Creates a new user named alice with a home directory (-m), bash shell (-s), and membership in the sudo group (-G).",
+            options: [
+              { flag: "-m", description: "Create the user's home directory" },
+              { flag: "-s", description: "Specify the user's login shell" },
+              { flag: "-G", description: "Comma-separated list of supplementary groups" },
+              { flag: "-c", description: "Add a comment (full name) for the user" },
+              { flag: "-e", description: "Set an expiration date for the account (YYYY-MM-DD)" }
+            ],
+            example: "sudo useradd -m -s /bin/bash -G sudo -c \"Alice Johnson\" alice",
+            output: ""
+
+          },
+          {
+            command: "passwd alice",
+            explanation: "Sets or changes the password for user alice. The system prompts for the new password and requires confirmation.",
+            options: [
+              { flag: "-l", description: "Lock the user's account (disable login)" },
+              { flag: "-u", description: "Unlock a locked account" },
+              { flag: "-d", description: "Delete the user's password (make account password-less)" },
+              { flag: "-e", description: "Expire the password, forcing change on next login" },
+              { flag: "-S", description: "Show password status information" }
+            ],
+            example: "sudo passwd alice",
+            output: "New password: \nRetype new password: \npasswd: password updated successfully"
+          },
+          {
+            command: "groupadd developers",
+            explanation: "Creates a new group called developers. Groups are used to organize users and assign shared permissions.",
+            options: [
+              { flag: "-g", description: "Specify a custom GID (group ID) for the group" },
+              { flag: "-r", description: "Create a system group with a GID below 1000" },
+              { flag: "-f", description: "Exit successfully if the group already exists" }
+            ],
+            example: "sudo groupadd -g 2000 developers",
+            output: ""
+          }
+        ],
+        notes: [
+          "User account information is stored in /etc/passwd, encrypted passwords in /etc/shadow, and group info in /etc/group",
+          "Each user has a UID (User ID): 0 for root, 1-999 for system accounts, 1000+ for regular users",
+          "The userdel command removes users; use userdel -r to also remove the home directory and mail spool",
+          "Use groups username to see which groups a user belongs to"
+        ],
+        warnings: [
+          "Never delete system users (UID < 1000) as they own critical system files and services"
+        ],
+        useCases: [
+          "Onboarding new employees: Create user accounts with appropriate group memberships for access control",
+          "Department isolation: Create groups for each department (engineering, sales, hr) and add users accordingly"
+        ],
+        practice: [
+          { task: "Create a new user named 'testuser' with a home directory, bash shell, and add them to a new group called 'testgroup'", hint: "Use 'sudo groupadd testgroup', then 'sudo useradd -m -s /bin/bash -G testgroup testuser', then set a password with 'sudo passwd testuser'" }
+        ],
+        quiz: [
+          {
+            question: "In which file are encrypted user passwords stored?",
+            options: ["/etc/passwd", "/etc/shadow", "/etc/group", "/etc/gshadow"],
+            correctAnswer: 1,
+            explanation: "Encrypted password hashes are stored in /etc/shadow, which is readable only by root for security."
+          }
+        ],
+        summary: "Linux uses users and groups for access control, with account details stored in /etc/passwd, /etc/shadow, and /etc/group files."
+      },
+      {
+        id: "chmod",
+        title: "chmod",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "The chmod command changes file and directory permissions in Linux. This lesson covers symbolic and numeric permission modes, special permissions like setuid and sticky bit.",
+        commands: [
+          {
+            command: "chmod 755 script.sh",
+            explanation: "Sets permissions to rwxr-xr-x using numeric mode: owner gets read/write/execute (7), group gets read/execute (5), others get read/execute (5).",
+            options: [
+              { flag: "-R", description: "Recursively change permissions on directories and their contents" },
+              { flag: "-v", description: "Verbose, show changes for each file" },
+              { flag: "-c", description: "Like verbose but only report when a change is made" },
+              { flag: "--reference", description: "Copy permissions from a reference file" }
+            ],
+            example: "chmod -v 755 deploy.sh",
+            output: "mode of 'deploy.sh' changed from 0644 (rw-r--r--) to 0755 (rwxr-xr-x)"
+          },
+          {
+            command: "chmod u+x,g-w,o+r script.sh",
+            explanation: "Symbolic mode: adds execute for user, removes write for group, adds read for others. Symbolic mode is more intuitive for targeted changes.",
+            options: [
+              { flag: "u", description: "Owner (user) permissions" },
+              { flag: "g", description: "Group permissions" },
+              { flag: "o", description: "Others permissions" },
+              { flag: "a", description: "All (user, group, and others)" },
+              { flag: "+", description: "Add permission" },
+              { flag: "-", description: "Remove permission" },
+              { flag: "=", description: "Set exact permission" }
+            ],
+            example: "chmod u+x script.sh",
+            output: ""
+          },
+          {
+            command: "chmod +t /tmp/shared",
+            explanation: "Sets the sticky bit on a directory. Only file owners can delete or rename their own files, even if others have write access.",
+            options: [
+              { flag: "+t", description: "Set sticky bit (restricted deletion flag)" },
+              { flag: "-t", description: "Remove sticky bit" }
+            ],
+            example: "chmod +t /tmp/shared",
+            output: ""
+          }
+        ],
+        notes: [
+          "Numeric permissions: read=4, write=2, execute=1; sum for owner/group/others (e.g., 754 = rwxr-xr--)",
+          "The sticky bit (+t) on /tmp prevents users from deleting each other's temporary files",
+          "The setuid bit (chmod u+s) allows a program to run with the owner's privileges; use with extreme caution",
+          "Default permissions are controlled by the umask value, which subtracts from the base permissions"
+        ],
+        warnings: [
+          "Setting the setuid bit (chmod u+s) on executables can create serious security vulnerabilities if misused"
+        ],
+        useCases: [
+          "Making scripts executable: chmod +x script.sh to allow a shell script to be run as a program",
+          "Securing shared directories: chmod 1770 /shared/project grants full access to group but restricts deletion with the sticky bit"
+        ],
+        practice: [
+          { task: "Create a file, set its permissions to 644, then add execute permission for the owner only using symbolic mode", hint: "Use 'touch test.txt', then 'chmod 644 test.txt', then 'chmod u+x test.txt'" }
+        ],
+        quiz: [
+          {
+            question: "What numeric permission value grants read, write, and execute to the owner?",
+            options: ["6", "5", "7", "4"],
+            correctAnswer: 2,
+            explanation: "7 = 4 (read) + 2 (write) + 1 (execute), granting full permissions to the owner."
+          }
+        ],
+        summary: "chmod controls file permissions using numeric (octal) or symbolic modes, with special bits for setuid, setgid, and sticky directory behavior."
+      },
+      {
+        id: "chown",
+        title: "chown",
+        level: "Intermediate",
+        estimatedTime: "15 min",
+        description: "The chown command changes the owner and group of files and directories. This is essential for transferring files between users and fixing permission issues.",
+        commands: [
+          {
+            command: "chown alice:developers report.pdf",
+            explanation: "Changes the owner of report.pdf to alice and the group to developers. Uses the format owner:group.",
+            options: [
+              { flag: "-R", description: "Recursively change ownership on directories and contents" },
+              { flag: "-v", description: "Verbose, show changes for each file" },
+              { flag: "-c", description: "Report only when a change is made" },
+              { flag: "--from", description: "Change ownership only if current owner/group matches specified values" }
+            ],
+            example: "chown -v bob:bob report.pdf",
+            output: "changed ownership of 'report.pdf' from alice:developers to bob:bob"
+          },
+          {
+            command: "chown :www-data /var/www/html -R",
+            explanation: "Changes only the group to www-data recursively on the /var/www/html directory, leaving the owner unchanged.",
+            options: [
+              { flag: "-R", description: "Recursively change ownership" },
+              { flag: "--from", description: "Only change ownership if current owner/group matches" }
+            ],
+            example: "sudo chown -R :www-data /var/www/html",
+            output: ""
+          }
+        ],
+        notes: [
+          "Only root can change file ownership; regular users cannot give away their files to other users",
+          "Use chown owner:group to change both, chown owner: to change owner and set group to login group, chown :group to change only group",
+          "The -R flag is powerful but can be dangerous; use it carefully on large directory trees",
+          "After restoring files from a backup, ownership often needs to be corrected with chown"
+        ],
+        warnings: [
+          "Changing ownership of system files (in /etc, /usr, /bin) can break the system; only change ownership when you know the correct owner"
+        ],
+        useCases: [
+          "Web server deployment: chown -R www-data:www-data /var/www/html gives the web server proper access to website files",
+          "User file transfer: When a user leaves, chown -R newuser:newuser /home/olduser reassigns their files"
+        ],
+        practice: [
+          { task: "Create a file, change its owner to a different user, then change only its group to www-data", hint: "Use 'sudo chown otheruser: myfile.txt' to change owner, then 'sudo chown :www-data myfile.txt' to change only the group" }
+        ],
+        quiz: [
+          {
+            question: "What happens if you use 'chown :group file'?",
+            options: ["Owner is changed to group", "Only the group is changed", "Nothing happens", "Both owner and group are changed"],
+            correctAnswer: 1,
+            explanation: "When the owner portion is omitted (colon before group), only the group ownership of the file is changed."
+          }
+        ],
+        summary: "chown changes file and directory ownership, requiring root privileges, with recursive support for bulk operations."
+      },
+      {
+        id: "chgrp",
+        title: "chgrp",
+        level: "Intermediate",
+        estimatedTime: "15 min",
+        description: "The chgrp command changes the group ownership of files and directories. It is more specific than chown when only the group needs to change.",
+        commands: [
+          {
+            command: "chgrp -R www-data /var/www/project",
+            explanation: "Recursively changes the group of /var/www/project and all its contents to www-data.",
+            options: [
+              { flag: "-R", description: "Recursively change group on directories and their contents" },
+              { flag: "-v", description: "Verbose, output diagnostic for each file" },
+              { flag: "-c", description: "Report only when a change is made" },
+              { flag: "--dereference", description: "Change the referenced file, not the symlink itself" }
+            ],
+            example: "sudo chgrp -R www-data /var/www/project",
+            output: ""
+          },
+          {
+            command: "chgrp -c developers *.txt",
+            explanation: "Changes the group of all .txt files in the current directory to developers, reporting only files that were actually changed.",
+            options: [
+              { flag: "-c", description: "Report only changed files" },
+              { flag: "--reference", description: "Use the group of a reference file instead of specifying a group name" }
+            ],
+            example: "chgrp -c developers README.txt INSTALL.txt",
+            output: "changed group of 'README.txt' from staff to developers\nchanged group of 'INSTALL.txt' from staff to developers"
+          }
+        ],
+        notes: [
+          "chgrp is simpler than chown when you only need to change the group and leave the owner untouched",
+          "A user can change the group of their own files to any group they are a member of",
+          "The --reference option lets you copy the group from one file to another without typing the group name",
+          "chgrp is essentially equivalent to chown :group file but is more explicit about intent"
+        ],
+        warnings: [
+          "Changing group ownership of executables with setgid bit can affect security; verify the combination carefully"
+        ],
+        useCases: [
+          "Shared project directories: chgrp -R developers /shared/project ensures all team members can collaborate",
+          "Fixing group permissions after extraction: Archives extracted as root often need chgrp to restore correct groups"
+        ],
+        practice: [
+          { task: "Create a directory, set its group to a group you belong to, then verify the change with ls -ld", hint: "Use 'mkdir shared_dir', then 'sudo chgrp yourgroup shared_dir', then 'ls -ld shared_dir' to verify" }
+        ],
+        quiz: [
+          {
+            question: "What is the chgrp command used for?",
+            options: ["Change file owner", "Change file group only", "Change file permissions", "Delete a group"],
+            correctAnswer: 1,
+            explanation: "chgrp specifically changes the group ownership of files and directories without modifying the owner."
+          }
+        ],
+        summary: "chgrp changes only the group ownership of files, providing a clear and targeted alternative to chown when only the group needs modification."
+      },
+      {
+        id: "sudo",
+        title: "sudo",
+        level: "Beginner",
+        estimatedTime: "20 min",
+        description: "sudo (superuser do) allows authorized users to execute commands with root privileges. This lesson covers sudo configuration, syntax, and security best practices.",
+        commands: [
+          {
+            command: "sudo apt update",
+            explanation: "Runs the apt update command with root privileges. sudo prompts for the user's password (not root's password) before executing.",
+            options: [
+              { flag: "-u", description: "Run command as a specific user instead of root" },
+              { flag: "-k", description: "Reset the timestamp; force password prompt on next use" },
+              { flag: "-l", description: "List the user's allowed (and forbidden) commands" },
+              { flag: "-i", description: "Run a login shell as the target user (simulates initial login)" }
+            ],
+            example: "sudo apt update",
+            output: "[sudo] password for admin: \nGet:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]\nGet:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]\nGet:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]\nFetched 499 kB in 2s (250 kB/s)\nReading package lists... Done"
+          },
+          {
+            command: "sudo -l",
+            explanation: "Lists the sudo privileges for the current user, showing which commands can be run as root and which users.",
+            options: [
+              { flag: "-l", description: "List allowed commands" },
+              { flag: "-U", description: "List privileges for another user (requires root)" }
+            ],
+            example: "sudo -l",
+            output: "Matching Defaults entries for admin on server:\n    env_reset, mail_badpass,\n    secure_path=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n\nUser admin may run the following commands on server:\n    (ALL : ALL) ALL\n    (root) NOPASSWD: /usr/bin/systemctl restart nginx\n    (root) /usr/bin/apt"
+          }
+        ],
+        notes: [
+          "sudo configuration is in /etc/sudoers; always edit with visudo to prevent syntax errors",
+          "The NOPASSWD directive in sudoers allows specific commands without password prompting",
+          "sudo -i provides a root shell with root's environment variables and home directory",
+          "The sudo timestamp caches authentication for 5 minutes (configurable) to avoid repeated password prompts"
+        ],
+        warnings: [
+          "Never edit /etc/sudoers directly with a regular text editor; always use visudo which validates syntax before saving"
+        ],
+        useCases: [
+          "Software installation: sudo apt install nginx installs system software with proper permissions",
+          "Service management: sudo systemctl restart nginx restarts a service without logging in as root"
+        ],
+        practice: [
+          { task: "Check what sudo privileges your user has and then run a command as a different user with sudo -u", hint: "Run 'sudo -l' to see your privileges, then 'sudo -u nobody whoami' to run a command as the nobody user" }
+        ],
+        quiz: [
+          {
+            question: "Which command should be used to safely edit the sudo configuration file?",
+            options: ["vim /etc/sudoers", "nano /etc/sudoers", "visudo", "sudoedit /etc/sudoers"],
+            correctAnswer: 2,
+            explanation: "visudo opens /etc/sudoers in a text editor and validates syntax before saving, preventing configuration errors that could lock out administrative access."
+          }
+        ],
+        summary: "sudo allows authorized users to execute commands with elevated privileges, with granular control through the /etc/sudoers configuration file."
+      },
+      {
+        id: "permission-practice",
+        title: "Permission Practice",
+        level: "Intermediate",
+        estimatedTime: "25 min",
+        description: "This practical lesson combines chmod, chown, chgrp, umask, and special permissions in real-world scenarios. Learn to design and implement permission schemes.",
+        commands: [
+          {
+            command: "umask 0027",
+            explanation: "Sets the umask to 0027, which means new files get 640 (rw-r-----) and new directories get 750 (rwxr-x---) permissions by default.",
+            options: [
+              { flag: "-S", description: "Display umask in symbolic format" },
+              { flag: "-p", description: "Output the umask in a format that can be sourced" }
+            ],
+            example: "umask -S",
+            output: "u=rwx,g=rx,o="
+          },
+          {
+            command: "getfacl /shared/project",
+            explanation: "Displays the Access Control List (ACL) for a file or directory, showing detailed permission entries for multiple users and groups.",
+            options: [
+              { flag: "-R", description: "Recursively list ACLs for directory contents" },
+              { flag: "-d", description: "Display default ACL (for directories)" }
+            ],
+            example: "getfacl /shared/project",
+            output: "# file: shared/project\n# owner: root\n# group: developers\nuser::rwx\nuser:alice:rwx\nuser:bob:r-x\ngroup::r-x\nmask::rwx\nother::---\ndefault:user::rwx\ndefault:group::r-x\ndefault:other::---"
+          },
+          {
+            command: "setfacl -m u:alice:rwx,g:developers:rw /shared/project",
+            explanation: "Modifies the ACL on /shared/project, giving user alice rwx permissions and the developers group rw permissions.",
+            options: [
+              { flag: "-m", description: "Modify the ACL (add or change entries)" },
+              { flag: "-x", description: "Remove specific ACL entries" },
+              { flag: "-b", description: "Remove all extended ACL entries" },
+              { flag: "-R", description: "Apply recursively to directory contents" },
+              { flag: "-d", description: "Set default ACL for new items in a directory" }
+            ],
+            example: "setfacl -m u:alice:rwx /shared/project",
+            output: ""
+          }
+        ],
+        notes: [
+          "ACLs provide finer-grained permissions than traditional Unix permissions, allowing multiple users and groups",
+          "The umask is subtracted from the base permissions (666 for files, 777 for directories) to determine defaults",
+          "Use 'ls -ld' to view traditional permissions; use 'getfacl' to view ACL entries",
+          "The mask entry in ACLs limits the maximum permissions granted to named users and groups"
+        ],
+        warnings: [
+          "ACL support requires the filesystem to be mounted with the acl option, though most modern Linux systems enable it by default"
+        ],
+        useCases: [
+          "Shared project directory: Use ACLs to give multiple teams specific access levels to the same directory structure",
+          "Restrictive default permissions: Set umask 0077 in security-sensitive environments to ensure new files are private by default"
+        ],
+        practice: [
+          { task: "Create a shared directory with ACLs where alice has rwx, the developers group has rx, and bob has no access", hint: "Use 'mkdir /tmp/shared', 'setfacl -m u:alice:rwx,g:developers:rx,o:--- /tmp/shared', then verify with getfacl" }
+        ],
+        quiz: [
+          {
+            question: "With umask 0027, what permissions will a new directory get?",
+            options: ["rwxrwxrwx", "rwxr-x---", "rwxrwxr-x", "rwx------"],
+            correctAnswer: 1,
+            explanation: "Directory base permissions are 777; subtract umask 027 to get 750, which is rwxr-x---."
+          }
+        ],
+        summary: "Real-world permission management combines chmod, chown, ACLs, and umask to implement precise access control policies for multi-user environments."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Package Management",
+    lessons: [
+      {
+        id: "apt",
+        title: "apt",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "APT (Advanced Package Tool) is the package manager for Debian-based distributions. This lesson covers installing, updating, removing, and searching for software packages.",
+        commands: [
+          {
+            command: "apt update",
+            explanation: "Downloads updated package lists from all configured repositories. Must be run before apt upgrade to ensure latest package versions are available.",
+            options: [
+              { flag: "No common flags", description: "apt update takes no options but can be run with -q for quiet mode" }
+            ],
+            example: "sudo apt update",
+            output: "Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease\nGet:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]\nGet:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]\nGet:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [108 kB]\nFetched 337 kB in 3s (112 kB/s)\nReading package lists... Done"
+          },
+          {
+            command: "apt install -y nginx",
+            explanation: "Installs the nginx package along with all its dependencies. The -y flag automatically answers yes to prompts.",
+            options: [
+              { flag: "-y", description: "Assume yes to all prompts (non-interactive)" },
+              { flag: "-q", description: "Quiet mode, less output" },
+              { flag: "-d", description: "Download only, do not install" },
+              { flag: "--reinstall", description: "Reinstall packages that are already installed" },
+              { flag: "--no-install-recommends", description: "Only install required dependencies, not recommended ones" }
+            ],
+            example: "sudo apt install -y nginx",
+            output: "Reading package lists... Done\nBuilding dependency tree... Done\nReading state information... Done\nThe following additional packages will be installed:\n  libnginx-mod-http-geoip libnginx-mod-http-image-filter\n  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream\n  nginx-common nginx-core\nSuggested packages:\n  fcgiwrap nginx-doc ssl-cert\nThe following NEW packages will be installed:\n  libnginx-mod-http-geoip libnginx-mod-http-image-filter\n  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream\n  nginx nginx-common nginx-core\n0 upgraded, 8 newly installed, 0 to remove and 0 not upgraded.\nNeed to get 1,235 kB of archives.\nAfter this operation, 4,096 kB of additional disk space will be used.\nGet:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 nginx-common all 1.18.0-6ubuntu14.3 [41.7 kB]\n...\nUnpacking nginx (1.18.0-6ubuntu14.3) ...\nSetting up nginx (1.18.0-6ubuntu14.3) ...\nCreated symlink /etc/systemd/system/multi-user.target.wants/nginx.service \u2192 /lib/systemd/system/nginx.service."
+          },
+          {
+            command: "apt remove nginx",
+            explanation: "Removes the nginx package but keeps configuration files. Use apt purge to remove configuration files as well.",
+            options: [
+              { flag: "--purge", description: "Remove package and its configuration files" },
+              { flag: "-y", description: "Assume yes (non-interactive)" },
+              { flag: "--auto-remove", description: "Remove unused dependencies automatically" }
+            ],
+            example: "sudo apt remove --purge -y nginx",
+            output: "Reading package lists... Done\nBuilding dependency tree... Done\nThe following packages will be REMOVED:\n  libnginx-mod-http-geoip libnginx-mod-http-image-filter\n  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream\n  nginx* nginx-common* nginx-core*\n0 upgraded, 0 newly installed, 8 to remove and 0 not upgraded.\nAfter this operation, 4,096 kB disk space will be freed.\n(Reading database ... 123456 files and directories currently installed.)\nRemoving nginx (1.18.0-6ubuntu14.3) ...\nProcessing triggers for man-db (2.10.2-1) ..."
+          }
+        ],
+        notes: [
+          "Always run apt update before apt upgrade to refresh the package index from repositories",
+          "Use apt search keyword to find packages matching a keyword across all repositories",
+          "apt show package displays detailed information about a package including version, description, and dependencies",
+          "The /etc/apt/sources.list file and /etc/apt/sources.list.d/ directory define which repositories are used"
+        ],
+        warnings: [
+          "Avoid using apt-get upgrade and apt dist-upgrade interchangeably without understanding; dist-upgrade can remove packages if needed"
+        ],
+        useCases: [
+          "Install LAMP stack: sudo apt install -y apache2 mysql-server php to set up a web server",
+          "System updates: sudo apt update && sudo apt upgrade -y for regular security and feature updates"
+        ],
+        practice: [
+          { task: "Search for a package related to 'htop', install it, then remove it along with its configuration files", hint: "Use 'apt search htop', 'sudo apt install -y htop', then 'sudo apt purge -y htop'" }
+        ],
+        quiz: [
+          {
+            question: "What does 'apt update' do?",
+            options: ["Updates installed packages", "Updates the package index from repositories", "Updates the Linux kernel", "Updates system configuration"],
+            correctAnswer: 1,
+            explanation: "apt update refreshes the local package index from configured repositories, making it aware of new versions and newly added packages."
+          }
+        ],
+        summary: "APT is the standard package manager for Debian-based systems, providing commands to update, install, remove, and manage software packages."
+      },
+      {
+        id: "yum-dnf",
+        title: "yum and dnf",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "YUM and DNF are package managers for Red Hat-based distributions (RHEL, Fedora, CentOS). DNF is the modern successor to YUM with better performance and dependency resolution.",
+        commands: [
+          {
+            command: "dnf install -y httpd",
+            explanation: "Installs the Apache HTTP server (httpd) package with all dependencies. DNF resolves dependencies automatically.",
+            options: [
+              { flag: "-y", description: "Assume yes to all prompts" },
+              { flag: "--downloadonly", description: "Download packages without installing" },
+              { flag: "--nogpgcheck", description: "Skip GPG signature verification" },
+              { flag: "-q", description: "Quiet mode, minimal output" }
+            ],
+            example: "sudo dnf install -y httpd",
+            output: "Last metadata expiration check: 2:15:30 ago on Tue Dec 14 08:30:00 2023.\nDependencies resolved.\n================================================================================\n Package           Arch        Version                    Repository       Size\n================================================================================\nInstalling:\n httpd             x86_64      2.4.53-1.fc36             updates         1.4 M\nInstalling dependencies:\n apr               x86_64      1.7.0-11.fc36             fedora          127 k\n apr-util          x86_64      1.6.1-20.fc36             fedora           98 k\n httpd-filesystem  noarch      2.4.53-1.fc36             updates          25 k\n mailcap           noarch      2.1.49-5.fc36             fedora           34 k\n\nTransaction Summary\n================================================================================\nInstall  5 Packages\n\nTotal download size: 1.7 M\nInstalled size: 5.5 M\nDownloading Packages:\n(1/5): apr-1.7.0-11.fc36.x86_64.rpm       127 kB/s | 127 kB     00:01\n...\nComplete!"
+          },
+          {
+            command: "dnf groupinstall \"Web Server\"",
+            explanation: "Installs a predefined group of related packages. Group installs are convenient for setting up common server roles.",
+            options: [
+              { flag: "--with-optional", description: "Include optional packages in the group" },
+              { flag: "-y", description: "Assume yes" }
+            ],
+            example: "sudo dnf groupinstall -y \"Development Tools\"",
+            output: "Last metadata expiration check: 1:00:00 ago on Tue Dec 14 09:30:00 2023.\nDependencies resolved.\n================================================================================\n Package              Arch      Version              Repository          Size\n================================================================================\nInstalling group/module packages:\n autoconf             noarch    2.69-40.fc36         fedora             409 k\n automake             noarch    1.16.5-5.fc36        fedora             315 k\n gcc                  x86_64    12.2.1-4.fc36        fedora              32 M\n gcc-c++              x86_64    12.2.1-4.fc36        fedora              13 M\n git                  x86_64    2.38.1-1.fc36        updates            7.1 M\n make                 x86_64    1:4.3-7.fc36         fedora             1.5 M\n...\nTransaction Summary\n================================================================================\nInstall  43 Packages\n\nTotal download size: 84 M\nInstalled size: 256 M\nComplete!"
+          }
+        ],
+        notes: [
+          "DNF is the default package manager for Fedora, RHEL 8+, and CentOS 8+, replacing the older YUM",
+          "Repository configuration files are in /etc/yum.repos.d/ with .repo extension",
+          "Use dnf provides */filename to find which package provides a specific file",
+          "dnf history shows a log of all package transactions with the ability to undo or redo them"
+        ],
+        warnings: [
+          "Disabling GPG signature checking (--nogpgcheck) can expose your system to malicious packages"
+        ],
+        useCases: [
+          "Enterprise RHEL systems: Use DNF for all package management on Red Hat Enterprise Linux servers",
+          "Group installations: Use dnf groupinstall to quickly set up development tools, web servers, or desktop environments"
+        ],
+        practice: [
+          { task: "Search for the package that provides the 'ifconfig' command, then install it using DNF", hint: "Use 'dnf provides */ifconfig' to find the package, then 'sudo dnf install -y net-tools'" }
+        ],
+        quiz: [
+          {
+            question: "Which package manager is the modern replacement for YUM on RHEL-based systems?",
+            options: ["APT", "Pacman", "DNF", "Zypper"],
+            correctAnswer: 2,
+            explanation: "DNF (Dandified YUM) is the modern successor to YUM, introduced in Fedora 18 and adopted by RHEL 8 and CentOS 8."
+          }
+        ],
+        summary: "DNF and YUM are package managers for RPM-based distributions, with DNF offering improved performance, better dependency resolution, and a cleaner codebase."
+      },
+      {
+        id: "snap",
+        title: "snap",
+        level: "Intermediate",
+        estimatedTime: "15 min",
+        description: "Snap is a universal package manager developed by Canonical that works across Linux distributions. Snap packages are sandboxed and auto-updating.",
+        commands: [
+          {
+            command: "snap install --classic certbot",
+            explanation: "Installs the certbot snap with classic confinement, which gives it access to system resources like a traditionally installed package.",
+            options: [
+              { flag: "--classic", description: "Allow classic confinement (full system access)" },
+              { flag: "--edge", description: "Install from the edge channel (latest development version)" },
+              { flag: "--beta", description: "Install from the beta channel" },
+              { flag: "--candidate", description: "Install from the candidate channel" }
+            ],
+            example: "sudo snap install --classic certbot",
+            output: "certbot 2.6.0 from Certbot Project (certbot-eff) installed"
+          },
+          {
+            command: "snap list",
+            explanation: "Lists all installed snap packages, showing their name, version, revision, tracking channel, publisher, and notes.",
+            options: [
+              { flag: "--all", description: "Show all versions of snaps installed" }
+            ],
+            example: "snap list",
+            output: "Name               Version          Rev    Tracking       Publisher    Notes\ncore20             20230126         1852   latest/stable  canonical     base\ncore22             20230628         634    latest/stable  canonical     base\ncertbot            2.6.0            2475   latest/stable  certbot-eff   classic\nlxd                5.18-edge        d9a63  latest/edge    canonical     -\nsnapd              2.60.1           19131  latest/stable  canonical     snapd"
+          },
+          {
+            command: "snap refresh",
+            explanation: "Checks for and applies updates to all installed snap packages. Snaps auto-update by default, but this forces an immediate check.",
+            options: [
+              { flag: "--list", description: "List available updates without applying them" },
+              { flag: "snap-name", description: "Update only the specified snap" }
+            ],
+            example: "sudo snap refresh",
+            output: "All snaps up to date."
+          }
+        ],
+        notes: [
+          "Snap packages include their dependencies, avoiding dependency conflicts with system packages",
+          "Snaps update automatically through the snapd daemon, ensuring security patches are applied promptly",
+          "Snap channels include stable, candidate, beta, and edge, allowing staged rollouts",
+          "Snap confinement levels are strict (default), classic (full access), and devmode (permissive for development)"
+        ],
+        warnings: [
+          "Snap packages are larger than traditional packages because they bundle dependencies; this can consume more disk space"
+        ],
+        useCases: [
+          "Cross-distribution deployment: Snap allows deploying the same software across Ubuntu, Fedora, Debian, and other distros",
+          "IoT and embedded systems: Snaps are transactionally updated, with automatic rollback on failure for reliable updates"
+        ],
+        practice: [
+          { task: "Search for the 'nextcloud' snap, install it, and check its status", hint: "Use 'snap find nextcloud', 'sudo snap install nextcloud', then 'snap services nextcloud'" }
+        ],
+        quiz: [
+          {
+            question: "What is the main advantage of Snap packages?",
+            options: ["Smallest package size", "Bundled dependencies and sandboxing", "Faster installation than APT", "No need for sudo"],
+            correctAnswer: 1,
+            explanation: "Snap packages bundle their dependencies and run in sandboxed environments, avoiding dependency conflicts and improving security across distributions."
+          }
+        ],
+        summary: "Snap is a universal package system with sandboxed, auto-updating applications that work consistently across Linux distributions."
+      },
+      {
+        id: "updating-system",
+        title: "Updating the System",
+        level: "Intermediate",
+        estimatedTime: "15 min",
+        description: "Keeping a Linux system updated is critical for security and stability. This lesson covers update strategies, kernel updates, and best practices for different distribution families.",
+        commands: [
+          {
+            command: "apt update && apt upgrade -y",
+            explanation: "Refreshes the package index and upgrades all installed packages to their latest versions. The && ensures upgrade only runs if update succeeds.",
+            options: [
+              { flag: "--dry-run", description: "Simulate the upgrade without actually installing anything" }
+            ],
+            example: "sudo apt update && sudo apt upgrade -y",
+            output: "Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease\nGet:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]\n...\nReading package lists... Done\nReading package lists... Done\nBuilding dependency tree... Done\nReading state information... Done\nCalculating upgrade... Done\nThe following packages will be upgraded:\n  openssh-client openssh-server openssl python3-apt systemd\n5 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.\nNeed to get 8,432 kB of archives.\nAfter this operation, 512 B of additional disk space will be used.\nGet:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssh-client amd64 1:8.9p1-3ubuntu0.4 [724 kB]\n...\nFetched 8,432 kB in 5s (1.7 MB/s)\n(Reading database ... 123456 files and directories currently installed.)\nPreparing to unpack .../openssh-client_1%3a8.9p1-3ubuntu0.4_amd64.deb ...\nUnpacking openssh-client (1:8.9p1-3ubuntu0.4) over (1:8.9p1-3ubuntu0.3) ...\nSetting up openssh-client (1:8.9p1-3ubuntu0.4) ...\nProcessing triggers for man-db (2.10.2-1) ..."
+          },
+          {
+            command: "apt list --upgradable",
+            explanation: "Lists all packages that have newer versions available without performing any upgrades. Useful for previewing pending updates.",
+            options: [
+              { flag: "--upgradable", description: "Show packages that can be upgraded" },
+              { flag: "--installed", description: "Show all installed packages" }
+            ],
+            example: "apt list --upgradable",
+            output: "Listing... Done\nopenssh-client/jammy-updates 1:8.9p1-3ubuntu0.4 amd64 [upgradable from: 1:8.9p1-3ubuntu0.3]\nopenssh-server/jammy-updates 1:8.9p1-3ubuntu0.4 amd64 [upgradable from: 1:8.9p1-3ubuntu0.3]\nopenssl/jammy-updates 3.0.2-0ubuntu1.12 amd64 [upgradable from: 3.0.2-0ubuntu1.11]\npython3-apt/jammy-updates 2.4.0ubuntu3 amd64 [upgradable from: 2.4.0ubuntu2]\nsystemd/jammy-updates 249.11-0ubuntu3.12 amd64 [upgradable from: 249.11-0ubuntu3.10]"
+          }
+        ],
+        notes: [
+          "Always review the list of packages to be updated before proceeding, especially on production systems",
+          "Kernel updates require a system reboot to take effect; track them with apt list --upgradable | grep linux-image",
+          "Use unattended-upgrades for automatic installation of security updates on servers",
+          "Schedule maintenance windows for updates on production systems to minimize downtime"
+        ],
+        warnings: [
+          "Do not interrupt package installation with Ctrl+C; this can leave the system in an inconsistent state"
+        ],
+        useCases: [
+          "Security patching: Run unattended-upgrades to automatically install critical security patches daily",
+          "Release upgrades: Use do-release-upgrade on Ubuntu to upgrade between LTS releases during maintenance windows"
+        ],
+        practice: [
+          { task: "Check how many upgradable packages are available on your system, then perform a dry-run upgrade", hint: "Use 'apt list --upgradable 2>/dev/null | wc -l' to count upgradable packages, then 'sudo apt upgrade --dry-run'" }
+        ],
+        quiz: [
+          {
+            question: "What is the purpose of 'apt list --upgradable'?",
+            options: ["Upgrade all packages", "List packages that can be upgraded", "List installed packages", "Remove obsolete packages"],
+            correctAnswer: 1,
+            explanation: "apt list --upgradable shows which installed packages have newer versions available in the repositories without performing any upgrades."
+          }
+        ],
+        summary: "Regular system updates are essential for security and stability, with package managers providing preview, simulation, and automatic update capabilities."
+      },
+      {
+        id: "installing-removing-packages",
+        title: "Installing and Removing Packages",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "This lesson covers comprehensive package management workflows including handling PPAs, third-party repositories, dependency resolution, and troubleshooting installation issues.",
+        commands: [
+          {
+            command: "add-apt-repository ppa:ondrej/php",
+            explanation: "Adds a Personal Package Archive (PPA) repository to the system's software sources, enabling installation of packages from that PPA.",
+            options: [
+              { flag: "-y", description: "Assume yes to prompts" },
+              { flag: "-n", description: "Do not update the package index after adding" },
+              { flag: "-r", description: "Remove the specified repository instead of adding it" }
+            ],
+            example: "sudo add-apt-repository -y ppa:ondrej/php && sudo apt update",
+            output: "Repository: 'deb https://ppa.launchpadcontent.net/ondrej/php/ubuntu/ jammy main'\nDescription:\nParser for PHP packages, co-maintained by Debian PHP Maintainers\nMore info: https://launchpad.net/~ondrej/+archive/ubuntu/php\nAdding repository.\nPress [ENTER] to continue or Ctrl+C to cancel\n\nHit:1 http://archive.ubuntu.com/ubuntu jammy InRelease\nGet:2 http://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy InRelease [23.5 kB]\n...\nReading package lists... Done"
+          },
+          {
+            command: "dpkg -i package.deb",
+            explanation: "Installs a .deb package file directly using the low-level dpkg tool. Unlike apt, dpkg does not resolve dependencies automatically.",
+            options: [
+              { flag: "-i", description: "Install the package" },
+              { flag: "-r", description: "Remove the package (keep configuration)" },
+              { flag: "-P", description: "Purge the package (remove configuration too)" },
+              { flag: "-l", description: "List installed packages matching a pattern" },
+              { flag: "-L", description: "List files installed by a package" }
+            ],
+            example: "sudo dpkg -i google-chrome-stable_current_amd64.deb",
+            output: "Selecting previously unselected package google-chrome-stable.\n(Reading database ... 123456 files and directories currently installed.)\nPreparing to unpack google-chrome-stable_current_amd64.deb ...\nUnpacking google-chrome-stable (114.0.5735.90-1) ...\nSetting up google-chrome-stable (114.0.5735.90-1) ...\nProcessing triggers for mailcap (3.70+nmu1ubuntu1) ...\nProcessing triggers for gnome-menus (3.36.0-1ubuntu3) ..."
+          },
+          {
+            command: "apt-mark hold nginx",
+            explanation: "Marks a package as held back, preventing it from being upgraded. Useful for pinning specific versions in production.",
+            options: [
+              { flag: "hold", description: "Mark package as held back" },
+              { flag: "unhold", description: "Remove the hold" },
+              { flag: "showhold", description: "Show all packages on hold" }
+            ],
+            example: "sudo apt-mark hold nginx",
+            output: "nginx set on hold."
+          }
+        ],
+        notes: [
+          "Use dpkg -L package to see all files installed by a package, useful for finding configuration files",
+          "If dpkg complains about missing dependencies, run 'sudo apt install -f' to fix broken dependencies",
+          "apt-mark hold prevents accidental upgrades of critical packages like database engines",
+          "Third-party repositories should be added cautiously as they can introduce dependency conflicts or security risks"
+        ],
+        warnings: [
+          "Only add PPAs and third-party repositories from trusted sources; malicious repositories can compromise system security"
+        ],
+        useCases: [
+          "Install specific software versions: Add the ondrej/php PPA to install PHP 8.2 on Ubuntu where only PHP 8.0 is in the default repo",
+          "Pin production dependencies: Use apt-mark hold on critical packages like MySQL or PostgreSQL to prevent unexpected upgrades"
+        ],
+        practice: [
+          { task: "Download a .deb package, inspect its contents with dpkg-deb, install it, then verify the installation", hint: "Use 'dpkg-deb -c package.deb' to list contents, 'sudo dpkg -i package.deb' to install, and 'dpkg -L packagename' to list installed files" }
+        ],
+        quiz: [
+          {
+            question: "What command fixes broken dependencies after a dpkg installation?",
+            options: ["apt update", "apt install -f", "apt upgrade", "dpkg --configure"],
+            correctAnswer: 1,
+            explanation: "apt install -f (or apt-get install -f) fixes broken dependencies by installing or removing packages as needed."
+          }
+        ],
+        summary: "Package installation spans from high-level tools like apt to low-level tools like dpkg, with repository management and version pinning for production control."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Processes and Services",
+    lessons: [
+      {
+        id: "ps",
+        title: "ps",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "The ps (process status) command provides a snapshot of currently running processes. This lesson covers various ps options for displaying process information in different formats.",
+        commands: [
+          {
+            command: "ps aux",
+            explanation: "Shows all running processes for all users (a), with detailed information including user, PID, CPU/memory usage, and command (u), and processes not attached to a terminal (x).",
+            options: [
+              { flag: "a", description: "Show processes for all users" },
+              { flag: "u", description: "Display user-oriented format with additional details" },
+              { flag: "x", description: "Include processes without a controlling terminal" },
+              { flag: "-e", description: "Show all processes (equivalent to ax)" },
+              { flag: "-f", description: "Full format listing" }
+            ],
+            example: "ps aux",
+            output: "USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nroot           1  0.0  0.4 102552 10136 ?        Ss   Dec10   0:23 /sbin/init splash\nroot           2  0.0  0.0      0     0 ?        S    Dec10   0:00 [kthreadd]\nroot           3  0.0  0.0      0     0 ?        I<   Dec10   0:00 [rcu_gp]\nroot         456  0.0  0.3  28288  6508 ?        Ss   Dec10   0:01 /lib/systemd/systemd-journald\nroot         478  0.0  0.0   2480  1536 ?        Ss   Dec10   0:00 /sbin/dhclient\nroot         579  0.0  0.1   9672  3840 ?        Ss   Dec10   0:00 /usr/sbin/cron -f\nroot         621  0.0  0.2 161256  5096 ?        Ssl  Dec10   0:00 /usr/sbin/rsyslogd -n\nmysql        789  0.1  2.3 1812345 47012 ?       Ssl  Dec10   2:45 /usr/sbin/mysqld\nadmin       1234  0.0  0.1  11456  4320 pts/0    Ss   Dec15   0:00 -bash\nadmin       2345  0.0  0.2  56789 12345 pts/0    S    Dec15   0:02 nginx: worker process\nadmin       3456  0.0  0.1  38472  5608 pts/0    R+   10:30   0:00 ps aux"
+          },
+          {
+            command: "ps -ef --forest",
+            explanation: "Shows all processes in a full format with a tree structure, making it easy to see parent-child process relationships.",
+            options: [
+              { flag: "-e", description: "Select all processes" },
+              { flag: "-f", description: "Full format including PPID (parent PID)" },
+              { flag: "--forest", description: "Display process hierarchy as ASCII art tree" },
+              { flag: "-o", description: "Custom output format with selected columns" }
+            ],
+            example: "ps -ef --forest | head -20",
+            output: "UID          PID    PPID  C STIME TTY          TIME CMD\nroot           1       0  0 Dec10 ?        00:00:23 /sbin/init splash\nroot         456       1  0 Dec10 ?        00:00:01  \\_ /lib/systemd/systemd-journald\nroot         478       1  0 Dec10 ?        00:00:00  \\_ /sbin/dhclient\nroot         579       1  0 Dec10 ?        00:00:00  \\_ /usr/sbin/cron -f\nroot         621       1  0 Dec10 ?        00:00:00  \\_ /usr/sbin/rsyslogd -n\nmysql        789       1  0 Dec10 ?        00:02:45  \\_ /usr/sbin/mysqld\nroot         890       1  0 Dec10 ?        00:00:05  \\_ /usr/sbin/sshd -D\nroot        1023     890  0 Dec15 ?        00:00:00      \\_ sshd: admin [priv]\nadmin       1024    1023  0 Dec15 ?        00:00:00          \\_ sshd: admin@pts/0\nadmin       1234    1024  0 Dec15 pts/0    00:00:00              \\_ -bash\nadmin       3456    1234  0 10:30 pts/0    00:00:00                  \\_ ps -ef --forest"
+          }
+        ],
+        notes: [
+          "PID 1 is always the init process (systemd on modern systems), the first process started by the kernel",
+          "The STAT column shows process state: S (sleeping), R (running), Z (zombie), T (stopped), < (high priority), N (low priority)",
+          "Zombie processes (state Z) are terminated processes waiting for their parent to read their exit status",
+          "Use ps -eo pid,comm,%cpu,%mem --sort=-%cpu | head to find the top CPU-consuming processes"
+        ],
+        warnings: [
+          "A large number of zombie processes may indicate a buggy parent process that is not reaping its children"
+        ],
+        useCases: [
+          "Find resource hogs: ps aux --sort=-%mem | head -5 identifies the top 5 memory-consuming processes",
+          "Check if a service is running: ps aux | grep nginx quickly verifies that nginx processes are active"
+        ],
+        practice: [
+          { task: "List all processes for a specific user and display only PID, command, and CPU percentage sorted by CPU usage", hint: "Use 'ps -u username -o pid,comm,%cpu --sort=-%cpu' replacing username with an actual user" }
+        ],
+        quiz: [
+          {
+            question: "What does the Z state mean in the ps STAT column?",
+            options: ["Running", "Sleeping", "Zombie", "Suspended"],
+            correctAnswer: 2,
+            explanation: "Z (zombie) indicates a process that has completed execution but still has an entry in the process table waiting for its parent to read its exit status."
+          }
+        ],
+        summary: "The ps command provides flexible process monitoring with various output formats, sorting options, and the ability to show process hierarchy."
+      },
+      {
+        id: "top-htop",
+        title: "top and htop",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "top and htop are interactive process monitors that provide real-time views of system resource usage. This lesson covers interpreting their output and using interactive features.",
+        commands: [
+          {
+            command: "top -u mysql",
+            explanation: "Starts top and filters to show only processes owned by the mysql user. top refreshes every 3 seconds by default.",
+            options: [
+              { flag: "-u", description: "Show only processes for a specific user" },
+              { flag: "-p", description: "Monitor only specific PIDs (comma-separated)" },
+              { flag: "-H", description: "Show individual threads instead of processes" },
+              { flag: "-b", description: "Batch mode (non-interactive, useful for logging)" },
+              { flag: "-n", description: "Number of iterations before exiting (batch mode)" }
+            ],
+            example: "top -b -n 1 | head -15",
+            output: "top - 10:30:45 up 5 days, 3:15,  2 users,  load average: 0.08, 0.03, 0.01\nTasks: 198 total,   1 running, 197 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  2.5 us,  0.8 sy,  0.0 ni, 96.4 id,  0.2 wa,  0.0 hi,  0.1 si,  0.0 st\nMiB Mem :   7872.1 total,   2345.6 free,   3120.4 used,   2406.1 buff/cache\nMiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   4456.7 avail Mem\n\n    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n   1234 admin     20   0  11456   4320   3412 S   0.0   0.1   0:00.24 bash\n   2345 root      20   0  56789  12345   8765 S   0.0   0.2   0:02.15 nginx\n    789 mysql     20   0 1812345 47012  12345 S   0.3   0.6   2:45.12 mysqld\n   3456 admin     20   0   5678   2345   1234 R   0.0   0.0   0:00.02 top"
+          },
+          {
+            command: "htop",
+            explanation: "An improved interactive process viewer with a color-coded interface, mouse support, and easier navigation. Usually requires installation via apt or dnf.",
+            options: [
+              { flag: "-u", description: "Show only processes for a specific user" },
+              { flag: "-t", description: "Show processes in a tree view" },
+              { flag: "-s", description: "Sort by a specific column (e.g., PERCENT_CPU, PERCENT_MEM)" }
+            ],
+            example: "htop",
+            output: "  1  [||||||                                     12.5%]   Tasks: 45, 56 thr; 1 running\n  2  [|                                          1.2%]   Load average: 0.15 0.08 0.02\n  3  [||                                         3.4%]   Uptime: 5 days, 03:15:45\n  4  [                                           0.0%]\n  Mem[||||||||||||||||||||||||||     3.0G/7.7G]   Swap[                                      0K/2.0G]\n\n  PID USER      PRI  NI  VIRT   RES   SHR S CPU% MEM%   TIME+  Command\n 3456 admin      20   0  5678  2345 1234 R  12.5  0.0  0:00.02 htop\n 1234 admin      20   0 11456  4320 3412 S   0.0  0.1  0:00.24 -bash\n 2345 root       20   0 56789 12345 8765 S   0.0  0.2  0:02.15 nginx: worker process\n  789 mysql      20   0 1.8G 47012 12345 S   0.0  0.6  2:45.12 /usr/sbin/mysqld\n F1Help F2Setup F3SearchF4FilterF5Tree F6Sort F7Nice F8Nice F9Kill F10Quit"
+          }
+        ],
+        notes: [
+          "top displays load average for 1, 5, and 15 minutes; values below the CPU core count indicate a healthy system",
+          "In top, press 'P' to sort by CPU usage, 'M' to sort by memory usage, 'k' to kill a process",
+          "htop offers a more intuitive interface with color coding, mouse support, and vertical/horizontal scrolling",
+          "Press 'h' within htop to see a help screen with all interactive commands"
+        ],
+        warnings: [
+          "Load averages that consistently exceed the number of CPU cores indicate the system is overloaded"
+        ],
+        useCases: [
+          "Performance troubleshooting: Use htop to identify which process is consuming excessive CPU or memory in real time",
+          "Server health monitoring: Run top in batch mode (top -b -n 1) in scripts to log system performance metrics"
+        ],
+        practice: [
+          { task: "Run htop, identify the top 3 CPU-consuming processes, and sort by memory usage instead", hint: "Start htop, press F6 to enter sort selection, choose PERCENT_MEM, then observe the reordered process list" }
+        ],
+        quiz: [
+          {
+            question: "What does the load average of 0.50, 0.30, 0.10 mean on a single-core system?",
+            options: ["System is overloaded", "CPU is 50% utilized in the last minute", "50 processes are running", "System has 50% memory free"],
+            correctAnswer: 1,
+            explanation: "The load average represents the average number of processes waiting for CPU. 0.50 means 50% utilization, 0.10 means 10% utilization."
+          }
+        ],
+        summary: "top and htop provide real-time system monitoring with process management capabilities, load averages, and detailed CPU/memory usage statistics."
+      },
+      {
+        id: "kill",
+        title: "kill",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "The kill command sends signals to processes to control their behavior. This lesson covers different signal types, graceful termination, and forced process termination.",
+        commands: [
+          {
+            command: "kill -15 2345",
+            explanation: "Sends SIGTERM (signal 15) to process 2345, requesting graceful termination. The process can clean up resources before exiting.",
+            options: [
+              { flag: "-15", description: "SIGTERM - graceful termination (default signal)" },
+              { flag: "-9", description: "SIGKILL - forced immediate termination (cannot be caught)" },
+              { flag: "-1", description: "SIGHUP - hangup, often causes daemons to reload configuration" },
+              { flag: "-2", description: "SIGINT - interrupt (like Ctrl+C)" },
+              { flag: "-3", description: "SIGQUIT - quit with core dump" }
+            ],
+            example: "kill -15 2345",
+            output: ""
+          },
+          {
+            command: "killall -9 nginx",
+            explanation: "Sends SIGKILL to all processes named nginx. Useful for stopping all instances of a service quickly.",
+            options: [
+              { flag: "-9", description: "Send SIGKILL (forced termination)" },
+              { flag: "-15", description: "Send SIGTERM (graceful termination)" },
+              { flag: "-u", description: "Kill only processes owned by a specific user" },
+              { flag: "-i", description: "Interactive mode, ask for confirmation before killing" },
+              { flag: "-r", description: "Interpret process name as a regular expression" }
+            ],
+            example: "sudo killall -15 nginx",
+            output: ""
+          },
+          {
+            command: "pkill -f \"python server.py\"",
+            explanation: "Sends a signal to processes matching a pattern. The -f flag matches against the full command line, not just the process name.",
+            options: [
+              { flag: "-f", description: "Match against full command line" },
+              { flag: "-u", description: "Kill processes for a specific user only" },
+              { flag: "-9", description: "Send SIGKILL instead of default SIGTERM" },
+              { flag: "-c", description: "Count matching processes without killing them" }
+            ],
+            example: "pkill -f \"python server.py\"",
+            output: ""
+          }
+        ],
+        notes: [
+          "Always try SIGTERM (kill -15) first to give processes a chance to shut down cleanly",
+          "SIGKILL (kill -9) should be a last resort; it can leave shared memory segments, sockets, and temp files behind",
+          "Use kill -l to list all available signals and their numbers",
+          "SIGHUP (kill -1) causes many daemons like nginx and sshd to reload their configuration without restarting"
+        ],
+        warnings: [
+          "Kill -9 on database processes (MySQL, PostgreSQL) can cause data corruption; always attempt graceful shutdown first"
+        ],
+        useCases: [
+          "Restart a hung service: kill -15 PID, wait a few seconds, then kill -9 PID if it does not stop",
+          "Reload nginx configuration: kill -1 $(cat /var/run/nginx.pid) sends SIGHUP to reload without downtime"
+        ],
+        practice: [
+          { task: "Start a sleep process in the background, then gracefully terminate it using kill, then force kill it", hint: "Use 'sleep 300 &' to start, get the PID with $!, then 'kill -15 $PID', then 'kill -9 $PID' if needed" }
+        ],
+        quiz: [
+          {
+            question: "What is the difference between SIGTERM (15) and SIGKILL (9)?",
+            options: ["There is no difference", "SIGTERM allows cleanup, SIGKILL forces immediate termination", "SIGKILL is for system processes only", "SIGTERM is stronger than SIGKILL"],
+            correctAnswer: 1,
+            explanation: "SIGTERM (15) requests graceful termination that the process can catch for cleanup; SIGKILL (9) forces immediate termination that cannot be caught or ignored."
+          }
+        ],
+        summary: "The kill command family (kill, killall, pkill) sends POSIX signals to processes, from graceful termination (SIGTERM) to forced kill (SIGKILL) and configuration reload (SIGHUP)."
+      },
+      {
+        id: "systemctl",
+        title: "systemctl",
+        level: "Advanced",
+        estimatedTime: "25 min",
+        description: "systemctl is the central management tool for systemd, the init system used by most modern Linux distributions. It controls services, targets, and system states.",
+        commands: [
+          {
+            command: "systemctl status nginx",
+            explanation: "Shows the current status of the nginx service including whether it is active, the main PID, memory usage, and recent log entries.",
+            options: [
+              { flag: "status", description: "Display service status with recent log lines" },
+              { flag: "-l", description: "Show full output without truncation" },
+              { flag: "--no-pager", description: "Display output without using a pager" }
+            ],
+            example: "systemctl status nginx",
+            output: "● nginx.service - A high performance web server and a reverse proxy server\n     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)\n     Active: active (running) since Thu 2023-12-14 08:30:15 UTC; 2 days ago\n       Docs: man:nginx(8)\n    Process: 1234 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)\n    Process: 1235 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)\n   Main PID: 2345 (nginx)\n      Tasks: 3 (limit: 23456)\n     Memory: 12.5M\n        CPU: 2min 15.432s\n     CGroup: /system.slice/nginx.service\n             ├─2345 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;\n             ├─2346 nginx: worker process\n             └─2347 nginx: worker process\n\nDec 14 08:30:15 server systemd[1]: Starting A high performance web server...\nDec 14 08:30:15 server systemd[1]: Started A high performance web server."
+          },
+          {
+            command: "systemctl enable --now nginx",
+            explanation: "Enables nginx to start automatically at boot and starts it immediately. Combining --now with enable is a common workflow pattern.",
+            options: [
+              { flag: "enable", description: "Create symlinks to start service at boot" },
+              { flag: "disable", description: "Remove boot-time startup symlinks" },
+              { flag: "--now", description: "Start or stop the service immediately as well" },
+              { flag: "start", description: "Start the service immediately" },
+              { flag: "stop", description: "Stop the service immediately" },
+              { flag: "restart", description: "Stop then start the service" },
+              { flag: "reload", description: "Reload configuration without stopping" }
+            ],
+            example: "sudo systemctl enable --now nginx",
+            output: "Synchronizing state of nginx.service with SysV service script with /lib/systemd/systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nginx\nCreated symlink /etc/systemd/system/multi-user.target.wants/nginx.service \u2192 /lib/systemd/system/nginx.service."
+          },
+          {
+            command: "systemctl list-units --type=service --state=running",
+            explanation: "Lists all currently running service units on the system. Useful for getting an overview of active services.",
+            options: [
+              { flag: "--type", description: "Filter by unit type (service, socket, timer, target)" },
+              { flag: "--state", description: "Filter by state (running, exited, failed, inactive)" },
+              { flag: "--all", description: "Show all units, not just loaded ones" }
+            ],
+            example: "systemctl list-units --type=service --state=running",
+            output: "  UNIT                        LOAD   ACTIVE SUB     DESCRIPTION\n  accounts-daemon.service      loaded active running Accounts Service\n  cron.service                loaded active running Regular background program processing daemon\n  dbus.service                loaded active running D-Bus System Message Bus\n  getty@tty1.service           loaded active running Getty on tty1\n  nginx.service               loaded active running A high performance web server\n  networkd-dispatcher.service loaded active running Network Manager Script Dispatcher\n  rsyslog.service             loaded active running System Logging Service\n  ssh.service                 loaded active running OpenBSD Secure Shell server\n  systemd-journald.service    loaded active running Journal Service\n  systemd-logind.service      loaded active running User Login Management\n  systemd-udevd.service       loaded active running Rule-based Manager for Device Events\n\nLOAD   = Reflects whether the unit definition was properly loaded.\nACTIVE = The high-level unit activation state, i.e., generalization of SUB.\nSUB    = The low-level unit activation state, values depend on unit type.\n\n12 loaded units listed."
+          }
+        ],
+        notes: [
+          "systemd is the init system and service manager, replacing SysV init with parallel startup and better dependency handling",
+          "Service unit files are stored in /lib/systemd/system/ (distribution-provided) and /etc/systemd/system/ (custom/overrides)",
+          "Use systemctl list-unit-files --type=service to see all available services and their enablement status",
+          "systemctl daemon-reload must be run after modifying or adding unit files so systemd re-reads them"
+        ],
+        warnings: [
+          "Always run systemctl daemon-reload after creating or editing unit files; failure to do so results in systemd using stale definitions"
+        ],
+        useCases: [
+          "Deploy a web server: systemctl enable --now nginx ensures nginx starts at boot and is running immediately",
+          "Troubleshoot a failed service: systemctl status service shows recent log entries and the exit code for diagnosis"
+        ],
+        practice: [
+          { task: "Check the status of the SSH service, stop it, verify it stopped, then start it again", hint: "Use 'systemctl status ssh', 'sudo systemctl stop ssh', 'systemctl status ssh', then 'sudo systemctl start ssh'" }
+        ],
+        quiz: [
+          {
+            question: "What does 'systemctl enable --now nginx' do?",
+            options: ["Only enables at boot", "Only starts the service", "Enables at boot and starts immediately", "Disables and stops the service"],
+            correctAnswer: 2,
+            explanation: "The --now flag combined with enable both enables the service to start at boot and starts it immediately in one command."
+          }
+        ],
+        summary: "systemctl is the primary command for managing systemd services, providing start, stop, enable, disable, and status monitoring capabilities."
+      },
+      {
+        id: "journalctl",
+        title: "journalctl",
+        level: "Advanced",
+        estimatedTime: "20 min",
+        description: "journalctl queries the systemd journal, which collects and stores log data from the kernel, system services, and applications. It replaces traditional syslog for many log sources.",
+        commands: [
+          {
+            command: "journalctl -u nginx.service --since today",
+            explanation: "Shows all log entries for the nginx service since midnight today. The --since and --until flags accept various time formats.",
+            options: [
+              { flag: "-u", description: "Show logs for a specific systemd unit" },
+              { flag: "--since", description: "Show entries after a specific time (e.g., 'today', 'yesterday', '1 hour ago')" },
+              { flag: "--until", description: "Show entries before a specific time" },
+              { flag: "-f", description: "Follow mode, like tail -f" },
+              { flag: "-n", description: "Number of most recent entries to show" },
+              { flag: "-p", description: "Filter by priority: emerg, alert, crit, err, warning, notice, info, debug" }
+            ],
+            example: "journalctl -u nginx.service --since \"1 hour ago\"",
+            output: "Dec 15 09:45:12 server nginx[2345]: 192.168.1.100 - - [15/Dec/2023:09:45:12 +0000] \"GET /index.html HTTP/1.1\" 200 1234 \"-\" \"Mozilla/5.0\"\nDec 15 09:46:30 server nginx[2345]: 192.168.1.100 - - [15/Dec/2023:09:46:30 +0000] \"GET /style.css HTTP/1.1\" 304 0 \"-\" \"Mozilla/5.0\"\nDec 15 10:15:00 server nginx[2345]: 10.0.0.50 - - [15/Dec/2023:10:15:00 +0000] \"POST /login.php HTTP/1.1\" 200 567 \"-\" \"curl/7.68\"\nDec 15 10:30:01 server nginx[2345]: 10.0.0.50 - - [15/Dec/2023:10:30:01 +0000] \"GET /admin HTTP/1.1\" 403 234 \"-\" \"curl/7.68\""
+          },
+          {
+            command: "journalctl -p err -b",
+            explanation: "Shows all error-level and higher priority messages from the current boot (-b). Essential for quick system health assessment.",
+            options: [
+              { flag: "-p", description: "Filter by priority level (err shows err, crit, alert, emerg)" },
+              { flag: "-b", description: "Show entries from the current boot" },
+              { flag: "-k", description: "Show kernel messages only" },
+              { flag: "--list-boots", description: "List boot numbers and their timestamps" },
+              { flag: "--disk-usage", description: "Show total disk usage of journal files" }
+            ],
+            example: "journalctl -p err -b --no-pager | head -20",
+            output: "-- Journal begins at Mon Dec 10 14:15:00 2023, ends at Fri Dec 15 10:30:45 2023. --\nDec 10 14:15:01 server kernel: ACPI Error: [_OSC] Namespace lookup failure, AE_ALREADY_EXISTS\nDec 10 14:15:02 server kernel: pcieport 0000:00:1c.5: PCIe Bus Error: severity=Corrected, type=Physical Layer\nDec 15 08:00:10 server sshd[2345]: error: Could not load host key: /etc/ssh/ssh_host_ed25519_key\nDec 15 08:30:15 server nginx[2345]: 2023/12/15 08:30:15 [error] 2345#2345: *1 connect() failed (111: Connection refused) while connecting to upstream\nDec 15 10:30:01 server kernel: sd 0:0:0:0: [sda] Unhandled error code"
+          }
+        ],
+        notes: [
+          "The journal is stored in /var/log/journal/ by default and is persistent across reboots",
+          "Journalctl supports --output=json for machine-readable output, useful for log aggregation",
+          "Journald can forward logs to traditional syslog for compatibility with existing log monitoring tools",
+          "Use journalctl --vacuum-size=500M to limit journal storage to 500MB and remove older entries"
+        ],
+        warnings: [
+          "The journal can consume significant disk space on busy systems; configure journal size limits in /etc/systemd/journald.conf"
+        ],
+        useCases: [
+          "Troubleshoot a service crash: journalctl -u nginx.service -p err --since yesterday shows error logs for nginx",
+          "Kernel panic analysis: journalctl -k -b -1 shows kernel messages from the previous boot after a crash"
+        ],
+        practice: [
+          { task: "View only kernel messages from the current boot, filtered by warning priority and above", hint: "Use 'journalctl -k -b -p warning' to show kernel warnings and errors from the current boot" }
+        ],
+        quiz: [
+          {
+            question: "What does 'journalctl -u ssh.service -f' do?",
+            options: ["Show all SSH logs then exit", "Follow SSH logs in real time", "Show failed SSH attempts only", "Restart the SSH service"],
+            correctAnswer: 1,
+            explanation: "The -u flag filters by unit (ssh.service) and -f enters follow mode, showing new log entries in real time."
+          }
+        ],
+        summary: "journalctl provides powerful log querying capabilities for the systemd journal, with filtering by unit, priority, time range, and boot session."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Shell Scripting",
+    lessons: [
+      {
+        id: "bash-basics",
+        title: "Bash Basics",
+        level: "Intermediate",
+        estimatedTime: "25 min",
+        description: "Bash (Bourne Again Shell) is the most common shell for Linux scripting. This lesson covers script structure, shebang lines, comments, and basic script execution.",
+        commands: [
+          {
+            command: "cat > hello.sh << \"EOF\"\n#!/bin/bash\n# This is a comment\necho \"Hello, Linux!\"\nEOF",
+            explanation: "Creates a simple bash script using a here-document. The script starts with a shebang (#!/bin/bash) and prints a greeting.",
+            options: [
+              { flag: "#!/bin/bash", description: "Shebang line specifying the interpreter" },
+              { flag: "#", description: "Comment - lines starting with # are ignored" }
+            ],
+            example: "cat > hello.sh << \"EOF\"\n#!/bin/bash\necho \"Hello, World!\"\nEOF\nchmod +x hello.sh\n./hello.sh",
+            output: "Hello, World!"
+          },
+          {
+            command: "bash -x script.sh",
+            explanation: "Runs a script with debug mode, printing each command before execution. The -x flag is invaluable for troubleshooting script behavior.",
+            options: [
+              { flag: "-x", description: "Enable debug mode (print commands and their arguments)" },
+              { flag: "-n", description: "Syntax check only (do not execute)" },
+              { flag: "-v", description: "Print shell input lines as they are read" },
+              { flag: "-u", description: "Treat unset variables as an error" },
+              { flag: "-e", description: "Exit immediately if a command exits with non-zero status" }
+            ],
+            example: "bash -x hello.sh",
+            output: "+ echo 'Hello, World!'\nHello, World!"
+          }
+        ],
+        notes: [
+          "Always start scripts with #!/bin/bash to explicitly specify the interpreter",
+          "Use set -e at the beginning of scripts to exit on any error, preventing silent failures",
+          "Use set -u to treat unset variables as errors, catching typos in variable names",
+          "The chmod +x command makes a script executable; without it, run with bash script.sh"
+        ],
+        warnings: [
+          "Never run a script you have not reviewed; always understand what a script does before executing it with bash"
+        ],
+        useCases: [
+          "Automate repetitive tasks: Wrap a series of commands in a script to run them consistently and reliably",
+          "Provision new servers: Create setup scripts that install packages, configure services, and harden security"
+        ],
+        practice: [
+          { task: "Create a bash script that prints the current date, the current user, and the current directory, then run it", hint: "Use 'date', 'whoami', and 'pwd' commands inside the script, make it executable with chmod +x, and run it" }
+        ],
+        quiz: [
+          {
+            question: "What is the purpose of the shebang line #!/bin/bash?",
+            options: ["Adds a comment", "Specifies the script interpreter", "Sets bash version", "Enables debug mode"],
+            correctAnswer: 1,
+            explanation: "The shebang line tells the operating system which interpreter to use when executing the script as a program."
+          }
+        ],
+        summary: "Bash scripts start with a shebang line, support comments, and can be executed after making them executable with chmod +x."
+      },
+      {
+        id: "variables",
+        title: "Variables",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "Variables store data in bash scripts, including strings, numbers, command output, and environment values. This lesson covers variable assignment, expansion, and scope.",
+        commands: [
+          {
+            command: "name=\"John\"\necho \"Hello, ${name}!\"",
+            explanation: "Assigns a string value to a variable and uses parameter expansion with ${} to reference it. Quoting preserves spaces in values.",
+            options: [
+              { flag: "${var}", description: "Parameter expansion with braces (safest for complex usage)" },
+              { flag: "$var", description: "Simple variable expansion" },
+              { flag: "${var:-default}", description: "Use default value if variable is unset" },
+              { flag: "${var:?Error message}", description: "Exit with error message if variable is unset" }
+            ],
+            example: "greeting=\"Hello\"\nname=\"Linux\"\necho \"${greeting}, ${name}!\"",
+            output: "Hello, Linux!"
+          },
+          {
+            command: "current_date=$(date +%Y-%m-%d)\necho \"Today is $current_date\"",
+            explanation: "Uses command substitution with $() to capture the output of the date command into a variable. This is the modern syntax for command substitution.",
+            options: [
+              { flag: "$(command)", description: "Modern command substitution (preferred)" },
+              { flag: "`command`", description: "Legacy backtick command substitution" }
+            ],
+            example: "files=$(ls -la | wc -l)\necho \"There are $files files in this directory\"",
+            output: "There are 24 files in this directory"
+          },
+          {
+            command: "export PATH=\"$PATH:/custom/bin\"",
+            explanation: "Exports a variable to the environment, making it available to child processes. PATH is the search path for executable commands.",
+            options: [
+              { flag: "export", description: "Make variable available to child processes" },
+              { flag: "local", description: "Declare a variable local to a function" },
+              { flag: "readonly", description: "Make a variable read-only (cannot be changed)" }
+            ],
+            example: "export API_KEY=\"abc123\"\necho \"API key is set: ${API_KEY:0:3}...\"",
+            output: "API key is set: abc..."
+          }
+        ],
+        notes: [
+          "Variable names are case-sensitive and conventionally uppercase for environment/global variables, lowercase for local variables",
+          "Double quotes allow variable expansion inside strings; single quotes prevent it",
+          "Use ${#var} to get the length of a variable, ${var:offset:length} to extract substrings",
+          "The $? variable holds the exit status of the last command: 0 means success, non-zero means failure"
+        ],
+        warnings: [
+          "Always quote variable expansions in double quotes (\"$var\") to prevent word splitting and glob expansion issues"
+        ],
+        useCases: [
+          "Configuration flexibility: Use variables for configurable values like file paths, server names, and ports",
+          "Command output reuse: Capture command results with $() to use the output multiple times in a script"
+        ],
+        practice: [
+          { task: "Write a script that assigns your name to a variable, the current date to another, and prints a greeting with both", hint: "Use 'name=\"YourName\"' and 'date=$(date +%A)' then 'echo \"Hello $name, today is $date\"'" }
+        ],
+        quiz: [
+          {
+            question: "What does ${myvar:-default} do if myvar is not set?",
+            options: ["Sets myvar to default", "Returns default as the value", "Produces an error", "Returns empty string"],
+            correctAnswer: 1,
+            explanation: "The ${var:-default} syntax returns the default value if the variable is unset or empty, without modifying the variable."
+          }
+        ],
+        summary: "Bash variables store strings and command output, with parameter expansion providing powerful text manipulation and default value handling."
+      },
+      {
+        id: "conditions",
+        title: "Conditions",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "Conditional statements in bash allow scripts to make decisions based on file states, string comparisons, and numeric tests. This lesson covers if-else, test expressions, and case statements.",
+        commands: [
+          {
+            command: "if [ -f /etc/nginx/nginx.conf ]; then\n  echo \"Nginx is installed\"\nelse\n  echo \"Nginx not found\"\nfi",
+            explanation: "Checks if a file exists and is a regular file. The [ command (synonym for test) evaluates conditions and returns 0 for true.",
+            options: [
+              { flag: "-f", description: "Check if file exists and is a regular file" },
+              { flag: "-d", description: "Check if path exists and is a directory" },
+              { flag: "-e", description: "Check if path exists (any type)" },
+              { flag: "-z", description: "Check if string is empty (zero length)" },
+              { flag: "-n", description: "Check if string is not empty" },
+              { flag: "-eq", description: "Numeric equality (also -ne, -gt, -lt, -ge, -le)" }
+            ],
+            example: "if [ -d /var/log/nginx ]; then\n  count=$(ls /var/log/nginx/*.log 2>/dev/null | wc -l)\n  echo \"Found $count nginx log files\"\nfi",
+            output: "Found 3 nginx log files"
+          },
+          {
+            command: "read -p \"Enter directory: \" dir\nif [ -d \"$dir\" ]; then\n  echo \"$dir exists with $(ls -1 \"$dir\" | wc -l) items\"\nelse\n  echo \"$dir does not exist\"\nfi",
+            explanation: "Reads user input into a variable, then checks if the entered path is a directory using the -d test flag.",
+            options: [
+              { flag: "-p", description: "Prompt string for read command" },
+              { flag: "-a", description: "Logical AND between conditions" },
+              { flag: "-o", description: "Logical OR between conditions" },
+              { flag: "!", description: "Logical NOT (negation)" }
+            ],
+            example: "if [ \"$USER\" = \"root\" ] || [ \"$(id -u)\" -eq 0 ]; then\n  echo \"You are running as root\"\nelse\n  echo \"You are a regular user\"\nfi",
+            output: "You are a regular user"
+          },
+          {
+            command: "case \"$1\" in\n  start)\n    echo \"Starting...\"\n    ;;\n  stop)\n    echo \"Stopping...\"\n    ;;\n  restart)\n    echo \"Restarting...\"\n    ;;\n  *)\n    echo \"Usage: $0 {start|stop|restart}\"\n    ;;\nesac",
+            explanation: "Case statement for pattern matching, commonly used in init-style scripts to handle multiple command options cleanly.",
+            options: [
+              { flag: "*)", description: "Default case (wildcard match)" },
+              { flag: ";;", description: "Terminate each case block" }
+            ],
+            example: "case $1 in\n  -v|--version)\n    echo \"Version 1.0\"\n    ;;\n  -h|--help)\n    echo \"Usage: $0 [-v|-h]\"\n    ;;\nesac",
+            output: "Usage: script.sh [-v|-h]"
+          }
+        ],
+        notes: [
+          "Always quote variables in test brackets [ \"$var\" = \"value\" ] to avoid syntax errors when variables are empty",
+          "Use [[ ]] (double brackets) for advanced pattern matching and regex support in bash (not POSIX sh)",
+          "The exit status of a command can be used directly as a condition without test: if grep -q \"pattern\" file; then",
+          "Modern bash prefers [[ ]] over [ ] for conditions as it handles empty variables more safely and supports && and || operators"
+        ],
+        warnings: [
+          "Unquoted variables inside single-bracket test [ ] will cause syntax errors or incorrect results if they contain spaces or are empty"
+        ],
+        useCases: [
+          "Input validation: Check that required arguments are provided before proceeding with script logic",
+          "Service management: Use case statements for init-style scripts with start, stop, restart, and status options"
+        ],
+        practice: [
+          { task: "Write a script that checks if a file path argument is provided, and if so, reports whether it is a file, directory, or does not exist", hint: "Use 'if [ -z \"$1\" ]; then echo \"Usage: ...\"; exit 1; fi', then test with -f and -d" }
+        ],
+        quiz: [
+          {
+            question: "What does 'if [ -f \"/etc/hosts\" ]' check?",
+            options: ["If /etc/hosts is a directory", "If /etc/hosts is a regular file", "If /etc/hosts is empty", "If /etc/hosts is executable"],
+            correctAnswer: 1,
+            explanation: "The -f operator returns true if the path exists and is a regular file (not a directory, symlink, or special file)."
+          }
+        ],
+        summary: "Bash conditionals use if-else, test expressions, and case statements to implement decision-making logic based on file states, comparisons, and patterns."
+      },
+      {
+        id: "loops",
+        title: "Loops",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "Loops in bash enable repetitive execution of commands. This lesson covers for loops over lists and ranges, while loops for conditional repetition, and loop control.",
+        commands: [
+          {
+            command: "for user in alice bob charlie; do\n  echo \"Creating user: $user\"\n  sudo useradd -m \"$user\" 2>/dev/null && echo \"  $user created\"\ndone",
+            explanation: "Iterates over a list of usernames, attempting to create each user. The loop runs the body once for each item in the list.",
+            options: [
+              { flag: "for var in list", description: "Iterate over a space-separated list" },
+              { flag: "for ((i=0; i<10; i++))", description: "C-style for loop with numeric iteration" },
+              { flag: "break", description: "Exit the loop immediately" },
+              { flag: "continue", description: "Skip to the next iteration" }
+            ],
+            example: "for i in {1..5}; do\n  echo \"Number: $i\"\ndone",
+            output: "Number: 1\nNumber: 2\nNumber: 3\nNumber: 4\nNumber: 5"
+          },
+          {
+            command: "while [ -f /tmp/running.lock ]; do\n  echo \"Waiting for lock to be removed...\"\n  sleep 5\ndone\necho \"Lock removed, proceeding...\"",
+            explanation: "A while loop that continues as long as a condition is true (a lock file exists). The sleep prevents CPU spinning.",
+            options: [
+              { flag: "while condition", description: "Repeat while condition is true" },
+              { flag: "until condition", description: "Repeat until condition becomes true" },
+              { flag: "sleep N", description: "Pause for N seconds between iterations" }
+            ],
+            example: "count=1\nwhile [ $count -le 3 ]; do\n  echo \"Attempt $count\"\n  ((count++))\ndone",
+            output: "Attempt 1\nAttempt 2\nAttempt 3"
+          },
+          {
+            command: "for file in /var/log/*.log; do\n  size=$(stat -c%s \"$file\" 2>/dev/null || echo 0)\n  echo \"$file: $size bytes\"\ndone",
+            explanation: "Iterates over all .log files in /var/log, using stat to get each file's size and printing the result.",
+            options: [
+              { flag: "*.log", description: "Glob pattern matching any .log files" },
+              { flag: "stat -c%s", description: "Get file size in bytes" }
+            ],
+            example: "for script in *.sh; do\n  lines=$(wc -l < \"$script\")\n  echo \"$script has $lines lines\"\ndone",
+            output: "backup.sh has 45 lines\ndeploy.sh has 23 lines\nmonitor.sh has 67 lines"
+          }
+        ],
+        notes: [
+          "Use for loops with brace expansion {1..10} or {a..z} for sequential ranges",
+          "The C-style for loop ((i=0; i<10; i++)) is useful for more complex iteration patterns",
+          "While loops are ideal for daemon processes, monitoring scripts, and polling operations",
+          "Looping over glob patterns is safer than parsing ls output, which can break with special characters"
+        ],
+        warnings: [
+          "Be careful with while loops that have no sleep or delay; they can consume 100% CPU in a tight loop"
+        ],
+        useCases: [
+          "Batch operations: Loop over all .conf files in /etc/nginx/conf.d/ to validate each configuration",
+          "Monitoring: Use a while loop with sleep to continuously check service health and send alerts"
+        ],
+        practice: [
+          { task: "Write a loop that iterates over all files in the current directory and prints whether each is a file or directory", hint: "Use 'for item in *; do if [ -f \"$item\" ]; then echo \"$item: file\"; elif [ -d \"$item\" ]; then echo \"$item: directory\"; fi; done'" }
+        ],
+        quiz: [
+          {
+            question: "How do you exit a bash loop before it completes all iterations?",
+            options: ["exit", "stop", "break", "continue"],
+            correctAnswer: 2,
+            explanation: "The break statement exits the current loop immediately, continuing execution after the loop body."
+          }
+        ],
+        summary: "Bash for and while loops enable repetitive task execution with break/continue control, iterating over lists, ranges, files, and conditions."
+      },
+      {
+        id: "functions",
+        title: "Functions",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "Functions in bash allow modular script design by grouping commands into reusable blocks. This lesson covers function definition, parameters, return values, and variable scope.",
+        commands: [
+          {
+            command: "function log_message {\n  local level=\"$1\"\n  local message=\"$2\"\n  echo \"[$(date +%H:%M:%S)] [$level] $message\"\n}\n\nlog_message \"INFO\" \"Script started\"\nlog_message \"ERROR\" \"File not found\"",
+            explanation: "Defines a function with parameters accessed via $1, $2, etc. The local keyword restricts variable scope to the function.",
+            options: [
+              { flag: "local", description: "Declare a variable with function-local scope" },
+              { flag: "return", description: "Return a numeric exit status (0-255)" },
+              { flag: "$1..$9", description: "Positional parameters passed to the function" },
+              { flag: "$@", description: "All positional parameters as separate words" },
+              { flag: "$*", description: "All positional parameters as a single word" }
+            ],
+            example: "function get_uptime {\n  uptime | awk '{print $3 \" \" $4}' | tr -d ','\n}\necho \"System uptime: $(get_uptime)\"",
+            output: "System uptime: 5 days"
+          },
+          {
+            command: "function check_status {\n  local service=\"$1\"\n  if systemctl is-active --quiet \"$service\"; then\n    return 0\n  else\n    return 1\n  fi\n}\n\nif check_status \"nginx\"; then\n  echo \"Nginx is running\"\nelse\n  echo \"Nginx is not running\"\nfi",
+            explanation: "A function that returns 0 (success) or 1 (failure) based on service status. The return value is captured in the if condition.",
+            options: [
+              { flag: "return 0", description: "Return success (true)" },
+              { flag: "return 1", description: "Return failure (false)" },
+              { flag: "echo", description: "Output from functions can be captured with $()" }
+            ],
+            example: "function cpu_usage {\n  local usage=$(top -bn1 | grep \"Cpu(s)\" | awk '{print $2}' | cut -d'%' -f1)\n  echo \"$usage\"\n}\necho \"Current CPU usage: $(cpu_usage)%\"",
+            output: "Current CPU usage: 12.5%"
+          }
+        ],
+        notes: [
+          "Functions must be defined before they are called; bash reads scripts sequentially",
+          "Use local for all variables inside functions to avoid conflicts with global variables",
+          "Functions return numeric exit codes (0-255) via return; for string output, use echo and capture with $()",
+          "The $FUNCNAME variable contains the name of the currently executing function, useful for debugging"
+        ],
+        warnings: [
+          "Forgetting the local keyword in a function creates a global variable that can accidentally overwrite existing values"
+        ],
+        useCases: [
+          "Code reuse: Define utility functions (log, error, die) once and reuse them across the entire script",
+          "Modular design: Break complex scripts into well-named functions for readability and maintainability"
+        ],
+        practice: [
+          { task: "Write a function that takes a filename as an argument and reports whether it exists, its size, and its type", hint: "Define 'function file_info { local f=\"$1\"; if [ -e \"$f\" ]; then echo \"Size: $(stat -c%s \"$f\") bytes\"; ...; }'" }
+        ],
+        quiz: [
+          {
+            question: "What keyword makes a variable local to a bash function?",
+            options: ["private", "local", "scope", "internal"],
+            correctAnswer: 1,
+            explanation: "The local keyword restricts a variable's visibility to the function where it is declared and its child functions."
+          }
+        ],
+        summary: "Bash functions enable modular code with parameters, local variables, and return values, supporting code reuse and structured script design."
+      },
+      {
+        id: "script-permissions",
+        title: "Script Permissions",
+        level: "Intermediate",
+        estimatedTime: "15 min",
+        description: "Script permissions control who can read, execute, or modify shell scripts. This lesson covers execution permissions, shebang importance, and security considerations.",
+        commands: [
+          {
+            command: "chmod u=rwx,g=rx,o=r script.sh",
+            explanation: "Sets explicit permissions using symbolic mode: owner has full access, group has read/execute, others have read only.",
+            options: [
+              { flag: "u=rwx", description: "Set owner permissions to read, write, execute" },
+              { flag: "g=rx", description: "Set group permissions to read, execute" },
+              { flag: "o=r", description: "Set others permissions to read only" },
+              { flag: "a=rx", description: "Set all (owner, group, others) to read, execute" }
+            ],
+            example: "ls -l script.sh",
+            output: "-rwxr-xr-- 1 admin admin 1024 Dec 15 10:30 script.sh"
+          },
+          {
+            command: "./script.sh",
+            explanation: "Executes a script using the interpreter specified in the shebang line. The script must have execute permission.",
+            options: [
+              { flag: "./", description: "Explicit path to the current directory script" },
+              { flag: "bash script.sh", description: "Run with explicit interpreter (no execute permission needed)" },
+              { flag: "source script.sh", description: "Run in current shell context (script can affect current environment)" }
+            ],
+            example: "./deploy.sh",
+            output: "Deploying application...\nBuilding Docker images...\nStarting services...\nDeployment complete."
+          }
+        ],
+        notes: [
+          "Scripts need execute (x) permission to run with ./script.sh; use bash script.sh if you cannot change permissions",
+          "The shebang line is ignored when running with bash script.sh; the script runs with the user's current shell",
+          "Source a script (source script.sh or . script.sh) to run it in the current shell, retaining variable changes",
+          "Scripts in PATH directories (/usr/local/bin, ~/.local/bin) can be run from anywhere without ./ prefix"
+        ],
+        warnings: [
+          "Never put the current directory (.) in the root user's PATH; it enables accidental execution of malicious scripts"
+        ],
+        useCases: [
+          "System-wide scripts: Place admin scripts in /usr/local/bin with 755 permissions and root:root ownership",
+          "User-specific scripts: Store personal utilities in ~/.local/bin with 700 permissions for privacy"
+        ],
+        practice: [
+          { task: "Create a script, set its permissions to 755, move it to /usr/local/bin, and run it from any directory", hint: "Use 'chmod 755 script.sh', 'sudo cp script.sh /usr/local/bin/', then run 'script.sh' from any location" }
+        ],
+        quiz: [
+          {
+            question: "What permission is needed to run a script with ./script.sh?",
+            options: ["Read only", "Write only", "Execute", "All permissions"],
+            correctAnswer: 2,
+            explanation: "The execute (x) permission is required to run a script directly. Without it, use 'bash script.sh' instead."
+          }
+        ],
+        summary: "Script permissions control executability and access, with best practices for deployment in system and user directories."
+      },
+      {
+        id: "automation-scripts",
+        title: "Automation Scripts",
+        level: "Advanced",
+        estimatedTime: "30 min",
+        description: "Automation scripts combine all bash concepts to perform complex administrative tasks. This lesson demonstrates real-world automation for backups, monitoring, and deployment.",
+        commands: [
+          {
+            command: "cat > backup.sh << \"SCRIPT\"\n#!/bin/bash\nset -euo pipefail\n\nBACKUP_DIR=\"/backup/$(date +%Y-%m-%d)\"\nSOURCES=(\"/etc\" \"/var/www\" \"/home\")\nRETENTION_DAYS=14\n\nmkdir -p \"$BACKUP_DIR\"\n\nfor source in \"${SOURCES[@]}\"; do\n  name=$(basename \"$source\")\n  archive=\"$BACKUP_DIR/${name}.tar.gz\"\n  tar -czf \"$archive\" \"$source\" 2>/dev/null && echo \"Backed up: $name\"\n  echo \"$(date +%H:%M:%S) $name backup: ${archive}\" >> /var/log/backup.log\ndone\n\nfind /backup -maxdepth 1 -type d -mtime +$RETENTION_DAYS -exec rm -rf {} \\;\necho \"Cleaned up backups older than $RETENTION_DAYS days\"\nSCRIPT",
+            explanation: "A complete backup script using arrays, loops, date-based directories, logging, and retention cleanup. The set -euo pipefail ensures strict error handling.",
+            options: [
+              { flag: "set -euo pipefail", description: "Exit on error, unset variable error, pipe failure detection" },
+              { flag: "array=(\"a\" \"b\")", description: "Bash array for storing multiple values" },
+              { flag: "maxdepth", description: "Limit find recursion depth" }
+            ],
+            example: "sudo ./backup.sh",
+            output: "Backed up: etc\nBacked up: www\nBacked up: home\nCleaned up backups older than 14 days"
+          },
+          {
+            command: "cat > deploy.sh << \"SCRIPT\"\n#!/bin/bash\nset -euo pipefail\n\nAPP_DIR=\"/opt/myapp\"\nREPO_URL=\"https://github.com/org/myapp.git\"\nBRANCH=\"${1:-main}\"\n\nfunction log {\n  echo \"[$(date '+%Y-%m-%d %H:%M:%S')] $*\"\n}\n\nif [ ! -d \"$APP_DIR\" ]; then\n  log \"Cloning repository...\"\n  git clone --branch \"$BRANCH\" \"$REPO_URL\" \"$APP_DIR\"\nelse\n  log \"Updating repository...\"\n  cd \"$APP_DIR\" && git fetch origin && git reset --hard \"origin/$BRANCH\"\nfi\n\nlog \"Building application...\"\ncd \"$APP_DIR\"\nnpm install --production\nnpm run build\n\nlog \"Restarting service...\"\nsudo systemctl restart myapp\nlog \"Deployment completed successfully\"\nSCRIPT",
+            explanation: "A deployment automation script with error handling, logging, git operations, build steps, and service restart.",
+            options: [
+              { flag: "${1:-default}", description: "Use first argument or default value" },
+              { flag: "git fetch && git reset", description: "Safely update to latest remote commit" }
+            ],
+            example: "./deploy.sh develop",
+            output: "[2023-12-15 10:30:01] Updating repository...\n[2023-12-15 10:30:05] Building application...\n[2023-12-15 10:30:45] Restarting service...\n[2023-12-15 10:30:46] Deployment completed successfully"
+          }
+        ],
+        notes: [
+          "Always use set -euo pipefail in production scripts to prevent silent failures",
+          "Use trap to handle cleanup on script exit: trap 'rm -f /tmp/tempfile' EXIT ensures cleanup even on failure",
+          "Log all automation activities with timestamps for auditing and troubleshooting",
+          "Test automation scripts in a staging environment before running them on production systems"
+        ],
+        warnings: [
+          "Automation scripts running with sudo can cause extensive damage if buggy; always include validation checks and dry-run modes"
+        ],
+        useCases: [
+          "Nightly backups: Schedule backup.sh via cron to run daily with log rotation and retention management",
+          "CI/CD deployment: Use deploy.sh in a continuous delivery pipeline to push updates to staging and production servers"
+        ],
+        practice: [
+          { task: "Create an automation script that checks disk usage for all mounted filesystems and sends a warning if any exceeds 80%", hint: "Use 'df -h' output piped to awk, loop through filesystems, check usage percentage with ${usage%?} to strip % sign" }
+        ],
+        quiz: [
+          {
+            question: "What does 'set -e' do in a bash script?",
+            options: ["Enables debug mode", "Exits on first error", "Enables emacs mode", "Sets environment variables"],
+            correctAnswer: 1,
+            explanation: "set -e causes the script to exit immediately if any command returns a non-zero exit status, preventing cascading failures."
+          }
+        ],
+        summary: "Automation scripts combine variables, conditions, loops, and functions with strict error handling to perform complex administrative tasks reliably."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Networking",
+    lessons: [
+      {
+        id: "ip-command",
+        title: "ip command",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "The ip command from the iproute2 suite is the modern replacement for ifconfig and route. This lesson covers network interface configuration, IP addresses, routing, and ARP management.",
+        commands: [
+          {
+            command: "ip addr show",
+            explanation: "Displays all network interfaces and their IP addresses, states, MAC addresses, and other configuration details.",
+            options: [
+              { flag: "addr", description: "Manage and display IP addresses" },
+              { flag: "link", description: "Manage and display network interfaces" },
+              { flag: "route", description: "Manage and display routing table" },
+              { flag: "neigh", description: "Manage and display ARP/neighbor cache" },
+              { flag: "-s", description: "Show statistics (packets, bytes, errors, drops)" }
+            ],
+            example: "ip addr show",
+            output: "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000\n    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00\n    inet 127.0.0.1/8 scope host lo\n       valid_lft forever preferred_lft forever\n    inet6 ::1/128 scope host\n       valid_lft forever preferred_lft forever\n2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000\n    link/ether 08:00:27:ab:cd:ef brd ff:ff:ff:ff:ff:ff\n    inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0\n       valid_lft forever preferred_lft forever\n    inet6 fe80::a00:27ff:feab:cdef/64 scope link\n       valid_lft forever preferred_lft forever"
+          },
+          {
+            command: "ip route show",
+            explanation: "Displays the kernel routing table, including default gateway and network routes.",
+            options: [
+              { flag: "route", description: "Show or modify the routing table" },
+              { flag: "add", description: "Add a new route" },
+              { flag: "del", description: "Delete a route" },
+              { flag: "replace", description: "Replace or add a route" }
+            ],
+            example: "ip route show",
+            output: "default via 192.168.1.1 dev eth0 proto static\n10.0.0.0/8 via 192.168.1.254 dev eth0 proto static metric 100\n192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.100"
+          },
+          {
+            command: "ip link set eth0 up",
+            explanation: "Brings a network interface up (enables it) or down (disables it). Equivalent to ifconfig eth0 up/down.",
+            options: [
+              { flag: "set", description: "Change device attributes" },
+              { flag: "up", description: "Bring the interface up" },
+              { flag: "down", description: "Bring the interface down" },
+              { flag: "mtu", description: "Set the Maximum Transmission Unit" }
+            ],
+            example: "sudo ip link set eth0 mtu 9000",
+            output: ""
+          }
+        ],
+        notes: [
+          "The ip command replaces deprecated tools: ip addr replaces ifconfig, ip route replaces route, ip neigh replaces arp",
+          "Use ip -br addr for a brief, machine-friendly output showing only interface names and IP addresses",
+          "Changes made with ip are immediate but not persistent; use distribution-specific network config files to persist",
+          "The lo (loopback) interface always has 127.0.0.1/8 assigned and is essential for local communication"
+        ],
+        warnings: [
+          "Running 'ip link set eth0 down' over SSH will disconnect you; always have out-of-band access when modifying network interfaces remotely"
+        ],
+        useCases: [
+          "Static IP assignment: ip addr add 192.168.1.200/24 dev eth0 assigns a static IP address to an interface",
+          "Troubleshooting: ip addr show and ip route show provide a complete picture of the current network configuration"
+        ],
+        practice: [
+          { task: "Display all network interfaces with their IP addresses in brief format, then check the routing table", hint: "Use 'ip -br addr show' for brief output and 'ip route show' for the routing table" }
+        ],
+        quiz: [
+          {
+            question: "Which ip command shows the routing table?",
+            options: ["ip addr", "ip route", "ip link", "ip neigh"],
+            correctAnswer: 1,
+            explanation: "ip route show (or just ip route) displays the kernel routing table including the default gateway and network routes."
+          }
+        ],
+        summary: "The ip command is the modern network configuration tool that manages interfaces, addresses, routes, and neighbor cache for Linux networking."
+      },
+      {
+        id: "ping",
+        title: "ping",
+        level: "Beginner",
+        estimatedTime: "15 min",
+        description: "ping is the fundamental network diagnostic tool that tests reachability between hosts using ICMP echo requests. This lesson covers basic connectivity testing and advanced ping options.",
+        commands: [
+          {
+            command: "ping -c 4 google.com",
+            explanation: "Sends 4 ICMP echo requests to google.com and reports response times, packet loss, and statistics.",
+            options: [
+              { flag: "-c", description: "Stop after sending a specific number of packets" },
+              { flag: "-i", description: "Interval between packets in seconds (default 1)" },
+              { flag: "-s", description: "Packet size in bytes (default 56)" },
+              { flag: "-W", description: "Time to wait for a response in seconds" },
+              { flag: "-D", description: "Print timestamps before each output line" }
+            ],
+            example: "ping -c 4 google.com",
+            output: "PING google.com (142.250.80.14) 56(84) bytes of data.\n64 bytes from 142.250.80.14: icmp_seq=1 ttl=118 time=12.3 ms\n64 bytes from 142.250.80.14: icmp_seq=2 ttl=118 time=11.8 ms\n64 bytes from 142.250.80.14: icmp_seq=3 ttl=118 time=12.1 ms\n64 bytes from 142.250.80.14: icmp_seq=4 ttl=118 time=11.9 ms\n\n--- google.com ping statistics ---\n4 packets transmitted, 4 received, 0% packet loss, time 3003ms\nrtt min/avg/max/mdev = 11.781/12.013/12.305/0.189 ms"
+          },
+          {
+            command: "ping -c 10 -i 0.2 -s 1472 192.168.1.1",
+            explanation: "Sends 10 packets with 200ms intervals and 1472-byte payload to test local network performance and MTU limits.",
+            options: [
+              { flag: "-c 10", description: "Send 10 packets" },
+              { flag: "-i 0.2", description: "200ms interval between packets" },
+              { flag: "-s 1472", description: "1472 byte payload (1500 MTU minus 28 header)" },
+              { flag: "-f", description: "Flood mode (root only), sends packets as fast as possible" }
+            ],
+            example: "ping -c 5 -i 0.5 192.168.1.1",
+            output: "PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.\n64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=1.234 ms\n64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=1.101 ms\n64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=1.345 ms\n64 bytes from 192.168.1.1: icmp_seq=4 ttl=64 time=0.987 ms\n64 bytes from 192.168.1.1: icmp_seq=5 ttl=64 time=1.112 ms\n\n--- 192.168.1.1 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 2000ms\nrtt min/avg/max/mdev = 0.987/1.156/1.345/0.128 ms"
+          }
+        ],
+        notes: [
+          "Ping uses ICMP (Internet Control Message Protocol) which may be blocked by some firewalls",
+          "High latency or packet loss indicates network congestion, faulty hardware, or bandwidth saturation",
+          "TTL (Time To Live) decreases by 1 per hop; starting TTL values indicate the OS: 64 (Linux), 128 (Windows), 255 (network devices)",
+          "Use ping -D to include timestamps in output for correlating with other log entries"
+        ],
+        warnings: [
+          "Flood ping (-f) can disrupt network performance and should only be used for controlled testing on local networks"
+        ],
+        useCases: [
+          "Connectivity check: ping -c 1 8.8.8.8 tests if the internet is reachable from the server",
+          "Latency monitoring: Continuous ping with timestamps helps diagnose intermittent network issues"
+        ],
+        practice: [
+          { task: "Ping your default gateway with 10 packets and observe the min/avg/max response times", hint: "First find your gateway with 'ip route | grep default', then 'ping -c 10 <gateway_ip>'" }
+        ],
+        quiz: [
+          {
+            question: "What protocol does ping use to test network connectivity?",
+            options: ["TCP", "UDP", "ICMP", "ARP"],
+            correctAnswer: 2,
+            explanation: "Ping uses ICMP (Internet Control Message Protocol) echo request and echo reply messages."
+          }
+        ],
+        summary: "ping tests network connectivity and latency using ICMP echo requests, providing packet loss statistics and round-trip time measurements."
+      },
+      {
+        id: "netstat-ss",
+        title: "netstat and ss",
+        level: "Advanced",
+        estimatedTime: "20 min",
+        description: "Netstat and ss display network connections, listening ports, and socket statistics. ss is the modern replacement for netstat, offering better performance and more detailed information.",
+        commands: [
+          {
+            command: "ss -tuln",
+            explanation: "Lists all TCP (-t) and UDP (-u) listening (-l) sockets with numeric (-n) port numbers. Shows which services are listening on which ports.",
+            options: [
+              { flag: "-t", description: "Show TCP sockets" },
+              { flag: "-u", description: "Show UDP sockets" },
+              { flag: "-l", description: "Show only listening sockets" },
+              { flag: "-n", description: "Show numeric addresses/ports instead of resolving names" },
+              { flag: "-p", description: "Show process using the socket" },
+              { flag: "-a", description: "Show all sockets (listening and established)" }
+            ],
+            example: "ss -tuln",
+            output: "Netid  State   Recv-Q  Send-Q  Local Address:Port   Peer Address:Port\ntcp    LISTEN  0       128     0.0.0.0:22            0.0.0.0:*\ntcp    LISTEN  0       128     127.0.0.1:5432        0.0.0.0:*\ntcp    LISTEN  0       511     *:80                  *:*\ntcp    LISTEN  0       128     *:443                 *:*\ntcp    LISTEN  0       128     [::]:22               [::]:*\nudp    LISTEN  0       256     0.0.0.0:68            0.0.0.0:*\nudp    LISTEN  0       256     *:631                 *:*"
+          },
+          {
+            command: "ss -tunap | grep ESTAB",
+            explanation: "Shows all established TCP connections with process information. Used for monitoring active connections and identifying which process owns each connection.",
+            options: [
+              { flag: "-t", description: "TCP sockets only" },
+              { flag: "-u", description: "UDP sockets only" },
+              { flag: "-a", description: "All sockets" },
+              { flag: "-p", description: "Show process name and PID" },
+              { flag: "-e", description: "Show detailed socket information" },
+              { flag: "-s", description: "Print summary statistics" }
+            ],
+            example: "ss -tunap | grep ESTAB",
+            output: "tcp   ESTAB  0      0         192.168.1.100:22       192.168.1.50:54321   users:((\"sshd\",pid=1234,fd=4))\ntcp   ESTAB  0      0         192.168.1.100:443      10.0.0.10:34567      users:((\"nginx\",pid=2345,fd=7))\ntcp   ESTAB  0      0         192.168.1.100:5432     192.168.1.50:49876    users:((\"postgres\",pid=3456,fd=8))"
+          },
+          {
+            command: "netstat -i",
+            explanation: "Displays a table of network interfaces with packet statistics including transmitted/received packets, errors, and drops.",
+            options: [
+              { flag: "-i", description: "Show interface statistics" },
+              { flag: "-r", description: "Show routing table" },
+              { flag: "-s", description: "Show protocol statistics (TCP, UDP, ICMP, IP)" },
+              { flag: "-ie", description: "Show interface details (like ifconfig)" }
+            ],
+            example: "netstat -i",
+            output: "Kernel Interface table\nIface   MTU   RX-OK RX-ERR RX-DRP RX-OVR   TX-OK TX-ERR TX-DRP TX-OVR Flg\neth0    1500  1234567      0      0      0   987654      0      0      0 BMRU\nlo     65536   12345      0      0      0    12345      0      0      0 LRU"
+          }
+        ],
+        notes: [
+          "ss is faster than netstat because it reads socket information directly from the kernel (netlink) instead of parsing /proc",
+          "Port numbers below 1024 require root privileges to bind and are called privileged ports",
+          "The LISTEN state indicates a service is waiting for connections; ESTAB indicates an active connection",
+          "Use ss -s for a quick summary of total sockets by type and state"
+        ],
+        warnings: [
+          "netstat is deprecated on many modern distributions in favor of ss; use ss for new scripts and monitoring systems"
+        ],
+        useCases: [
+          "Port conflict resolution: ss -tuln | grep :80 shows if anything is already listening on port 80",
+          "Security auditing: ss -tunap shows all active connections with process names for identifying unauthorized services"
+        ],
+        practice: [
+          { task: "Find all listening TCP ports on your system and identify which process is listening on port 22", hint: "Use 'ss -tlnp' to show TCP listening ports with process names" }
+        ],
+        quiz: [
+          {
+            question: "What does the ss -tuln command show?",
+            options: ["Network traffic statistics", "Listening TCP and UDP ports with numeric addresses", "Active network connections only", "Interface hardware information"],
+            correctAnswer: 1,
+            explanation: "ss -tuln displays TCP (-t) and UDP (-u) listening (-l) sockets with numeric (-n) addresses and ports."
+          }
+        ],
+        summary: "ss is the modern tool for socket statistics, providing faster and more detailed connection information than the legacy netstat command."
+      },
+      {
+        id: "curl-wget",
+        title: "curl and wget",
+        level: "Intermediate",
+        estimatedTime: "20 min",
+        description: "curl and wget are command-line tools for transferring data with URLs. curl supports a wider range of protocols and is ideal for API interaction, while wget excels at recursive downloads.",
+        commands: [
+          {
+            command: "curl -I https://example.com",
+            explanation: "Fetches only the HTTP headers from a URL, showing response status, content type, server information, and caching headers. Useful for debugging web servers.",
+            options: [
+              { flag: "-I", description: "Fetch only HTTP headers (HEAD request)" },
+              { flag: "-L", description: "Follow redirects" },
+              { flag: "-o", description: "Save output to a file" },
+              { flag: "-O", description: "Save with remote file name" },
+              { flag: "-X", description: "Specify HTTP method (GET, POST, PUT, DELETE)" },
+              { flag: "-H", description: "Add custom HTTP header" },
+              { flag: "-d", description: "Send data in POST request" },
+              { flag: "-k", description: "Allow insecure SSL connections" }
+            ],
+            example: "curl -I https://google.com",
+            output: "HTTP/2 200\ncontent-type: text/html; charset=ISO-8859-1\ncontent-length: 0\nx-xss-protection: 0\nx-frame-options: SAMEORIGIN\ndate: Fri, 15 Dec 2023 10:30:00 GMT\nserver: gws\naccept-ranges: none\nvary: Accept-Encoding"
+          },
+          {
+            command: "curl -X POST -H \"Content-Type: application/json\" -d '{\"name\":\"test\",\"status\":\"active\"}' https://api.example.com/resource",
+            explanation: "Sends a POST request with JSON data to a REST API endpoint. This demonstrates how curl is used for API integration.",
+            options: [
+              { flag: "-X POST", description: "Use HTTP POST method" },
+              { flag: "-d", description: "Send data in request body" },
+              { flag: "-H", description: "Add custom header" },
+              { flag: "-v", description: "Verbose output showing request/response details" }
+            ],
+            example: "curl -X POST -H \"Content-Type: application/json\" -d '{\"key\":\"value\"}' https://httpbin.org/post",
+            output: "{\n  \"args\": {},\n  \"data\": \"{\\\"key\\\":\\\"value\\\"}\",\n  \"files\": {},\n  \"form\": {},\n  \"headers\": {\n    \"Content-Type\": \"application/json\",\n    \"Host\": \"httpbin.org\"\n  },\n  \"json\": {\n    \"key\": \"value\"\n  },\n  \"url\": \"https://httpbin.org/post\"\n}"
+          },
+          {
+            command: "wget -r -l 2 -np -nH --cut-dirs=1 http://example.com/files/",
+            explanation: "Recursively downloads files from a web directory with a maximum depth of 2, no parent directories, saving files locally without the hostname prefix.",
+            options: [
+              { flag: "-r", description: "Recursive download" },
+              { flag: "-l", description: "Maximum recursion depth" },
+              { flag: "-np", description: "No parent directories (stay within the specified path)" },
+              { flag: "-nH", description: "No hostname prefix in saved files" },
+              { flag: "-c", description: "Continue/resume a partial download" },
+              { flag: "-q", description: "Quiet mode (no output)" }
+            ],
+            example: "wget -c https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso",
+            output: "--2023-12-15 10:30:01--  https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso\nResolving releases.ubuntu.com (releases.ubuntu.com)... 91.189.91.124\nConnecting to releases.ubuntu.com (releases.ubuntu.com)|91.189.91.124|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 4897234944 (4.6G) [application/x-iso9660-image]\nSaving to: 'ubuntu-22.04.3-desktop-amd64.iso'\n\nubuntu-22.04.3-desktop- 100%[===================>]   4.56G  12.5MB/s    in 6m 25s\n\n2023-12-15 10:36:26 (12.5 MB/s) - 'ubuntu-22.04.3-desktop-amd64.iso' saved [4897234944/4897234944]"
+          }
+        ],
+        notes: [
+          "curl outputs to stdout by default; use -o to save files or pipe the output for further processing",
+          "wget is better for downloading large files and recursive mirroring; curl is better for API interaction",
+          "Use curl -v for verbose debugging showing request headers, response headers, and TLS handshake details",
+          "Both tools support HTTP/2, HTTPS, FTP, and proxy configurations"
+        ],
+        warnings: [
+          "Using curl with -k (insecure) disables SSL certificate verification; avoid this in production scripts"
+        ],
+        useCases: [
+          "API testing: curl -X GET -H \"Authorization: Bearer token\" https://api.example.com/v1/status tests authenticated endpoints",
+          "File mirroring: wget -r -l inf -np https://docs.example.com/ creates a local mirror of documentation"
+        ],
+        practice: [
+          { task: "Use curl to check the HTTP headers of a website you administer and verify the server software and caching headers", hint: "Use 'curl -I https://yoursite.com' and examine the server, cache-control, and content-type headers" }
+        ],
+        quiz: [
+          {
+            question: "What is the primary difference between curl and wget?",
+            options: ["Curl is faster", "Wget supports recursive downloads, curl is better for API interaction", "Curl supports more protocols", "Wget is older"],
+            correctAnswer: 1,
+            explanation: "wget excels at recursive and batch downloads, while curl offers better protocol support and is ideal for API testing and data transfer."
+          }
+        ],
+        summary: "curl is the Swiss Army knife for data transfer and API interaction, while wget specializes in recursive and resumable downloads."
+      },
+      {
+        id: "ssh-basics",
+        title: "SSH Basics",
+        level: "Advanced",
+        estimatedTime: "25 min",
+        description: "SSH (Secure Shell) provides encrypted remote access to Linux servers. This lesson covers key-based authentication, configuration, port forwarding, and security best practices.",
+        commands: [
+          {
+            command: "ssh -i ~/.ssh/id_rsa -p 2222 admin@192.168.1.100",
+            explanation: "Connects to a remote server on port 2222 using a specific identity file for key-based authentication instead of a password.",
+            options: [
+              { flag: "-i", description: "Use a specific identity/private key file" },
+              { flag: "-p", description: "Specify port number (default is 22)" },
+              { flag: "-l", description: "Login name (alternative to user@host)" },
+              { flag: "-v", description: "Verbose mode for debugging connection issues" },
+              { flag: "-N", description: "Do not execute remote command (for port forwarding)" },
+              { flag: "-L", description: "Local port forwarding" }
+            ],
+            example: "ssh -i ~/.ssh/deploy_key -p 2222 deploy@staging.example.com",
+            output: "Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-91-generic x86_64)\n\n * Documentation:  https://help.ubuntu.com\n * Management:     https://landscape.canonical.com\n * Support:        https://ubuntu.com/advantage\n\nLast login: Fri Dec 15 09:15:22 2023 from 192.168.1.50\ndeploy@staging:~$"
+          },
+          {
+            command: "ssh-keygen -t ed25519 -C \"admin@server\"",
+            explanation: "Generates a new Ed25519 SSH key pair, the most secure and efficient key type.",
+            options: [
+              { flag: "-t", description: "Key type: rsa, dsa, ecdsa, ed25519" },
+              { flag: "-b", description: "Key size in bits (e.g., -b 4096 for RSA)" },
+              { flag: "-C", description: "Comment attached to the public key" },
+              { flag: "-f", description: "Output file path for the key" },
+              { flag: "-N", description: "Passphrase for the key" }
+            ],
+            example: "ssh-keygen -t ed25519 -C \"john@webserver\"",
+            output: "Generating public/private ed25519 key pair.\nEnter file in which to save the key (/home/admin/.ssh/id_ed25519):\nEnter passphrase (empty for no passphrase):\nEnter same passphrase again:\nYour identification has been saved in /home/admin/.ssh/id_ed25519\nYour public key has been saved in /home/admin/.ssh/id_ed25519.pub\nThe key fingerprint is:\nSHA256:abc123def456ghijklmno789pqrstuvwxyz012345 john@webserver\nThe key's randomart image is:\n+--[ED25519 256]--+\n|    .o..   .      |\n|   . o.. . .     |\n|    o o o .      |\n|   . + + o       |\n|  . + o S        |\n|   = + o         |\n|    B +          |\n|   + E           |\n|  .+o..          |\n+----[SHA256]-----+"
+          },
+          {
+            command: "ssh-copy-id -i ~/.ssh/id_ed25519.pub admin@192.168.1.100",
+            explanation: "Copies the public key to the remote server's authorized_keys file, enabling passwordless key-based authentication.",
+            options: [
+              { flag: "-i", description: "Public key file to install" },
+              { flag: "-p", description: "Port number of the remote SSH server" },
+              { flag: "-f", description: "Force installation even if key already exists" }
+            ],
+            example: "ssh-copy-id -i ~/.ssh/id_ed25519.pub admin@192.168.1.100",
+            output: "/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: \"/home/admin/.ssh/id_ed25519.pub\"\n/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed\n/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys\n\nadmin@192.168.1.100's password:\n\nNumber of key(s) added: 1\n\nNow try logging into the machine, with:   ssh -o \"IdentitiesOnly=yes\" admin@192.168.1.100\nand check to make sure that only the key(s) you wanted were added."
+          }
+        ],
+        notes: [
+          "Always prefer Ed25519 keys over RSA for better security and performance; use -t ed25519",
+          "SSH configuration is stored in ~/.ssh/config for client settings and /etc/ssh/sshd_config for server settings",
+          "Disable root login and password authentication in sshd_config for improved security",
+          "Use SSH agent forwarding with caution: -A flag forwards your agent to the remote host, which can be a security risk"
+        ],
+        warnings: [
+          "Disabling password authentication before testing key-based login can lock you out of the server; always keep a second terminal open"
+        ],
+        useCases: [
+          "Remote server management: SSH into cloud servers for administration, monitoring, and troubleshooting",
+          "Secure file transfer: Use scp or sftp over SSH for encrypted file transfers between systems"
+        ],
+        practice: [
+          { task: "Generate an Ed25519 SSH key pair, examine the public key file format, and copy it to a remote server", hint: "Use 'ssh-keygen -t ed25519', then 'cat ~/.ssh/id_ed25519.pub' to view the key, then 'ssh-copy-id user@remote'" }
+        ],
+        quiz: [
+          {
+            question: "What is the recommended SSH key type for modern systems?",
+            options: ["RSA 1024", "RSA 2048", "Ed25519", "DSA"],
+            correctAnswer: 2,
+            explanation: "Ed25519 is recommended for modern systems as it offers better security, faster performance, and shorter key sizes compared to RSA."
+          }
+        ],
+        summary: "SSH provides encrypted remote access with key-based authentication, port forwarding, and secure file transfer capabilities."
+      },
+      {
+        id: "firewall-basics",
+        title: "Firewall Basics",
+        level: "Advanced",
+        estimatedTime: "25 min",
+        description: "Linux firewalls control network traffic based on rules. This lesson covers UFW (Uncomplicated Firewall) for beginners and iptables/nftables for advanced rule-based filtering.",
+        commands: [
+          {
+            command: "ufw status verbose",
+            explanation: "Shows the current firewall status, default policies, and all active rules in verbose format.",
+            options: [
+              { flag: "status", description: "Show firewall status" },
+              { flag: "verbose", description: "Show additional information about rules" },
+              { flag: "numbered", description: "Show rules with numbers for easy deletion" },
+              { flag: "app list", description: "List application profiles available for UFW" }
+            ],
+            example: "sudo ufw status verbose",
+            output: "Status: active\nLogging: on (low)\nDefault: deny (incoming), allow (outgoing), deny (routed)\nNew profiles: skip\n\nTo                         Action      From\n--                         ------      ----\n22/tcp                     ALLOW       Anywhere\n80/tcp                     ALLOW       Anywhere\n443/tcp                    ALLOW       Anywhere\n22/tcp (v6)                ALLOW       Anywhere (v6)\n80/tcp (v6)                ALLOW       Anywhere (v6)\n443/tcp (v6)               ALLOW       Anywhere (v6)"
+          },
+          {
+            command: "ufw allow from 192.168.1.0/24 to any port 22 proto tcp",
+            explanation: "Allows SSH (port 22) traffic only from the local subnet 192.168.1.0/24, restricting remote SSH access.",
+            options: [
+              { flag: "allow", description: "Allow traffic matching the rule" },
+              { flag: "deny", description: "Deny traffic matching the rule" },
+              { flag: "reject", description: "Reject traffic (sends rejection response)" },
+              { flag: "from", description: "Source IP or subnet" },
+              { flag: "to", description: "Destination IP or interface" },
+              { flag: "port", description: "Destination port" },
+              { flag: "proto", description: "Protocol (tcp, udp)" }
+            ],
+            example: "sudo ufw allow from 10.0.0.0/8 to any port 3306 proto tcp",
+            output: "Rule added"
+          },
+          {
+            command: "iptables -L -n -v",
+            explanation: "Lists all iptables rules in the filter table with numeric addresses and packet/byte counters.",
+            options: [
+              { flag: "-L", description: "List all rules" },
+              { flag: "-n", description: "Show numeric addresses (no DNS resolution)" },
+              { flag: "-v", description: "Verbose, show packet and byte counters" },
+              { flag: "-A", description: "Append a new rule to a chain" },
+              { flag: "-D", description: "Delete a rule from a chain" },
+              { flag: "-P", description: "Set the default policy for a chain" }
+            ],
+            example: "sudo iptables -L -n -v",
+            output: "Chain INPUT (policy DROP 1234 packets, 456K bytes)\n pkts bytes target     prot opt in     out     source               destination\n 1234  789K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0\n56789  123M ACCEPT     tcp  --  eth0   *       0.0.0.0/0            0.0.0.0/0            tcp dpt:22\n 4567   89K ACCEPT     tcp  --  eth0   *       192.168.1.0/24       0.0.0.0/0            tcp dpt:80\n 2345   56K ACCEPT     all  --  eth0   *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED\n   12   1234 DROP       all  --  eth0   *       0.0.0.0/0            0.0.0.0/0\n\nChain FORWARD (policy DROP 0 packets, 0 bytes)\n pkts bytes target     prot opt in     out     source               destination\n\nChain OUTPUT (policy ACCEPT 65432 packets, 234M bytes)\n pkts bytes target     prot opt in     out     source               destination"
+          }
+        ],
+        notes: [
+          "UFW is a frontend for iptables/nftables that simplifies firewall management for common use cases",
+          "Default UFW policy: deny all incoming, allow all outgoing; explicit rules create exceptions",
+          "Iptables rules are evaluated in order; the first matching rule determines the action",
+          "Nftables is the modern replacement for iptables, available on RHEL 8+ and Ubuntu 20.04+"
+        ],
+        warnings: [
+          "Enabling UFW or changing iptables rules over SSH without allowing SSH traffic first will lock you out of the server"
+        ],
+        useCases: [
+          "Web server hardening: ufw allow 80/tcp && ufw allow 443/tcp && ufw deny 22/tcp restricts to only web traffic",
+          "DDoS mitigation: iptables -A INPUT -p tcp --dport 80 -m connlimit --connlimit-above 100 -j REJECT limits concurrent connections"
+        ],
+        practice: [
+          { task: "Enable UFW, allow SSH from your specific IP only, allow web traffic, and verify the rules", hint: "Use 'sudo ufw allow from YOUR_IP to any port 22 proto tcp', 'sudo ufw allow 80/tcp', 'sudo ufw allow 443/tcp', then 'sudo ufw enable'" }
+        ],
+        quiz: [
+          {
+            question: "What is the default incoming policy in UFW?",
+            options: ["Allow all", "Deny all", "Reject all", "Forward all"],
+            correctAnswer: 1,
+            explanation: "UFW's default incoming policy is deny, meaning all incoming traffic is blocked unless explicitly allowed by a rule."
+          }
+        ],
+        summary: "Linux firewalls use UFW for simple rule management or iptables/nftables for advanced packet filtering, with default-deny policies for security."
+      }
+    ]
+  },
+  {
+    sectionTitle: "Advanced System Administration",
+    lessons: [
+      {
+        id: "cron-jobs",
+        title: "Cron Jobs",
+        level: "Advanced",
+        estimatedTime: "25 min",
+        description: "Cron is the standard job scheduler on Linux, allowing tasks to run automatically at specified times. This lesson covers crontab syntax, scheduling patterns, and job management.",
+        commands: [
+          {
+            command: "crontab -e",
+            explanation: "Opens the current user's crontab file in the default editor for editing. Each line defines a scheduled job with time specification and command.",
+            options: [
+              { flag: "-e", description: "Edit the current crontab" },
+              { flag: "-l", description: "List the current crontab entries" },
+              { flag: "-r", description: "Remove the current crontab" },
+              { flag: "-u", description: "Specify a different user (root only)" }
+            ],
+            example: "crontab -l",
+            output: "# Daily backup at 2 AM\n0 2 * * * /usr/local/bin/backup.sh\n\n# Check disk usage every hour\n0 * * * * /usr/local/bin/disk-check.sh\n\n# Rotate logs every Sunday at 3 AM\n0 3 * * 0 /usr/sbin/logrotate /etc/logrotate.conf\n\n# Update package list daily at 5 AM\n0 5 * * * apt update >> /var/log/apt-update.log 2>&1"
+          },
+          {
+            command: "echo \"30 4 * * 1 /usr/local/bin/weekly-report.sh\" | crontab -",
+            explanation: "Sets up a cron job that runs every Monday at 4:30 AM by piping a crontab entry directly. This is useful for scripted crontab installation.",
+            options: [
+              { flag: "Minute (0-59)", description: "First field: minute of the hour" },
+              { flag: "Hour (0-23)", description: "Second field: hour of the day" },
+              { flag: "Day (1-31)", description: "Third field: day of the month" },
+              { flag: "Month (1-12)", description: "Fourth field: month of the year" },
+              { flag: "Weekday (0-7)", description: "Fifth field: day of the week (0 or 7 = Sunday)" }
+            ],
+            example: "# Run every 15 minutes\n*/15 * * * * /usr/local/bin/health-check.sh\n\n# Run at midnight on the first of every month\n0 0 1 * * /usr/local/bin/monthly-cleanup.sh\n\n# Run every weekday (Mon-Fri) at 9 AM\n0 9 * * 1-5 /usr/local/bin/weekday-task.sh",
+            output: ""
+          },
+          {
+            command: "cat /etc/crontab",
+            explanation: "Shows the system-wide crontab file which includes an additional user field. System cron jobs are defined here instead of per-user crontabs.",
+            options: [
+              { flag: "/etc/crontab", description: "System-wide crontab file" },
+              { flag: "/etc/cron.d/", description: "Directory for package-specific cron files" },
+              { flag: "/etc/cron.hourly/", description: "Scripts run every hour" },
+              { flag: "/etc/cron.daily/", description: "Scripts run daily" },
+              { flag: "/etc/cron.weekly/", description: "Scripts run weekly" },
+              { flag: "/etc/cron.monthly/", description: "Scripts run monthly" }
+            ],
+            example: "cat /etc/crontab",
+            output: "# /etc/crontab: system-wide crontab\n# Unlike user crontabs, this has a user field\n\nSHELL=/bin/sh\nPATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin\n\n# m h dom mon dow user  command\n17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly\n25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )\n47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )\n52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )"
+          }
+        ],
+        notes: [
+          "Crontab format: minute hour day-of-month month day-of-week command, with * meaning 'every'",
+          "Use */5 in the minute field to run every 5 minutes; use comma-separated values for specific times (e.g., 0,15,30,45)",
+          "Redirect output in cron jobs: command >> /var/log/cron.log 2>&1 captures stdout and stderr",
+          "The MAILTO variable in crontab sends job output to an email address; set MAILTO=\"\" to disable email"
+        ],
+        warnings: [
+          "Always use absolute paths in cron jobs because cron runs with a minimal PATH environment variable"
+        ],
+        useCases: [
+          "Automated backups: Schedule a backup script to run daily at midnight with a cron job",
+          "System maintenance: Use cron for log rotation, package updates, disk cleanup, and monitoring tasks"
+        ],
+        practice: [
+          { task: "Create a cron job that runs a script every day at 3 AM, logs its output, and disables email notifications", hint: "Use 'crontab -e' and add '0 3 * * * /path/to/script.sh >> /var/log/script.log 2>&1' and set 'MAILTO=\"\"' at the top" }
+        ],
+        quiz: [
+          {
+            question: "What does the cron expression '0 0 * * 0' mean?",
+            options: ["Daily at midnight", "Every Sunday at midnight", "Every hour on Sunday", "Monthly on Sunday"],
+            correctAnswer: 1,
+            explanation: "0 0 * * 0 means at minute 0, hour 0 (midnight), every day of month (*), every month (*), on Sunday (0). So every Sunday at midnight."
+          }
+        ],
+        summary: "Cron is the Linux job scheduler that runs scripts and commands at specified times using a five-field time specification format."
+      },
+      {
+        id: "logs",
+        title: "Logs",
+        level: "Advanced",
+        estimatedTime: "20 min",
+        description: "Linux system logs are essential for troubleshooting, security auditing, and performance monitoring. This lesson covers log locations, log rotation, and analysis techniques.",
+        commands: [
+          {
+            command: "ls -la /var/log/",
+            explanation: "Lists all log files in the standard log directory. Different services and system components write to their own log files here.",
+            options: [
+              { flag: "/var/log/", description: "Standard system log directory" },
+              { flag: "/var/log/syslog", description: "General system log (Ubuntu/Debian)" },
+              { flag: "/var/log/messages", description: "General system log (RHEL/CentOS)" },
+              { flag: "/var/log/auth.log", description: "Authentication and security logs" },
+              { flag: "/var/log/kern.log", description: "Kernel messages" }
+            ],
+            example: "ls -la /var/log/",
+            output: "total 12384\ndrwxr-xr-x  14 root          root              4096 Dec 15 10:30 .\ndrwxr-xr-x  19 root          root              4096 Dec 15 10:30 ..\n-rw-r-----   1 syslog        adm              51200 Dec 15 10:30 syslog\n-rw-r-----   1 syslog        adm              70512 Dec 15 10:25 syslog.1\n-rw-r-----   1 syslog        adm             102400 Dec 15 03:00 syslog.2.gz\n-rw-r-----   1 syslog        adm              89012 Dec 14 23:00 syslog.3.gz\n-rw-r-----   1 root          adm              23456 Dec 15 10:30 auth.log\n-rw-r-----   1 root          adm              45678 Dec 15 03:00 auth.log.1\n-rw-r--r--   1 root          root            234567 Dec 15 10:30 dpkg.log\n-rw-r-----   1 root          adm              56780 Dec 15 10:30 kern.log\ndrwxr-xr-x   2 root          root              4096 Dec 15 10:30 nginx\n-rw-r-----   1 root          adm              12345 Dec 15 10:30 lastlog\n-rw-rw-r--   1 root          utmp            153600 Dec 15 10:30 wtmp\n-rw-r--r--   1 root          root              1234 Dec 15 10:30 bootstrap.log"
+          },
+          {
+            command: "grep \"Failed password\" /var/log/auth.log",
+            explanation: "Searches the authentication log for failed SSH login attempts, useful for detecting brute-force attacks.",
+            options: [
+              { flag: "grep", description: "Search for patterns in log files" },
+              { flag: "-i", description: "Case-insensitive search" },
+              { flag: "-c", description: "Count matching lines" },
+              { flag: "-v", description: "Invert match (show non-matching lines)" }
+            ],
+            example: "grep \"Failed password\" /var/log/auth.log | tail -10",
+            output: "Dec 15 08:12:34 server sshd[1234]: Failed password for root from 10.0.0.50 port 45678 ssh2\nDec 15 08:12:36 server sshd[1234]: Failed password for root from 10.0.0.50 port 45679 ssh2\nDec 15 08:12:38 server sshd[1234]: Failed password for root from 10.0.0.50 port 45680 ssh2\nDec 15 08:12:40 server sshd[1234]: Failed password for root from 10.0.0.50 port 45681 ssh2\nDec 15 08:12:42 server sshd[1234]: Failed password for root from 10.0.0.50 port 45682 ssh2\nDec 15 08:12:44 server sshd[1234]: Failed password for invalid user admin from 10.0.0.50 port 45683 ssh2\nDec 15 08:12:46 server sshd[1234]: Failed password for invalid user oracle from 10.0.0.50 port 45684 ssh2\nDec 15 08:12:48 server sshd[1234]: Failed password for invalid user test from 10.0.0.50 port 45685 ssh2\nDec 15 08:12:50 server sshd[1234]: Failed password for root from 10.0.0.50 port 45686 ssh2\nDec 15 08:12:52 server sshd[1234]: Failed password for root from 10.0.0.50 port 45687 ssh2"
+          },
+          {
+            command: "logrotate -f /etc/logrotate.conf",
+            explanation: "Forces log rotation manually. Logrotate compresses, rotates, and removes old log files based on configuration in /etc/logrotate.conf and /etc/logrotate.d/.",
+            options: [
+              { flag: "-f", description: "Force rotation even if not needed" },
+              { flag: "-d", description: "Debug mode (dry run, shows what would happen)" },
+              { flag: "-v", description: "Verbose output" },
+              { flag: "-s", description: "Specify a custom state file" }
+            ],
+            example: "cat /etc/logrotate.d/nginx",
+            output: "/var/log/nginx/*.log {\n    weekly\n    rotate 52\n    missingok\n    compress\n    delaycompress\n    notifempty\n    create 640 www-data adm\n    sharedscripts\n    postrotate\n        if [ -f /var/run/nginx.pid ]; then\n            kill -USR1 $(cat /var/run/nginx.pid)\n        fi\n    endscript\n}"
+          }
+        ],
+        notes: [
+          "Log files in /var/log are automatically rotated by logrotate to prevent them from consuming all disk space",
+          "syslog/rsyslog collects system logs and can forward them to remote log servers for centralized logging",
+          "The lastlog command shows the last login time for each user; wtmp records all login/logout history",
+          "Use logwatch or similar tools for automated log summarization and alerting"
+        ],
+        warnings: [
+          "Log files can consume significant disk space on busy systems; configure logrotate retention periods appropriately"
+        ],
+        useCases: [
+          "Security incident response: grep \"Failed password\" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -rn identifies attacking IPs",
+          "Application debugging: tail -f /var/log/nginx/error.log shows real-time application errors"
+        ],
+        practice: [
+          { task: "Count the number of failed SSH login attempts in the last 24 hours and identify the most common source IP", hint: "Use 'grep \"$(date +%b\\ %e)\" /var/log/auth.log | grep \"Failed password\" | grep -oP \"from \\K[\\d.]+\" | sort | uniq -c | sort -rn'" }
+        ],
+        quiz: [
+          {
+            question: "Which log file contains authentication-related events like SSH logins and sudo usage?",
+            options: ["/var/log/syslog", "/var/log/auth.log", "/var/log/kern.log", "/var/log/dpkg.log"],
+            correctAnswer: 1,
+            explanation: "/var/log/auth.log records authentication events including SSH logins, sudo commands, and user account changes."
+          }
+        ],
+        summary: "Linux system logs in /var/log capture system events, authentication attempts, and application output, with logrotate managing file sizes and retention."
+      },
+      {
+        id: "disk-usage",
+        title: "Disk Usage",
+        level: "Advanced",
+        estimatedTime: "20 min",
+        description: "Monitoring disk usage is critical for system health. This lesson covers df for filesystem overview, du for directory analysis, and tools for finding large files.",
+        commands: [
+          {
+            command: "df -h",
+            explanation: "Shows disk space usage for all mounted filesystems in human-readable format. Essential for checking available space and utilization.",
+            options: [
+              { flag: "-h", description: "Human-readable sizes (MB, GB, TB)" },
+              { flag: "-T", description: "Show filesystem type (ext4, xfs, tmpfs, etc.)" },
+              { flag: "-i", description: "Show inode usage instead of block usage" },
+              { flag: "--total", description: "Display a total line at the bottom" }
+            ],
+            example: "df -hT",
+            output: "Filesystem     Type      Size  Used Avail Use% Mounted on\ntmpfs          tmpfs     7.7G  2.1M  7.7G   1% /run\nefivarfs       efivarfs  256M  256K  256M   1% /sys/firmware/efi/efivars\n/dev/sda2      ext4      234G   32G  190G  15% /\ntmpfs          tmpfs     7.7G   48K  7.7G   1% /dev/shm\ntmpfs          tmpfs     5.0M  4.0K  5.0M   1% /run/lock\n/dev/sda1      vfat      511M  6.1M  505M   2% /boot/efi\n/dev/sdb1      ext4      1.8T  1.2T  512G  71% /data"
+          },
+          {
+            command: "du -sh /var/log/*",
+            explanation: "Shows the total disk usage of each item in /var/log in human-readable format. The -s flag summarizes each argument.",
+            options: [
+              { flag: "-s", description: "Display only a total for each argument" },
+              { flag: "-h", description: "Human-readable sizes" },
+              { flag: "-c", description: "Show grand total" },
+              { flag: "--max-depth=N", description: "Limit directory traversal depth" },
+              { flag: "-a", description: "Include files, not just directories" },
+              { flag: "--exclude", description: "Exclude files matching a pattern" }
+            ],
+            example: "du -sh /var/log/*",
+            output: "4.0K    /var/log/alternatives.log\n12K     /var/log/apt\n4.0K    /var/log/bootstrap.log\n1.2M    /var/log/dpkg.log\n12K     /var/log/faillog\n8.0K    /var/log/fontconfig.log\n4.0K    /var/log/gpu-manager.log\n67M     /var/log/journal\n4.0K    /var/log/lastlog\n4.0K    /var/log/nginx\n20K     /var/log/syslog\n2.5M    /var/log/auth.log"
+          },
+          {
+            command: "find / -type f -size +500M -exec ls -lh {} \\; 2>/dev/null",
+            explanation: "Finds all files larger than 500MB across the entire filesystem. Essential for identifying what is consuming significant disk space.",
+            options: [
+              { flag: "-size +500M", description: "Files larger than 500 megabytes" },
+              { flag: "-type f", description: "Regular files only (not directories)" },
+              { flag: "-exec ls -lh", description: "Execute ls with human-readable sizes on each result" },
+              { flag: "2>/dev/null", description: "Suppress permission denied errors" }
+            ],
+            example: "find / -type f -size +1G -exec ls -lh {} \\; 2>/dev/null",
+            output: "-rw------- 1 root root 4.6G Dec 10 14:15 /var/log/journal/abc123/system.journal\n-rw-r--r-- 1 root root 2.1G Dec 12 08:00 /var/log/syslog.1\n-rw-r--r-- 1 admin admin 1.5G Dec 15 09:30 /home/admin/database.dump\n-rw-r--r-- 1 root root 1.2G Dec 14 20:00 /tmp/large-debug.log"
+          }
+        ],
+        notes: [
+          "Use df -i to check inode usage; an ext4 filesystem can run out of inodes before running out of space if many small files exist",
+          "The du command is recursive by default; use --max-depth=1 to limit output to one level",
+          "Use ncdu (NCurses Disk Usage) for an interactive, terminal-based disk usage analyzer",
+          "The 'baobab' or 'gnome-disk-utility' tools provide graphical disk usage analysis"
+        ],
+        warnings: [
+          "Running find on the entire filesystem can be I/O intensive; run during off-peak hours on production servers"
+        ],
+        useCases: [
+          "Inode exhaustion: df -i /var identifies filesystems that have run out of inodes due to too many small files",
+          "Cleanup planning: du -sh /* | sort -rh identifies which top-level directories are consuming the most space"
+        ],
+        practice: [
+          { task: "Find the top 10 largest files in the /var directory sorted by size", hint: "Use 'find /var -type f -exec du -h {} + 2>/dev/null | sort -rh | head -10'" }
+        ],
+        quiz: [
+          {
+            question: "What is the difference between df and du?",
+            options: ["They are the same command", "df shows filesystem usage, du shows directory/file usage", "df shows inodes, du shows blocks", "du is for remote filesystems"],
+            correctAnswer: 1,
+            explanation: "df reports disk space usage for entire filesystems, while du estimates file and directory space usage recursively."
+          }
+        ],
+        summary: "Disk usage monitoring uses df for filesystem overview, du for directory analysis, and find for locating large files consuming storage."
+      },
+      {
+        id: "mounting-drives",
+        title: "Mounting Drives",
+        level: "Advanced",
+        estimatedTime: "25 min",
+        description: "Mounting connects filesystems to the directory tree. This lesson covers manual mounting with mount, automatic mounting via /etc/fstab, and filesystem creation.",
+        commands: [
+          {
+            command: "mount -t ext4 /dev/sdb1 /mnt/data",
+            explanation: "Mounts the ext4 filesystem on /dev/sdb1 to the /mnt/data mount point. After mounting, the filesystem contents are accessible at /mnt/data.",
+            options: [
+              { flag: "-t", description: "Filesystem type (ext4, xfs, ntfs, vfat, etc.)" },
+              { flag: "-o", description: "Mount options (ro, rw, noexec, nosuid, etc.)" },
+              { flag: "-a", description: "Mount all filesystems in /etc/fstab" },
+              { flag: "--bind", description: "Mount a directory tree to another location" }
+            ],
+            example: "mount -t ext4 -o rw,noatime /dev/sdb1 /mnt/data",
+            output: ""
+          },
+          {
+            command: "blkid /dev/sdb1",
+            explanation: "Displays the UUID and filesystem type for a block device. UUIDs are preferred over device names in /etc/fstab because they do not change.",
+            options: [
+              { flag: "No flags", description: "blkid shows UUID, TYPE, LABEL, and PARTUUID" }
+            ],
+            example: "blkid /dev/sdb1",
+            output: "/dev/sdb1: UUID=\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\" BLOCK_SIZE=\"4096\" TYPE=\"ext4\" PARTUUID=\"12345678-01\""
+          },
+          {
+            command: "cat /etc/fstab",
+            explanation: "Displays the filesystem table that defines how disk partitions, devices, and remote filesystems are mounted at boot time.",
+            options: [
+              { flag: "/etc/fstab", description: "Filesystem table configuration file" },
+              { flag: "6 fields", description: "Device, mount point, type, options, dump, pass" }
+            ],
+            example: "cat /etc/fstab",
+            output: "# /etc/fstab: static file system information.\n# <file system> <mount point>   <type>  <options>       <dump>  <pass>\nUUID=abcd-1234  /               ext4    defaults,noatime 0       1\nUUID=efgh-5678  /boot           ext4    defaults        0       2\nUUID=ijkl-9012  /boot/efi       vfat    umask=0077      0       2\nUUID=mnop-3456  /data           ext4    defaults        0       2\n/dev/sdb1       /mnt/backup     ext4    nofail,noauto   0       0\ntmpfs           /tmp            tmpfs   defaults,noexec,nosuid,size=2G 0 0\n//192.168.1.10/shared /mnt/network cifs credentials=/etc/samba/creds,uid=1000,gid=1000,iocharset=utf8 0 0"
+          },
+          {
+            command: "umount /mnt/data",
+            explanation: "Unmounts the filesystem mounted at /mnt/data. The system will refuse to unmount if files are in use on that filesystem.",
+            options: [
+              { flag: "-l", description: "Lazy unmount (detach now, clean up later)" },
+              { flag: "-f", description: "Force unmount (use if NFS is not responding)" }
+            ],
+            example: "umount /mnt/data",
+            output: ""
+          }
+        ],
+        notes: [
+          "Always use UUIDs in /etc/fstab instead of device names (/dev/sdb1) because device names can change between reboots",
+          "The mount point directory must exist before mounting; create it with mkdir -p if needed",
+          "Options like noexec, nosuid, and nodev improve security for mounted filesystems",
+          "Use mount -a to remount all filesystems from /etc/fstab after editing the file without rebooting"
+        ],
+        warnings: [
+          "Running out of space on a filesystem mounted at a critical location like /var can crash applications; monitor disk usage regularly"
+        ],
+        useCases: [
+          "Add a new data disk: Format with mkfs.ext4, create mount point, add to /etc/fstab, and mount -a",
+          "Mount ISO files: mount -o loop ubuntu.iso /mnt/iso mounts an ISO image as a loop device"
+        ],
+        practice: [
+          { task: "Create a mount point, mount a USB drive or ISO file, verify it is mounted with df -h, then unmount it", hint: "Use 'sudo mkdir -p /mnt/usb', 'sudo mount /dev/sdX1 /mnt/usb', 'df -h | grep mnt', 'sudo umount /mnt/usb'" }
+        ],
+        quiz: [
+          {
+            question: "Why are UUIDs preferred over device names in /etc/fstab?",
+            options: ["UUIDs are shorter", "Device names can change between reboots, UUIDs are persistent", "UUIDs are faster", "Only UUIDs work with ext4"],
+            correctAnswer: 1,
+            explanation: "Device names like /dev/sdb1 can change when disks are added or removed, but UUIDs are permanently assigned to the filesystem."
+          }
+        ],
+        summary: "Mounting connects filesystems to the Linux directory tree, with /etc/fstab providing automatic mounting at boot using persistent UUID identifiers."
+      },
+      {
+        id: "backup-strategy",
+        title: "Backup Strategy",
+        level: "Advanced",
+        estimatedTime: "25 min",
+        description: "A robust backup strategy protects against data loss from hardware failure, human error, and security incidents. This lesson covers backup types, tools, and the 3-2-1 rule.",
+        commands: [
+          {
+            command: "rsync -avz --delete /home /mnt/backup/",
+            explanation: "Synchronizes /home to the backup directory using archive mode with compression. The --delete flag removes files from the backup that were deleted from the source.",
+            options: [
+              { flag: "-a", description: "Archive mode (preserves permissions, timestamps, ownership)" },
+              { flag: "-v", description: "Verbose, show progress" },
+              { flag: "-z", description: "Compress data during transfer" },
+              { flag: "--delete", description: "Delete files in destination that are not in source" },
+              { flag: "--exclude", description: "Exclude files matching a pattern" },
+              { flag: "--link-dest", description: "Hardlink-based incremental backups" },
+              { flag: "--dry-run", description: "Show what would be transferred without actually copying" }
+            ],
+            example: "rsync -avz --delete --exclude=\"*.tmp\" /var/www/html user@backup-server:/backups/www/",
+            output: "sending incremental file list\n./\nindex.html\nstyle.css\n   1,234 100%    0.00kB/s    0:00:00\nscript.js\n  12,345 100%   12.05kB/s    0:00:01\nimages/\nimages/logo.png\n  45,678 100%   44.21kB/s    0:00:00\n\nsent 59,999 bytes  received 78 bytes  20,025.67 bytes/sec\ntotal size is 59,257  speedup is 0.99"
+          },
+          {
+            command: "tar -czf /backup/etc-$(date +%Y%m%d-%H%M%S).tar.gz /etc",
+            explanation: "Creates a timestamped compressed archive of /etc. The date command in the filename ensures unique backup files and easy identification.",
+            options: [
+              { flag: "-c", description: "Create a new archive" },
+              { flag: "-z", description: "Compress with gzip" },
+              { flag: "-f", description: "Archive filename" },
+              { flag: "--exclude", description: "Exclude files/directories from the archive" }
+            ],
+            example: "tar -czf /backup/home-$(date +%Y%m%d).tar.gz --exclude=\"*.mp4\" --exclude=\"*.iso\" /home",
+            output: ""
+          },
+          {
+            command: "dd if=/dev/sda of=/backup/mbr-backup.img bs=512 count=1",
+            explanation: "Creates a raw backup of the Master Boot Record (first 512 bytes) of /dev/sda. dd is a low-level copy tool useful for exact block-level backups.",
+            options: [
+              { flag: "if", description: "Input file (source device)" },
+              { flag: "of", description: "Output file (destination)" },
+              { flag: "bs", description: "Block size in bytes" },
+              { flag: "count", description: "Number of blocks to copy" },
+              { flag: "status=progress", description: "Show progress during copy" }
+            ],
+            example: "dd if=/dev/sda of=/backup/disk-backup.img bs=4M status=progress",
+            output: "1234567890 bytes (1.2 GB, 1.1 GiB) copied, 30s, 41.2 MB/s\n294+1 records in\n294+1 records out\n1234567890 bytes (1.2 GB, 1.1 GiB) copied, 30.1234 s, 41.0 MB/s"
+          }
+        ],
+        notes: [
+          "The 3-2-1 backup rule: 3 copies of data, on 2 different media types, with 1 copy offsite",
+          "Rsync is ideal for incremental backups as it only transfers changed parts of files",
+          "Always test backups by performing a restore; untested backups are not backups",
+          "Consider using --link-dest with rsync for space-efficient snapshots (hardlinked copies of unchanged files)"
+        ],
+        warnings: [
+          "Never store backups on the same disk or server as the original data; a hardware failure destroys both"
+        ],
+        useCases: [
+          "Offsite backup: rsync -avz /data user@remote-backup:/backup/ replicates data to a remote location",
+          "Server migration: rsync -avz --progress /home user@new-server:/home migrates user data to a new server"
+        ],
+        practice: [
+          { task: "Perform a dry-run rsync of your home directory to a backup location and review what would be copied", hint: "Use 'rsync -avz --dry-run --stats /home/youruser /mnt/backup/' and review the output summary" }
+        ],
+        quiz: [
+          {
+            question: "What does the 3-2-1 backup rule recommend?",
+            options: ["3 backups on 2 servers", "3 copies on 2 media types, 1 offsite", "3 copies daily, 2 weekly, 1 monthly", "3 different formats, 2 locations"],
+            correctAnswer: 1,
+            explanation: "The 3-2-1 rule means 3 total copies of your data, on 2 different types of media, with at least 1 copy stored offsite."
+          }
+        ],
+        summary: "Backup strategies combine rsync for efficient synchronization, tar for archiving, and follow the 3-2-1 rule for reliable data protection."
+      },
+      {
+        id: "user-management-practice",
+        title: "User Management Practice",
+        level: "Advanced",
+        estimatedTime: "20 min",
+        description: "Advanced user management covers bulk user creation, password policies, account expiration, and auditing. This lesson applies user administration skills to real-world scenarios.",
+        commands: [
+          {
+            command: "newusers users.txt",
+            explanation: "Creates multiple users at once from a formatted file. Each line has: username:password:UID:GID:comment:home:shell.",
+            options: [
+              { flag: "-r", description: "Create system accounts" },
+              { flag: "-s", description: "Create users with a specific shell" }
+            ],
+            example: "cat users.txt\nalice:password123:1001:1001:Alice:/home/alice:/bin/bash\nbob:password456:1002:1002:Bob:/home/bob:/bin/bash\n\nsudo newusers users.txt",
+            output: ""
+          },
+          {
+            command: "chage -M 90 -W 7 -E 2024-12-31 alice",
+            explanation: "Sets password policy: password expires after 90 days (-M), warning 7 days before (-W), account expires on 2024-12-31 (-E).",
+            options: [
+              { flag: "-M", description: "Maximum password age in days" },
+              { flag: "-m", description: "Minimum password age in days" },
+              { flag: "-W", description: "Warning period before password expires" },
+              { flag: "-E", description: "Account expiration date (YYYY-MM-DD)" },
+              { flag: "-l", description: "List current password aging information" }
+            ],
+            example: "chage -l alice",
+            output: "Last password change                                    : Dec 15, 2023\nPassword expires                                        : Mar 14, 2024\nPassword inactive                                       : never\nAccount expires                                         : Dec 31, 2024\nMinimum number of days between password change          : 0\nMaximum number of days between password change          : 90\nNumber of days of warning before password expires       : 7"
+          },
+          {
+            command: "last -a -F -10",
+            explanation: "Shows the last 10 user logins with full timestamps and hostnames. Useful for auditing user access.",
+            options: [
+              { flag: "-a", description: "Show hostname in the last column" },
+              { flag: "-F", description: "Full login and logout timestamps" },
+              { flag: "-d", description: "Translate IP addresses to hostnames" },
+              { flag: "-i", description: "Show IP addresses instead of hostnames" },
+              { flag: "-x", description: "Show system shutdown and runlevel entries" }
+            ],
+            example: "last -a -F -5",
+            output: "alice    pts/0    Fri Dec 15 10:30:01 2023   still logged in    192.168.1.100\nbob      pts/1    Fri Dec 15 09:15:22 2023 - Fri Dec 15 10:45:30 2023  (01:30)    10.0.0.50\ncharlie  pts/2    Wed Dec 13 08:30:00 2023 - Wed Dec 13 17:15:00 2023  (08:45)    10.0.0.100\n\nwtmp begins Mon Dec 10 14:15:00 2023"
+          }
+        ],
+        notes: [
+          "Use chage to implement password aging policies that comply with security standards like PCI DSS or HIPAA",
+          "The last command reads from /var/log/wtmp; use lastb for failed login attempts from /var/log/btmp",
+          "Bulk user creation with newusers is efficient for onboarding multiple users from a CSV export",
+          "The usermod command can lock (-L), unlock (-U), move home (-m), and change various user attributes"
+        ],
+        warnings: [
+          "Setting password expiration (-M) on system accounts can break services that rely on those accounts"
+        ],
+        useCases: [
+          "Employee onboarding: Use newusers with a generated password file, then force password change on first login with chage -d 0",
+          "Security compliance: Implement password policies with chage and audit user access with last and lastb"
+        ],
+        practice: [
+          { task: "Create a user with a 60-day password expiration, 7-day warning, and account expiring in 6 months", hint: "Use 'sudo useradd -m testuser', then 'sudo chage -M 60 -W 7 -E $(date -d \"+6 months\" +%Y-%m-%d) testuser'" }
+        ],
+        quiz: [
+          {
+            question: "What does 'chage -d 0 alice' do?",
+            options: ["Deletes user alice", "Forces password change on next login", "Disables alice account", "Sets password age to 0"],
+            correctAnswer: 1,
+            explanation: "chage -d 0 sets last password change date to epoch, forcing password change on next login."
+          }
+        ],
+        summary: "Advanced user management uses chage for password policies, newusers for bulk creation, and last for login auditing."
+      },
+      {
+        id: "server-maintenance-checklist",
+        title: "Server Maintenance Checklist",
+        level: "Advanced",
+        estimatedTime: "30 min",
+        description: "Regular server maintenance prevents issues and ensures optimal performance. This lesson provides a comprehensive maintenance checklist covering updates, monitoring, backups, and security.",
+        commands: [
+          {
+            command: "uptime && dmesg | tail -10 && free -h && df -h && last -x -F -15 | head -20",
+            explanation: "A one-line system health check showing uptime/load, recent kernel messages, memory, disk, and recent logins.",
+            options: [
+              { flag: "uptime", description: "Show system uptime and load averages" },
+              { flag: "dmesg | tail", description: "Latest kernel messages (hardware errors, OOM)" },
+              { flag: "free -h", description: "Memory usage summary" },
+              { flag: "df -h", description: "Disk usage for all filesystems" },
+              { flag: "last -x -F", description: "Full login history including reboots" }
+            ],
+            example: "uptime && dmesg | tail -3 && free -h && df -h | head -10",
+            output: " 10:30:45 up 5 days,  3:15,  2 users,  load average: 0.08, 0.03, 0.01\n[Wed Dec 13 03:00:01 2023] hung_task: blocked for 120 seconds\n[Wed Dec 13 03:00:01 2023] INFO: task systemd:1 blocked for more than 122 seconds.\n[Wed Dec 13 03:00:01 2023] Not tainted 5.15.0-91-generic #101\n              total        used        free      shared  buff/cache   available\nMem:           7.7G        3.0G        2.3G        123M        2.4G        4.3G\nSwap:          2.0G          0B        2.0G\nFilesystem      Size  Used Avail Use% Mounted on\ntmpfs           7.7G  2.1M  7.7G   1% /run\n/dev/sda2       234G   32G  190G  15% /"
+          },
+          {
+            command: "apt list --upgradable 2>/dev/null",
+            explanation: "Checks for available package updates. This is the first step in planning a maintenance update window.",
+            options: [
+              { flag: "apt update", description: "Refresh package index first" },
+              { flag: "apt list --upgradable", description: "Show upgradable packages" },
+              { flag: "apt upgrade --dry-run", description: "Simulate upgrade without changes" }
+            ],
+            example: "apt list --upgradable 2>/dev/null | head -10",
+            output: "Listing... Done\nopenssh-client/jammy-updates 1:8.9p1-3ubuntu0.4 amd64 [upgradable from: 1:8.9p1-3ubuntu0.3]\nopenssh-server/jammy-updates 1:8.9p1-3ubuntu0.4 amd64 [upgradable from: 1:8.9p1-3ubuntu0.3]\nopenssl/jammy-updates 3.0.2-0ubuntu1.12 amd64 [upgradable from: 3.0.2-0ubuntu1.11]"
+          },
+          {
+            command: "journalctl -p err --since \"1 week ago\" --no-pager | tail -20",
+            explanation: "Shows the last 20 error-level messages from the system journal for the past week. Essential for identifying issues.",
+            options: [
+              { flag: "-p err", description: "Filter by priority: error and above" },
+              { flag: "--since", description: "Show entries after a specific time" },
+              { flag: "--no-pager", description: "Output directly without pager" }
+            ],
+            example: "journalctl -p err --since yesterday --no-pager | tail -10",
+            output: "Dec 15 08:12:34 server sshd[3456]: Failed password for root from 10.0.0.50 port 45678 ssh2\nDec 15 08:12:36 server sshd[3456]: Failed password for root from 10.0.0.50 port 45679 ssh2\nDec 15 08:12:38 server sshd[3456]: Failed password for root from 10.0.0.50 port 45680 ssh2"
+          }
+        ],
+        notes: [
+          "A weekly maintenance schedule should include: update checks, log review, disk usage monitoring, and backup verification",
+          "Monthly tasks: review user accounts, check for expired SSL certificates, audit service configurations",
+          "Quarterly tasks: test backup restores, review firewall rules, update documentation, perform security audits",
+          "Use monitoring tools like Nagios, Zabbix, or Prometheus for continuous health monitoring between maintenance windows"
+        ],
+        warnings: [
+          "Always create a system backup before major maintenance operations like kernel upgrades or distribution release upgrades"
+        ],
+        useCases: [
+          "Weekly server review: Run the combined health check command, review logs for errors, check update status",
+          "Incident response: Before troubleshooting, run the health check to capture the current system state as a baseline"
+        ],
+        practice: [
+          { task: "Create a shell script that performs a complete daily server health check covering uptime, disk, memory, and recent errors", hint: "Combine uptime, df -h, free -h, journalctl -p err --since yesterday, and last -5 into a single script with echo labels" }
+        ],
+        quiz: [
+          {
+            question: "What should be done before major system maintenance?",
+            options: ["Restart all services", "Create a system backup", "Remove old log files", "Disable the firewall"],
+            correctAnswer: 1,
+            explanation: "Always create a verified system backup before major maintenance to enable recovery if something goes wrong."
+          }
+        ],
+        summary: "A comprehensive server maintenance checklist includes regular health checks, update management, log review, and backup verification at daily, weekly, and monthly intervals."
+      }
+    ]
+  }
+];
