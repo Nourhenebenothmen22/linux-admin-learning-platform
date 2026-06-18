@@ -34,9 +34,9 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8 lg:py-12 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-center w-full">
 
-        <div className="space-y-7">
+        <div className="space-y-5 lg:space-y-6">
           <div className="inline-flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 backdrop-blur-sm w-fit">
             <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-500/30">
               <BookOpen className="w-3 h-3 text-green-300" aria-hidden="true" />
@@ -51,14 +51,14 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           </div>
 
           <h1 className="font-bold leading-[0.95] tracking-tight">
-            <span className="block text-5xl sm:text-6xl lg:text-[5.5rem] text-white animate-fade-up">
+            <span className="block text-[clamp(2.2rem,5vw,4rem)] sm:text-5xl lg:text-6xl xl:text-[5.5rem] text-white animate-fade-up">
               Master
             </span>
-            <span className="block text-5xl sm:text-6xl lg:text-[5.5rem] text-white animate-fade-up animation-delay-100">
+            <span className="block text-[clamp(2.2rem,5vw,4rem)] sm:text-5xl lg:text-6xl xl:text-[5.5rem] text-white animate-fade-up animation-delay-100">
               Linux Like
             </span>
             <span
-              className="block text-5xl sm:text-6xl lg:text-[5.5rem] animate-fade-up animation-delay-200"
+              className="block text-[clamp(2.2rem,5vw,4rem)] sm:text-5xl lg:text-6xl xl:text-[5.5rem] animate-fade-up animation-delay-200"
               style={{
                 background: 'linear-gradient(135deg, #22c55e 0%, #10b981 50%, #06b6d4 100%)',
                 WebkitBackgroundClip: 'text',
@@ -110,7 +110,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           </div>
         </div>
 
-        <div className="relative h-[500px] lg:h-[600px] flex items-center justify-center">
+        <div className="relative flex items-center justify-center min-h-[300px] lg:min-h-0 lg:h-full py-4 lg:py-0">
 
           {/* Layered glow effects */}
           <div
@@ -138,7 +138,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
             />
 
             {/* Image container with circular frame */}
-            <div className="relative w-[300px] h-[300px] md:w-[380px] md:h-[380px]">
+            <div className="relative w-[260px] h-[260px] sm:w-[300px] sm:h-[300px] lg:w-[320px] lg:h-[320px] xl:w-[360px] xl:h-[360px]">
 
               {/* Dark inner ring */}
               <div className="absolute inset-0 rounded-full bg-zinc-950 p-[3px]">
