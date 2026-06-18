@@ -2,11 +2,14 @@
   "name": "linux-admin-learning-platform",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Nourhenebenothmen22.github.io/linux-admin-learning-platform",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "deploy": "npm run type-check && npm run build && touch out/.nojekyll && npx gh-pages -d out -b gh-pages"
   },
   "dependencies": {
     "lucide-react": "^1.21.0",
@@ -21,6 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
