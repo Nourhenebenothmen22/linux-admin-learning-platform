@@ -5,8 +5,6 @@ import Link from 'next/link'
 import type { JSX } from 'react'
 import { ExternalLink, Heart } from 'lucide-react'
 
-const BASE_PATH = '/linux-admin-learning-platform'
-
 const Footer = memo(function Footer(): JSX.Element {
   const currentYear: number = new Date().getFullYear()
 
@@ -24,7 +22,7 @@ const Footer = memo(function Footer(): JSX.Element {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-10">
           <div className="md:col-span-5 space-y-5">
             <Link
-              href={BASE_PATH}
+              href="/"
               className="inline-flex items-center gap-2.5 group"
               aria-label="Linux Academy home"
             >
@@ -68,7 +66,7 @@ const Footer = memo(function Footer(): JSX.Element {
             <ul className="space-y-2.5">
               <li>
                 <Link
-                  href={`${BASE_PATH}/course`}
+                  href="/course"
                   className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
                   Full Course
@@ -76,7 +74,7 @@ const Footer = memo(function Footer(): JSX.Element {
               </li>
               <li>
                 <Link
-                  href={`${BASE_PATH}/roadmap`}
+                  href="/roadmap"
                   className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
                   Learning Roadmap
@@ -84,7 +82,7 @@ const Footer = memo(function Footer(): JSX.Element {
               </li>
               <li>
                 <Link
-                  href={`${BASE_PATH}/course`}
+                  href="/course"
                   className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
                   All Lessons

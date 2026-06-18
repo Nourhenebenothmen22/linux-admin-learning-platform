@@ -5,8 +5,6 @@ import Link from 'next/link'
 import type { JSX } from 'react'
 import { ArrowRight } from 'lucide-react'
 
-const BASE_PATH = '/linux-admin-learning-platform'
-
 const Navbar = memo(function Navbar(): JSX.Element {
   const [scrolled, setScrolled] = useState<boolean>(false)
 
@@ -31,7 +29,7 @@ const Navbar = memo(function Navbar(): JSX.Element {
         className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between"
       >
         <Link
-          href={BASE_PATH}
+          href="/"
           className="flex items-center gap-2.5 group"
           aria-label="Linux Academy home"
         >
@@ -54,19 +52,19 @@ const Navbar = memo(function Navbar(): JSX.Element {
 
         <div className="flex items-center gap-1 md:gap-2">
           <Link
-            href={`${BASE_PATH}/course`}
+            href="/course"
             className="px-3 md:px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
           >
             Course
           </Link>
           <Link
-            href={`${BASE_PATH}/roadmap`}
+            href="/roadmap"
             className="px-3 md:px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
           >
             Roadmap
           </Link>
           <Link
-            href={`${BASE_PATH}/course`}
+            href="/course"
             className="group inline-flex items-center gap-1.5 ml-2 px-4 py-2 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold text-sm rounded-lg shadow-lg shadow-green-500/30 hover:shadow-green-500/50 hover:-translate-y-0.5 transition-all"
           >
             <span>Start Learning</span>

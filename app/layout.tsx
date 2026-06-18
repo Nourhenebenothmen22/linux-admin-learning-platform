@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description: "Master Linux from beginner commands to real system administration.",
     images: [
       {
-        url: `${BASE_PATH}/Linux-Logo.jpg`,
+        url: "Linux-Logo.jpg",
         width: 800,
         height: 800,
         alt: "Linux System Admin Academy",
@@ -70,13 +70,13 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Linux System Admin Academy",
     description: "Master Linux from beginner to system administrator.",
-    images: [`${BASE_PATH}/Linux-Logo.jpg`],
+    images: ["Linux-Logo.jpg"],
   },
   other: {
     "theme-color": "#22c55e",
     "X-Content-Type-Options": "nosniff",
-    "X-Frame-Options": "DENY",
     "Referrer-Policy": "strict-origin-when-cross-origin",
+    "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "apple-mobile-web-app-title": "Linux Academy",
@@ -116,14 +116,14 @@ export default function RootLayout({
           .bg-zinc-950{background-color:#09090b}
           .font-sans{font-family:ui-sans-serif,system-ui,sans-serif}
         `}</style>
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Linux Academy" />
         <meta
           httpEquiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'"
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed] font-sans">

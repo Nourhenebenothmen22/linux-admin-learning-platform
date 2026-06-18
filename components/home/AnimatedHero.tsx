@@ -6,8 +6,6 @@ import type { JSX } from 'react'
 import { ArrowRight, BookOpen, Sparkles, Zap } from 'lucide-react'
 import DistroBadge from '@/components/icons/DistroBadge'
 
-const BASE_PATH = '/linux-admin-learning-platform'
-
 const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
   return (
     <section
@@ -80,7 +78,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
 
           <div className="flex flex-wrap gap-3 animate-fade-up animation-delay-400">
             <Link
-              href={`${BASE_PATH}/course`}
+              href="/course"
               className="group inline-flex items-center gap-2 px-6 py-3.5 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold rounded-xl shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 hover:-translate-y-0.5 transition-all"
             >
               <Zap className="w-4 h-4" aria-hidden="true" />
@@ -88,7 +86,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
             <Link
-              href={`${BASE_PATH}/roadmap`}
+              href="/roadmap"
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 backdrop-blur-sm transition-all"
             >
               <span>View Roadmap</span>

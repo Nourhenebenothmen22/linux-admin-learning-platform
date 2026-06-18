@@ -5,8 +5,6 @@ import Link from 'next/link'
 import type { JSX } from 'react'
 import { ArrowRight, Terminal } from 'lucide-react'
 
-const BASE_PATH = '/linux-admin-learning-platform'
-
 const CTASection = memo(function CTASection(): JSX.Element {
   return (
     <section aria-label="Call to action" className="relative overflow-hidden py-24">
@@ -46,14 +44,14 @@ const CTASection = memo(function CTASection(): JSX.Element {
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
-            href={`${BASE_PATH}/course`}
+            href="/course"
             className="group inline-flex items-center gap-2 px-8 py-4 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold rounded-xl shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 hover:-translate-y-0.5 transition-all text-lg"
           >
             <span>Begin Free Course</span>
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
           <Link
-            href={`${BASE_PATH}/roadmap`}
+            href="/roadmap"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 backdrop-blur-sm transition-all text-lg"
           >
             <span>Explore Roadmap</span>
