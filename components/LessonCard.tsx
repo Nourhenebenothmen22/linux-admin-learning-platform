@@ -1,4 +1,5 @@
 ﻿'use client'
+import { memo } from 'react'
 import type { LessonLevel } from '../data/linuxCourse'
 
 interface LessonCardProps {
@@ -14,7 +15,7 @@ const levelStyles: Record<LessonLevel, string> = {
   Advanced: 'bg-red-500/10 text-red-400 border-red-500/20',
 }
 
-export default function LessonCard({ title, level, estimatedTime, onClick }: LessonCardProps) {
+const LessonCard = memo(function LessonCard({ title, level, estimatedTime, onClick }: LessonCardProps) {
   return (
     <button
       onClick={onClick}
@@ -40,4 +41,6 @@ export default function LessonCard({ title, level, estimatedTime, onClick }: Les
       </div>
     </button>
   )
-}
+})
+
+export default LessonCard
