@@ -110,30 +110,7 @@ const levelLineColors: Record<LessonLevel, string> = {
 export default function RoadmapPage() {
   return (
     <div className="min-h-screen">
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 bg-[#0a0a0a]/80 backdrop-blur-sm sticky top-0 z-50">
-        <Link href="/" className="flex items-center gap-2">
-          <Terminal className="w-5 h-5 text-green-400" />
-          <span className="text-sm font-semibold text-zinc-100">
-            Linux Academy
-          </span>
-        </Link>
-        <div className="flex items-center gap-6">
-          <Link
-            href="/course"
-            className="text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
-          >
-            Course
-          </Link>
-          <Link
-            href="/roadmap"
-            className="text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
-          >
-            Roadmap
-          </Link>
-        </div>
-      </nav>
-
-      <main className="max-w-4xl mx-auto px-6 py-16">
+      <main className="max-w-4xl mx-auto px-6 py-16 pt-20">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-300 transition-colors mb-8"
