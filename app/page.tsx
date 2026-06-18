@@ -3,19 +3,22 @@ import dynamic from "next/dynamic";
 import { Terminal, BookOpen, ArrowRight, ChevronRight } from "lucide-react";
 import type { JSX } from "react";
 
-const FeatureCards = dynamic(
-  () => import("../components/home/FeatureCards"),
+const FeaturesCarousel = dynamic(
+  () => import("../components/home/FeaturesCarousel"),
   {
     ssr: true,
     loading: (): JSX.Element => (
-      <section className="max-w-6xl mx-auto px-6 py-20">
+      <section className="w-full max-w-7xl mx-auto px-4 py-20" aria-busy="true">
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold text-zinc-100 mb-3">What You Will Learn</h2>
-          <p className="text-sm text-zinc-400 max-w-xl mx-auto">Loading...</p>
+          <div className="h-8 bg-zinc-800 rounded w-64 mx-auto mb-3 animate-pulse" />
+          <div className="h-4 bg-zinc-800 rounded w-96 mx-auto animate-pulse" />
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Array.from({ length: 5 }, (_: unknown, i: number) => (
-            <div key={i} className="h-32 bg-zinc-800 rounded-xl animate-pulse" />
+        <div className="flex gap-4 overflow-hidden">
+          {Array.from({ length: 3 }, (_: unknown, i: number): JSX.Element => (
+            <div
+              key={i}
+              className="flex-none w-full lg:w-[calc(33.333%-0.667rem)] h-48 bg-zinc-900 border border-zinc-800 rounded-xl animate-pulse"
+            />
           ))}
         </div>
       </section>
@@ -105,7 +108,7 @@ export default function Home() {
           </div>
         </section>
 
-        <FeatureCards />
+        <FeaturesCarousel />
         <TerminalPreview />
       </main>
 
