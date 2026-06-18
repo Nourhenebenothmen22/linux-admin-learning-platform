@@ -1,11 +1,12 @@
-﻿import { TriangleAlert, Info } from 'lucide-react'
+﻿import { memo } from 'react'
+import { TriangleAlert, Info } from 'lucide-react'
 
 interface AlertBoxProps {
   type: 'warning' | 'info'
   children: React.ReactNode
 }
 
-export default function AlertBox({ type, children }: AlertBoxProps) {
+const AlertBox = memo(function AlertBox({ type, children }: AlertBoxProps) {
   const isWarning: boolean = type === 'warning'
 
   return (
@@ -26,4 +27,6 @@ export default function AlertBox({ type, children }: AlertBoxProps) {
       <div className="text-sm leading-relaxed">{children}</div>
     </div>
   )
-}
+})
+
+export default AlertBox

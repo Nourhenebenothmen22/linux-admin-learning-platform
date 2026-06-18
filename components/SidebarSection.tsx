@@ -1,5 +1,5 @@
 ﻿'use client'
-import { useState, useCallback } from 'react'
+import { memo, useState, useCallback } from 'react'
 import { ChevronDown } from 'lucide-react'
 import type { LessonLevel } from '../data/linuxCourse'
 
@@ -23,7 +23,7 @@ const levelColors: Record<LessonLevel, string> = {
   Advanced: 'bg-red-500',
 }
 
-export default function SidebarSection({
+const SidebarSection = memo(function SidebarSection({
   title,
   lessons,
   activeLessonId,
@@ -36,6 +36,10 @@ export default function SidebarSection({
   const handleToggle = useCallback((): void => {
     setUserExpanded((prev: boolean | null) => !(prev !== null ? prev : defaultOpen))
   }, [defaultOpen])
+
+  const handleLessonClick = useCallback((id: string): void => {
+    onLessonClick(id)
+  }, [onLessonClick])
 
   return (
     <div className="mb-1">
@@ -64,7 +68,7 @@ export default function SidebarSection({
             return (
               <button
                 key={lesson.id}
-                onClick={(): void => onLessonClick(lesson.id)}
+                onClick={(): void => handleLessonClick(lesson.id)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-left smooth-transition ${
                   isActive
                     ? 'bg-green-500/10 text-green-400 border-l-2 border-green-500'
@@ -84,4 +88,6 @@ export default function SidebarSection({
       )}
     </div>
   )
-}
+})
+
+export default SidebarSection
