@@ -1,4 +1,5 @@
 ﻿'use client'
+import Link from 'next/link'
 import { Terminal } from 'lucide-react'
 import type { LessonLevel } from '../data/linuxCourse'
 import SearchLessons from './SearchLessons'
@@ -37,10 +38,10 @@ export default function Sidebar({
 
   return (
     <aside className="fixed left-0 top-0 bottom-0 w-72 bg-[#111111] border-r border-zinc-800 flex flex-col z-30">
-      <div className="flex items-center gap-2 px-4 py-4 border-b border-zinc-800">
+      <Link href="/" className="flex items-center gap-2 px-4 py-4 border-b border-zinc-800 hover:bg-zinc-800/50 transition-colors">
         <Terminal className="w-5 h-5 text-green-400" />
         <span className="text-sm font-semibold text-zinc-100">Linux Academy</span>
-      </div>
+      </Link>
 
       <div className="px-4 py-3 border-b border-zinc-800 space-y-3">
         <SearchLessons onSearch={onSearch} />
