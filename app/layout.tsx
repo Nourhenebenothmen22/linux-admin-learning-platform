@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import ErrorBoundary from "../components/ErrorBoundary";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -96,7 +98,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed] font-sans">
-        <ErrorBoundary>{children}</ErrorBoundary>
+        <Navbar />
+        <ErrorBoundary>
+          {children}
+          <Footer />
+        </ErrorBoundary>
       </body>
     </html>
   );
