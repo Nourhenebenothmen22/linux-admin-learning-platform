@@ -42,26 +42,30 @@ const SidebarSection = memo(function SidebarSection({
   }, [onLessonClick])
 
   return (
-    <div className="mb-1">
+    <div className="mb-0.5">
       <button
         onClick={handleToggle}
-        className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-zinc-800/50 smooth-transition"
+        className={`flex items-center justify-between w-full px-3 py-2 rounded-xl smooth-transition ${
+          expanded
+            ? 'bg-white/[0.04] text-zinc-200'
+            : 'hover:bg-white/[0.03] text-zinc-400 hover:text-zinc-300'
+        }`}
       >
         <div className="flex items-center gap-2 min-w-0">
           <ChevronDown
-            className={`w-3.5 h-3.5 text-zinc-400 flex-shrink-0 smooth-transition ${
-              expanded ? 'rotate-0' : '-rotate-90'
+            className={`w-3.5 h-3.5 flex-shrink-0 smooth-transition ${
+              expanded ? 'rotate-0 text-green-400' : '-rotate-90'
             }`}
           />
-          <span className="text-sm font-medium text-zinc-300 truncate">{title}</span>
+          <span className="text-sm font-medium truncate">{title}</span>
         </div>
-        <span className="text-xs text-zinc-400 bg-zinc-800 px-1.5 py-0.5 rounded flex-shrink-0 ml-2">
+        <span className="text-xs text-zinc-500 bg-white/[0.06] px-1.5 py-0.5 rounded-md flex-shrink-0 ml-2 font-medium">
           {lessons.length}
         </span>
       </button>
 
       {expanded && (
-        <div className="ml-2 mt-1 flex flex-col gap-0.5 animate-slide-down">
+        <div className="ml-3 mt-0.5 flex flex-col gap-0.5 border-l border-white/[0.06] pl-2">
           {lessons.map((lesson: SidebarLesson) => {
             const isActive: boolean = lesson.id === activeLessonId
 
@@ -69,14 +73,14 @@ const SidebarSection = memo(function SidebarSection({
               <button
                 key={lesson.id}
                 onClick={(): void => handleLessonClick(lesson.id)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-left smooth-transition ${
+                className={`flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-sm text-left smooth-transition ${
                   isActive
-                    ? 'bg-green-500/10 text-green-400 border-l-2 border-green-500'
-                    : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/30 border-l-2 border-transparent'
+                    ? 'bg-green-500/[0.07] text-green-400 shadow-sm shadow-green-500/5 font-medium'
+                    : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]'
                 }`}
               >
                 <span
-                  className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                  className={`w-1.5 h-1.5 rounded-full flex-shrink-0 shadow-sm shadow-current/20 ${
                     levelColors[lesson.level]
                   }`}
                 />

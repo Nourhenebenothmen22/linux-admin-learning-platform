@@ -22,20 +22,23 @@ const QuizCard = memo(function QuizCard({ question, options, correctAnswer, expl
   const isCorrect: boolean = selectedAnswer === correctAnswer
 
   return (
-    <div className="bg-[#1a1a1a] rounded-lg border border-zinc-800 p-5 my-4">
-      <p className="text-sm font-semibold text-zinc-200 mb-4">{question}</p>
+    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 my-4">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-sm font-semibold text-zinc-300">Question</span>
+      </div>
+      <p className="text-sm text-zinc-100 mb-4 leading-relaxed">{question}</p>
 
       <div className="flex flex-col gap-2">
         {options.map((option: string, index: number) => {
-          let optionStyle: string = 'bg-zinc-800/50 border-zinc-700 text-zinc-300 hover:bg-zinc-700/50 hover:border-zinc-600'
+          let optionStyle: string = 'bg-white/[0.04] border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:border-white/[0.12]'
 
           if (selectedAnswer !== null) {
             if (index === correctAnswer) {
-              optionStyle = 'bg-green-500/10 border-green-500 text-green-300'
+              optionStyle = 'bg-green-500/10 border-green-500/50 text-green-300'
             } else if (index === selectedAnswer && !isCorrect) {
-              optionStyle = 'bg-red-500/10 border-red-500 text-red-300'
+              optionStyle = 'bg-red-500/10 border-red-500/50 text-red-300'
             } else {
-              optionStyle = 'bg-zinc-800/30 border-zinc-700/50 text-zinc-400'
+              optionStyle = 'bg-white/[0.02] border-white/[0.04] text-zinc-500'
             }
           }
 
@@ -44,9 +47,15 @@ const QuizCard = memo(function QuizCard({ question, options, correctAnswer, expl
               key={index}
               onClick={(): void => handleSelect(index)}
               disabled={selectedAnswer !== null}
-              className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border text-sm text-left smooth-transition ${optionStyle}`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm text-left smooth-transition ${optionStyle}`}
             >
-              <span className="flex-shrink-0 w-6 h-6 rounded-full border border-current flex items-center justify-center text-xs font-medium">
+              <span className={`flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center text-xs font-medium ${
+                selectedAnswer !== null && index === correctAnswer
+                  ? 'border-green-500/50 bg-green-500/10'
+                  : selectedAnswer !== null && index === selectedAnswer && !isCorrect
+                    ? 'border-red-500/50 bg-red-500/10'
+                    : 'border-white/[0.12] bg-white/[0.04]'
+              }`}>
                 {String.fromCharCode(65 + index)}
               </span>
               <span className="flex-1">{option}</span>
@@ -62,8 +71,12 @@ const QuizCard = memo(function QuizCard({ question, options, correctAnswer, expl
       </div>
 
       {showExplanation && (
-        <div className={`mt-4 p-3 rounded-lg text-sm ${isCorrect ? 'bg-green-500/10 text-green-200' : 'bg-red-500/10 text-red-200'}`}>
-          <span className="font-semibold">{isCorrect ? 'Correct!' : 'Incorrect.'}</span>{' '}
+        <div className={`mt-4 p-4 rounded-xl border text-sm leading-relaxed ${
+          isCorrect
+            ? 'bg-green-500/[0.05] border-green-500/10 text-green-200'
+            : 'bg-red-500/[0.05] border-red-500/10 text-red-200'
+        }`}>
+          <span className="font-semibold">{isCorrect ? 'Correct!' : 'Not quite.'}</span>{' '}
           {explanation}
         </div>
       )}
