@@ -2,7 +2,6 @@
 
 import { memo, useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import type { JSX } from 'react'
 import { ArrowRight } from 'lucide-react'
 
@@ -36,14 +35,16 @@ const Navbar = memo(function Navbar(): JSX.Element {
           className="flex items-center gap-2.5 group"
           aria-label="Linux Academy home"
         >
-          <div className="relative w-9 h-9 rounded-lg overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all">
-            <Image
-              src={`${BASE_PATH}/Linux-Logo.jpg`}
+          <div className="relative w-10 h-10 rounded-lg overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all bg-zinc-900">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/linux-admin-learning-platform/Linux-Logo.jpg"
               alt="Linux Academy logo"
-              width={36}
-              height={36}
-              className="object-cover"
-              priority
+              width={40}
+              height={40}
+              loading="eager"
+              decoding="async"
+              className="w-full h-full object-cover"
             />
           </div>
           <span className="text-base font-bold text-white tracking-tight">

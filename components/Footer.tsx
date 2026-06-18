@@ -2,7 +2,6 @@
 
 import { memo } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import type { JSX } from 'react'
 import { ExternalLink, Heart } from 'lucide-react'
 
@@ -16,24 +15,29 @@ const Footer = memo(function Footer(): JSX.Element {
       className="relative border-t border-zinc-800/50 bg-zinc-950 mt-20"
       aria-label="Site footer"
     >
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/40 to-transparent" />
+      <div
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/40 to-transparent"
+        aria-hidden="true"
+      />
 
       <div className="max-w-7xl mx-auto px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-10">
-
           <div className="md:col-span-5 space-y-5">
             <Link
               href={BASE_PATH}
               className="inline-flex items-center gap-2.5 group"
               aria-label="Linux Academy home"
             >
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all">
-                <Image
-                  src={`${BASE_PATH}/Linux-Logo.jpg`}
+              <div className="relative w-11 h-11 rounded-xl overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all bg-zinc-900">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/linux-admin-learning-platform/Linux-Logo.jpg"
                   alt="Linux Academy logo"
-                  width={40}
-                  height={40}
-                  className="object-cover"
+                  width={44}
+                  height={44}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <span className="text-lg font-bold text-white tracking-tight">
@@ -65,25 +69,25 @@ const Footer = memo(function Footer(): JSX.Element {
               <li>
                 <Link
                   href={`${BASE_PATH}/course`}
-                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors inline-flex items-center gap-1.5 group"
+                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
-                  <span>Full Course</span>
+                  Full Course
                 </Link>
               </li>
               <li>
                 <Link
                   href={`${BASE_PATH}/roadmap`}
-                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors inline-flex items-center gap-1.5"
+                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
-                  <span>Learning Roadmap</span>
+                  Learning Roadmap
                 </Link>
               </li>
               <li>
                 <Link
                   href={`${BASE_PATH}/course`}
-                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors inline-flex items-center gap-1.5"
+                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
-                  <span>All Lessons</span>
+                  All Lessons
                 </Link>
               </li>
             </ul>
@@ -133,7 +137,7 @@ const Footer = memo(function Footer(): JSX.Element {
         </div>
 
         <div className="pt-8 border-t border-zinc-800/50 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-zinc-500 flex items-center gap-1.5">
+          <p className="text-xs text-zinc-500 flex items-center gap-1.5 flex-wrap justify-center">
             &copy; {currentYear} Linux System Admin Academy. Built with
             <Heart className="w-3 h-3 text-red-500 fill-red-500" aria-hidden="true" />
             using Next.js.

@@ -2,9 +2,9 @@
 
 import { memo } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import type { JSX } from 'react'
 import { ArrowRight, BookOpen, Sparkles, Zap } from 'lucide-react'
+import DistroBadge from '@/components/icons/DistroBadge'
 
 const BASE_PATH = '/linux-admin-learning-platform'
 
@@ -15,7 +15,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
       className="relative overflow-hidden min-h-[90vh] flex items-center bg-zinc-950"
     >
       <div
-        className="absolute inset-0 opacity-[0.08]"
+        className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
           backgroundImage:
             'linear-gradient(rgba(34,197,94,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,0.4) 1px, transparent 1px)',
@@ -129,59 +129,44 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           />
 
           <div className="relative animate-float z-10">
-            <Image
-              src={`${BASE_PATH}/Linux-Logo.jpg`}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/linux-admin-learning-platform/Linux-Logo.jpg"
               alt="Linux Tux Penguin Mascot"
               width={400}
-              height={470}
-              priority
-              className="rounded-2xl drop-shadow-[0_25px_50px_rgba(34,197,94,0.3)]"
+              height={400}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] object-contain drop-shadow-[0_25px_50px_rgba(34,197,94,0.4)] rounded-3xl"
             />
           </div>
 
-          <div className="absolute top-8 right-4 animate-float-slow">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 backdrop-blur-md shadow-xl shadow-orange-500/20">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-sm">U</span>
-              <span className="text-xs font-semibold text-orange-300 pr-1">Ubuntu</span>
-            </div>
+          <div className="absolute top-4 right-2 animate-float-slow z-20">
+            <DistroBadge name="Ubuntu" letter="U" color="orange" />
           </div>
-
-          <div className="absolute top-16 left-0 animate-float-slow animation-delay-200">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-red-500/10 border border-red-500/30 backdrop-blur-md shadow-xl shadow-red-500/20">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500 text-white font-bold text-sm">D</span>
-              <span className="text-xs font-semibold text-red-300 pr-1">Debian</span>
-            </div>
+          <div className="absolute top-12 left-0 animate-float-slow animation-delay-200 z-20">
+            <DistroBadge name="Debian" letter="D" color="red" />
           </div>
-
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 animate-float-slow animation-delay-400">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 backdrop-blur-md shadow-xl shadow-blue-500/20">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white font-bold text-sm">F</span>
-              <span className="text-xs font-semibold text-blue-300 pr-1">Fedora</span>
-            </div>
+          <div className="absolute top-1/2 left-0 -translate-y-8 animate-float-slow animation-delay-400 z-20">
+            <DistroBadge name="Fedora" letter="F" color="blue" />
           </div>
-
-          <div className="absolute top-1/2 right-0 -translate-y-1/2 animate-float-slow animation-delay-100">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 backdrop-blur-md shadow-xl shadow-cyan-500/20">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-cyan-500 text-white font-bold text-sm">A</span>
-              <span className="text-xs font-semibold text-cyan-300 pr-1">Arch</span>
-            </div>
+          <div className="absolute top-1/2 right-0 -translate-y-8 animate-float-slow animation-delay-100 z-20">
+            <DistroBadge name="Arch" letter="A" color="cyan" />
           </div>
-
-          <div className="absolute bottom-12 left-4 animate-float-slow animation-delay-300">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 backdrop-blur-md shadow-xl shadow-purple-500/20">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500 text-white font-bold text-sm">C</span>
-              <span className="text-xs font-semibold text-purple-300 pr-1">CentOS</span>
-            </div>
+          <div className="absolute bottom-16 left-4 animate-float-slow animation-delay-300 z-20">
+            <DistroBadge name="CentOS" letter="C" color="purple" />
           </div>
-
-          <div className="absolute bottom-8 right-8 animate-float-slow animation-delay-500">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-zinc-700/30 border border-zinc-500/30 backdrop-blur-md shadow-xl">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-zinc-800 text-white font-bold text-sm">K</span>
-              <span className="text-xs font-semibold text-zinc-300 pr-1">Kali</span>
-            </div>
+          <div className="absolute bottom-8 right-8 animate-float-slow animation-delay-500 z-20">
+            <DistroBadge name="Kali" letter="K" color="zinc" />
           </div>
         </div>
       </div>
+
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-zinc-950 to-transparent pointer-events-none"
+        aria-hidden="true"
+      />
 
       <style>{`
         @keyframes spin-slow {
