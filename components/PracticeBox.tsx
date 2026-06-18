@@ -1,5 +1,5 @@
 ﻿'use client'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { ChevronDown, Lightbulb } from 'lucide-react'
 
 interface PracticeBoxProps {
@@ -7,7 +7,7 @@ interface PracticeBoxProps {
   hint: string
 }
 
-export default function PracticeBox({ task, hint }: PracticeBoxProps) {
+const PracticeBox = memo(function PracticeBox({ task, hint }: PracticeBoxProps) {
   const [showHint, setShowHint] = useState<boolean>(false)
 
   return (
@@ -36,4 +36,6 @@ export default function PracticeBox({ task, hint }: PracticeBoxProps) {
       )}
     </div>
   )
-}
+})
+
+export default PracticeBox
