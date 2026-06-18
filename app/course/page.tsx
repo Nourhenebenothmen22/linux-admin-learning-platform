@@ -100,17 +100,15 @@ export default function CoursePage() {
       </Suspense>
 
       <main className="flex-1 lg:pl-72 min-h-dvh">
-        {/* Mobile top bar with lesson selector */}
-        <div className="lg:hidden sticky top-16 z-20 bg-[#050505] border-b border-white/[0.06] px-4 py-3 flex items-center gap-3">
+        <div className="lg:hidden px-4 lg:px-8 pt-4 pb-0">
           <button
             onClick={(): void => setMobileSidebarOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-zinc-300 hover:bg-white/[0.06] smooth-transition"
+            className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-zinc-300 hover:bg-white/[0.06] smooth-transition"
             aria-label="Open lessons sidebar"
           >
             <Menu className="w-4 h-4" />
             <span>Lessons</span>
           </button>
-          <span className="text-sm text-zinc-500 truncate">{activeLesson?.title ?? 'Select a lesson'}</span>
         </div>
 
         <Suspense fallback={<LessonSkeleton />}>

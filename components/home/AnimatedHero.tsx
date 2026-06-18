@@ -34,9 +34,9 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-8 lg:py-12 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-6 lg:py-8 grid lg:grid-cols-[1.1fr_1fr] gap-6 lg:gap-10 items-center w-full">
 
-        <div className="space-y-5 lg:space-y-6">
+        <div className="space-y-4 lg:space-y-4">
           <div className="inline-flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 backdrop-blur-sm w-fit">
             <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-500/30">
               <BookOpen className="w-3 h-3 text-green-300" aria-hidden="true" />
@@ -51,14 +51,14 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           </div>
 
           <h1 className="font-bold leading-[0.95] tracking-tight">
-            <span className="block text-[clamp(2.2rem,5vw,4rem)] sm:text-5xl lg:text-6xl xl:text-[5.5rem] text-white animate-fade-up">
+            <span className="block text-[clamp(1.8rem,4.5vw,3.5rem)] sm:text-4xl lg:text-5xl xl:text-6xl text-white animate-fade-up">
               Master
             </span>
-            <span className="block text-[clamp(2.2rem,5vw,4rem)] sm:text-5xl lg:text-6xl xl:text-[5.5rem] text-white animate-fade-up animation-delay-100">
+            <span className="block text-[clamp(1.8rem,4.5vw,3.5rem)] sm:text-4xl lg:text-5xl xl:text-6xl text-white animate-fade-up animation-delay-100">
               Linux Like
             </span>
             <span
-              className="block text-[clamp(2.2rem,5vw,4rem)] sm:text-5xl lg:text-6xl xl:text-[5.5rem] animate-fade-up animation-delay-200"
+              className="block text-[clamp(1.8rem,4.5vw,3.5rem)] sm:text-4xl lg:text-5xl xl:text-6xl animate-fade-up animation-delay-200"
               style={{
                 background: 'linear-gradient(135deg, #22c55e 0%, #10b981 50%, #06b6d4 100%)',
                 WebkitBackgroundClip: 'text',
@@ -70,7 +70,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
             </span>
           </h1>
 
-          <p className="text-base md:text-lg text-zinc-400 leading-relaxed max-w-xl animate-fade-up animation-delay-300">
+          <p className="text-sm md:text-base text-zinc-400 leading-relaxed max-w-xl animate-fade-up animation-delay-300">
             From your first command to managing production servers. Interactive lessons,
             real terminal practice, and quizzes that take you from{' '}
             <span className="text-green-400 font-semibold">zero to sysadmin</span>.
@@ -79,7 +79,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           <div className="flex flex-wrap gap-3 animate-fade-up animation-delay-400">
             <Link
               href="/course"
-              className="group inline-flex items-center gap-2 px-6 py-3.5 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold rounded-xl shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 hover:-translate-y-0.5 transition-all"
+              className="group inline-flex items-center gap-2 px-5 py-3 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold rounded-xl shadow-2xl shadow-green-500/40 hover:shadow-green-500/60 hover:-translate-y-0.5 transition-all"
             >
               <Zap className="w-4 h-4" aria-hidden="true" />
               <span>Start Free</span>
@@ -87,14 +87,14 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
             </Link>
             <Link
               href="/roadmap"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 backdrop-blur-sm transition-all"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 backdrop-blur-sm transition-all"
             >
               <span>View Roadmap</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-3 text-sm text-zinc-500 animate-fade-up animation-delay-500">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 animate-fade-up animation-delay-500">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-green-400" aria-hidden="true" />
               <span><strong className="text-white">50+</strong> Lessons</span>
@@ -110,16 +110,16 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center min-h-[300px] lg:min-h-0 lg:h-full py-4 lg:py-0">
+        <div className="relative flex items-center justify-center min-h-[220px] lg:min-h-0 lg:h-full py-4 lg:py-0">
 
           {/* Layered glow effects */}
           <div
-            className="absolute inset-0 m-auto w-[450px] h-[450px] rounded-full blur-[80px] opacity-50 pointer-events-none"
+            className="absolute inset-0 m-auto w-[380px] h-[380px] rounded-full blur-[70px] opacity-50 pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.6) 0%, transparent 60%)' }}
             aria-hidden="true"
           />
           <div
-            className="absolute inset-0 m-auto w-[380px] h-[380px] rounded-full blur-[40px] opacity-40 pointer-events-none"
+            className="absolute inset-0 m-auto w-[300px] h-[300px] rounded-full blur-[30px] opacity-40 pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.8) 0%, transparent 50%)' }}
             aria-hidden="true"
           />
@@ -138,7 +138,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
             />
 
             {/* Image container with circular frame */}
-            <div className="relative w-[260px] h-[260px] sm:w-[300px] sm:h-[300px] lg:w-[320px] lg:h-[320px] xl:w-[360px] xl:h-[360px]">
+            <div className="relative w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] xl:w-[300px] xl:h-[300px]">
 
               {/* Dark inner ring */}
               <div className="absolute inset-0 rounded-full bg-zinc-950 p-[3px]">
@@ -169,7 +169,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
 
               {/* Highlight reflection on glass */}
               <div
-                className="absolute top-4 left-4 w-16 h-16 rounded-full opacity-20 blur-xl pointer-events-none"
+                className="absolute top-3 left-3 w-12 h-12 rounded-full opacity-20 blur-xl pointer-events-none"
                 style={{
                   background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)"
                 }}
@@ -179,7 +179,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
 
             {/* Floor shadow */}
             <div
-              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[240px] h-[24px] rounded-full blur-2xl opacity-40 pointer-events-none"
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[200px] h-[20px] rounded-full blur-2xl opacity-40 pointer-events-none"
               style={{
                 background: "radial-gradient(ellipse, rgba(34,197,94,0.7) 0%, transparent 70%)"
               }}
@@ -191,7 +191,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           <div className="absolute top-4 right-2 animate-float-slow z-20 max-sm:hidden">
             <DistroBadge name="Ubuntu" letter="U" color="orange" />
           </div>
-          <div className="absolute top-12 left-0 animate-float-slow animation-delay-200 z-20 max-sm:hidden">
+          <div className="absolute top-10 left-2 animate-float-slow animation-delay-200 z-20 max-sm:hidden">
             <DistroBadge name="Debian" letter="D" color="red" />
           </div>
           <div className="absolute top-1/2 left-0 -translate-y-8 animate-float-slow animation-delay-400 z-20 max-sm:hidden">
@@ -200,10 +200,10 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
           <div className="absolute top-1/2 right-0 -translate-y-8 animate-float-slow animation-delay-100 z-20 max-sm:hidden">
             <DistroBadge name="Arch" letter="A" color="cyan" />
           </div>
-          <div className="absolute bottom-16 left-4 animate-float-slow animation-delay-300 z-20">
+          <div className="absolute bottom-12 left-4 animate-float-slow animation-delay-300 z-20 max-sm:hidden">
             <DistroBadge name="CentOS" letter="C" color="purple" />
           </div>
-          <div className="absolute bottom-8 right-8 animate-float-slow animation-delay-500 z-20 max-sm:hidden">
+          <div className="absolute bottom-6 right-8 animate-float-slow animation-delay-500 z-20 max-sm:hidden">
             <DistroBadge name="Kali" letter="K" color="zinc" />
           </div>
         </div>
