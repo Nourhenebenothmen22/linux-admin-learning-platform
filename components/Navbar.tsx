@@ -2,14 +2,19 @@
 
 import { memo, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { JSX } from 'react'
 import { ArrowRight, Menu, X } from 'lucide-react'
 
 const Navbar = memo(function Navbar(): JSX.Element {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const pathname = usePathname()
+  const isHome = pathname === '/'
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/95 backdrop-blur-xl">
+    <header className={`sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl ${
+      isHome ? 'bg-black/30' : 'bg-zinc-950/95'
+    }`}>
       <nav
         aria-label="Main navigation"
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
