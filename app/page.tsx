@@ -1,54 +1,39 @@
 import Link from "next/link";
-import type { LucideIcon } from "lucide-react";
-import {
-  Terminal,
-  BookOpen,
-  Shield,
-  Code,
-  Network,
-  Server,
-  ChevronRight,
-  ArrowRight,
-} from "lucide-react";
+import dynamic from "next/dynamic";
+import { Terminal, BookOpen, ArrowRight, ChevronRight } from "lucide-react";
+import type { JSX } from "react";
 
-interface Feature {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
+const FeatureCards = dynamic(
+  () => import("../components/home/FeatureCards"),
+  {
+    ssr: true,
+    loading: (): JSX.Element => (
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl font-bold text-zinc-100 mb-3">What You Will Learn</h2>
+          <p className="text-sm text-zinc-400 max-w-xl mx-auto">Loading...</p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 5 }, (_: unknown, i: number) => (
+            <div key={i} className="h-32 bg-zinc-800 rounded-xl animate-pulse" />
+          ))}
+        </div>
+      </section>
+    ),
+  }
+)
 
-const features: Feature[] = [
+const TerminalPreview = dynamic(
+  () => import("../components/home/TerminalPreview"),
   {
-    icon: Terminal,
-    title: "Commands",
-    description:
-      "Master essential Linux commands from file operations to process management with real examples.",
-  },
-  {
-    icon: Shield,
-    title: "Permissions",
-    description:
-      "Understand users, groups, chmod, chown, and sudo to secure your Linux systems.",
-  },
-  {
-    icon: Code,
-    title: "Shell Scripting",
-    description:
-      "Automate tasks with bash scripts using variables, conditions, loops, and functions.",
-  },
-  {
-    icon: Network,
-    title: "Networking",
-    description:
-      "Configure networks, use SSH, manage firewalls, and troubleshoot connectivity issues.",
-  },
-  {
-    icon: Server,
-    title: "System Administration",
-    description:
-      "Manage services, cron jobs, disk usage, backups, and perform real admin tasks.",
-  },
-];
+    ssr: true,
+    loading: (): JSX.Element => (
+      <section className="max-w-6xl mx-auto px-6 pb-20">
+        <div className="h-64 bg-zinc-900 rounded-xl border border-zinc-800 animate-pulse" />
+      </section>
+    ),
+  }
+)
 
 export default function Home() {
   return (
@@ -120,70 +105,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="max-w-6xl mx-auto px-6 py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-zinc-100 mb-3">
-              What You Will Learn
-            </h2>
-            <p className="text-sm text-zinc-400 max-w-xl mx-auto">
-              A structured curriculum covering everything from the Linux command
-              line to advanced system administration.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((feature: Feature) => (
-              <div
-                key={feature.title}
-                className="bg-[#1a1a1a] rounded-xl border border-zinc-800 p-6 hover:border-green-500/30 transition-all group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
-                  <feature.icon className="w-5 h-5 text-green-400" />
-                </div>
-                <h3 className="text-sm font-semibold text-zinc-200 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="max-w-6xl mx-auto px-6 pb-20">
-          <div className="bg-[#1a1a1a] rounded-xl border border-zinc-800 overflow-hidden">
-            <div className="p-6 md:p-8">
-              <h2 className="text-xl font-bold text-zinc-100 mb-4">
-                Terminal Preview
-              </h2>
-              <div className="bg-[#0d0d0d] rounded-lg border border-zinc-800 overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border-b border-zinc-800">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="text-xs text-zinc-400 ml-2">terminal</span>
-                </div>
-                <pre className="p-4 md:p-6 overflow-x-auto">
-                  <code className="text-xs md:text-sm font-mono leading-relaxed text-green-400">
-{`$ uname -a
-Linux academy-server 6.8.0-45-generic #45-Ubuntu SMP PREEMPT_DYNAMIC x86_64 GNU/Linux
-
-$ whoami
-student
-
-$ ls -la /home
-total 24
-drwxr-xr-x  4 root   root   4096 Jun 10 10:00 .
-drwxr-xr-x 18 root   root   4096 Jun 10 10:00 ..
-drwxr-xr-x  5 student student 4096 Jun 15 14:30 student
-
-$ echo "Welcome to Linux Academy"
-Welcome to Linux Academy`}</code>
-                </pre>
-              </div>
-            </div>
-          </div>
-        </section>
+        <FeatureCards />
+        <TerminalPreview />
       </main>
 
       <footer className="border-t border-zinc-800 py-8">
