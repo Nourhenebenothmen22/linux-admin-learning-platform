@@ -155,10 +155,24 @@ const FeaturesCarousel = memo(function FeaturesCarousel(): JSX.Element {
       aria-label="What you will learn carousel"
       className="w-full max-w-7xl mx-auto px-4 py-20"
     >
-      <div className="text-center mb-12">
-        <h2 className="text-2xl font-bold text-zinc-100 mb-3">What You Will Learn</h2>
-        <p className="text-sm text-zinc-400 max-w-xl mx-auto">
-          A structured curriculum covering everything from the Linux command line to advanced system administration.
+      <div className="text-center mb-12 max-w-3xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase">Curriculum</span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+          Everything You Need to{' '}
+          <span style={{
+            background: 'linear-gradient(135deg, #22c55e 0%, #06b6d4 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+            Become a Sysadmin
+          </span>
+        </h2>
+        <p className="text-base md:text-lg text-zinc-400">
+          A structured curriculum covering everything from your first command to managing production servers.
         </p>
       </div>
 
@@ -201,12 +215,12 @@ const FeaturesCarousel = memo(function FeaturesCarousel(): JSX.Element {
                 aria-label={`${index + 1} of ${features.length}: ${feature.title}`}
                 className="flex-none w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] snap-start"
               >
-                <article className="h-full bg-[#1a1a1a] rounded-xl border border-zinc-800 p-6 hover:border-green-500/30 transition-all group">
-                  <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
-                    <Icon className="w-5 h-5 text-green-400" />
+                <article className="h-full bg-[#1a1a1a] rounded-xl border border-zinc-800 p-5 hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/10 hover:bg-gradient-to-br hover:from-zinc-900 hover:to-zinc-800 transition-all group">
+                  <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
+                    <Icon className="w-6 h-6 text-green-400" />
                   </div>
                   <h3 className="text-sm font-semibold text-zinc-200 mb-2">{feature.title}</h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{feature.description}</p>
+                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">{feature.description}</p>
                 </article>
               </div>
             )
