@@ -1,4 +1,5 @@
 ﻿'use client'
+import { memo } from 'react'
 import { Search } from 'lucide-react'
 import type { ChangeEvent } from 'react'
 
@@ -6,7 +7,7 @@ interface SearchLessonsProps {
   onSearch: (query: string) => void
 }
 
-export default function SearchLessons({ onSearch }: SearchLessonsProps) {
+const SearchLessons = memo(function SearchLessons({ onSearch }: SearchLessonsProps) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     onSearch(e.target.value)
   }
@@ -22,4 +23,6 @@ export default function SearchLessons({ onSearch }: SearchLessonsProps) {
       />
     </div>
   )
-}
+})
+
+export default SearchLessons
