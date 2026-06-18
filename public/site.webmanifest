@@ -5,14 +5,14 @@
   "start_url": "/linux-admin-learning-platform/",
   "scope": "/linux-admin-learning-platform/",
   "display": "standalone",
-  "background_color": "#0f172a",
+  "background_color": "#0a0a0a",
   "theme_color": "#22c55e",
   "icons": [
     {
-      "src": "/linux-admin-learning-platform/favicon.svg",
+      "src": "/linux-admin-learning-platform/Linux-Logo.jpg",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/jpeg",
+      "purpose": "any"
     }
   ]
 }

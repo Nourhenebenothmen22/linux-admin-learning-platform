@@ -32,17 +32,46 @@ export const metadata: Metadata = {
     template: "%s | Linux System Admin Academy",
   },
   description:
-    "Master Linux from beginner commands to real system administration. Interactive lessons, quizzes, and practice exercises.",
+    "Master Linux from beginner commands to real system administration. Interactive lessons, hands-on practice, and quizzes designed to take you from zero to system administrator.",
+  keywords: ["Linux", "system administration", "terminal", "bash", "shell scripting", "sysadmin", "Linux tutorial"],
+  manifest: `${BASE_PATH}/site.webmanifest`,
   icons: {
     icon: [
-      { url: `${BASE_PATH}/favicon.svg`, type: "image/svg+xml" },
+      {
+        url: `${BASE_PATH}/Linux-Logo.jpg`,
+        type: "image/jpeg",
+        sizes: "any",
+      },
     ],
-    apple: [
-      { url: `${BASE_PATH}/favicon.svg`, sizes: "180x180", type: "image/svg+xml" },
-    ],
-    shortcut: `${BASE_PATH}/favicon.svg`,
+    apple: {
+      url: `${BASE_PATH}/Linux-Logo.jpg`,
+      type: "image/jpeg",
+      sizes: "180x180",
+    },
+    shortcut: `${BASE_PATH}/Linux-Logo.jpg`,
   },
-  manifest: `${BASE_PATH}/site.webmanifest`,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://nourhenebenothmen22.github.io/linux-admin-learning-platform",
+    siteName: "Linux System Admin Academy",
+    title: "Linux System Admin Academy",
+    description: "Master Linux from beginner commands to real system administration.",
+    images: [
+      {
+        url: `${BASE_PATH}/Linux-Logo.jpg`,
+        width: 800,
+        height: 800,
+        alt: "Linux System Admin Academy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Linux System Admin Academy",
+    description: "Master Linux from beginner to system administrator.",
+    images: [`${BASE_PATH}/Linux-Logo.jpg`],
+  },
   other: {
     "theme-color": "#22c55e",
     "X-Content-Type-Options": "nosniff",
@@ -66,9 +95,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" href="/linux-admin-learning-platform/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/linux-admin-learning-platform/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/linux-admin-learning-platform/favicon.svg" />
+        <link rel="icon" type="image/jpeg" href="/linux-admin-learning-platform/Linux-Logo.jpg" sizes="any" />
+        <link rel="apple-touch-icon" href="/linux-admin-learning-platform/Linux-Logo.jpg" />
+        <link rel="shortcut icon" href="/linux-admin-learning-platform/Linux-Logo.jpg" type="image/jpeg" />
         <meta name="theme-color" content="#22c55e" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <style>{`
