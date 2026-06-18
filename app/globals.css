@@ -140,12 +140,20 @@ body {
 .animation-delay-400 { animation-delay: 0.4s; }
 .animation-delay-500 { animation-delay: 0.5s; }
 
+@keyframes gradient-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-float-slow,
   .animate-fade-up {
     animation: none !important;
     opacity: 1 !important;
+  }
+  [style*="gradient-rotate"] {
+    animation: none !important;
   }
 }
 

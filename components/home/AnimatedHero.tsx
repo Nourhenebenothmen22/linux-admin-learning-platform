@@ -111,34 +111,83 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
         </div>
 
         <div className="relative h-[500px] lg:h-[600px] flex items-center justify-center">
+
+          {/* Layered glow effects */}
           <div
-            className="absolute inset-0 m-auto w-[450px] h-[450px] rounded-full blur-3xl opacity-50 pointer-events-none"
-            style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.4) 0%, transparent 70%)' }}
+            className="absolute inset-0 m-auto w-[450px] h-[450px] rounded-full blur-[80px] opacity-50 pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.6) 0%, transparent 60%)' }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0 m-auto w-[380px] h-[380px] rounded-full blur-[40px] opacity-40 pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.8) 0%, transparent 50%)' }}
             aria-hidden="true"
           />
 
-          <div
-            className="absolute inset-0 m-auto w-[480px] h-[480px] rounded-full border border-green-500/20 animate-spin-slow pointer-events-none"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute inset-0 m-auto w-[420px] h-[420px] rounded-full border border-green-500/10 animate-spin-slow-reverse pointer-events-none"
-            aria-hidden="true"
-          />
-
+          {/* THE LINUX LOGO - PERFECT CIRCULAR PREMIUM LOOK */}
           <div className="relative animate-float z-10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/linux-admin-learning-platform/Linux-Logo.jpg"
-              alt="Linux Tux Penguin Mascot"
-              width={400}
-              height={400}
-              loading="eager"
-              decoding="async"
-              className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] object-contain drop-shadow-[0_25px_50px_rgba(34,197,94,0.4)] rounded-3xl"
+
+            {/* Animated gradient border ring */}
+            <div
+              className="absolute -inset-1 rounded-full opacity-75 pointer-events-none"
+              style={{
+                background: "conic-gradient(from 0deg, #22c55e, #10b981, #06b6d4, #22c55e)",
+                animation: "gradient-rotate 8s linear infinite"
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Image container with circular frame */}
+            <div className="relative w-[300px] h-[300px] md:w-[380px] md:h-[380px]">
+
+              {/* Dark inner ring */}
+              <div className="absolute inset-0 rounded-full bg-zinc-950 p-[3px]">
+
+                {/* Image circle - black bg blends with dark frame */}
+                <div className="w-full h-full rounded-full overflow-hidden bg-zinc-900 relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/linux-admin-learning-platform/Linux-Logo.jpg"
+                    alt="Linux Tux Penguin Mascot"
+                    width={380}
+                    height={380}
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* Inner shadow for depth + vignette */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      boxShadow: "inset 0 0 40px rgba(0,0,0,0.6), inset 0 0 80px rgba(34,197,94,0.1)"
+                    }}
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+
+              {/* Highlight reflection on glass */}
+              <div
+                className="absolute top-4 left-4 w-16 h-16 rounded-full opacity-20 blur-xl pointer-events-none"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)"
+                }}
+                aria-hidden="true"
+              />
+            </div>
+
+            {/* Floor shadow */}
+            <div
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[240px] h-[24px] rounded-full blur-2xl opacity-40 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse, rgba(34,197,94,0.7) 0%, transparent 70%)"
+              }}
+              aria-hidden="true"
             />
           </div>
 
+          {/* Distro badges floating around the logo */}
           <div className="absolute top-4 right-2 animate-float-slow z-20">
             <DistroBadge name="Ubuntu" letter="U" color="orange" />
           </div>
@@ -166,30 +215,12 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
       />
 
       <style>{`
-        @keyframes spin-slow {
-          from { transform: translate(-50%, -50%) rotate(0deg); }
-          to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes spin-slow-reverse {
-          from { transform: translate(-50%, -50%) rotate(0deg); }
-          to { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-          will-change: transform;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-        }
-        .animate-spin-slow-reverse {
-          animation: spin-slow-reverse 25s linear infinite;
-          will-change: transform;
-          position: absolute;
-          top: 50%;
-          left: 50%;
+        @keyframes gradient-rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .animate-spin-slow, .animate-spin-slow-reverse {
+          [style*="gradient-rotate"] {
             animation: none !important;
           }
         }
