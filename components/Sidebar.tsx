@@ -1,4 +1,5 @@
 ﻿'use client'
+import { memo } from 'react'
 import Link from 'next/link'
 import { Terminal } from 'lucide-react'
 import type { LessonLevel } from '../data/linuxCourse'
@@ -26,7 +27,7 @@ interface SidebarProps {
   onSearch: (query: string) => void
 }
 
-export default function Sidebar({
+const Sidebar = memo(function Sidebar({
   sections,
   activeLessonId,
   onLessonClick,
@@ -38,7 +39,7 @@ export default function Sidebar({
 
   return (
     <aside className="fixed left-0 top-0 bottom-0 w-72 bg-[#111111] border-r border-zinc-800 flex flex-col z-30">
-      <Link href="/" className="flex items-center gap-2 px-4 py-4 border-b border-zinc-800 hover:bg-zinc-800/50 transition-colors">
+      <Link href="/" className="flex items-center gap-2 px-4 py-4 border-b border-zinc-800 hover:bg-zinc-800/50 smooth-transition">
         <Terminal className="w-5 h-5 text-green-400" />
         <span className="text-sm font-semibold text-zinc-100">Linux Academy</span>
       </Link>
@@ -73,4 +74,6 @@ export default function Sidebar({
       </nav>
     </aside>
   )
-}
+})
+
+export default Sidebar

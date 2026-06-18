@@ -3,19 +3,16 @@
   "short_name": "Linux Academy",
   "description": "Master Linux from beginner to system administrator",
   "start_url": "/linux-admin-learning-platform/",
+  "scope": "/linux-admin-learning-platform/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#22c55e",
   "icons": [
     {
-      "src": "/linux-admin-learning-platform/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/linux-admin-learning-platform/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/linux-admin-learning-platform/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }

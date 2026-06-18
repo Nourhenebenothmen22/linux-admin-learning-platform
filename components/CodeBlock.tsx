@@ -1,5 +1,5 @@
 ﻿'use client'
-import { useState } from 'react'
+import { memo, useState, useCallback } from 'react'
 import { Copy, Check } from 'lucide-react'
 
 interface CodeBlockProps {
@@ -8,10 +8,10 @@ interface CodeBlockProps {
   label?: string
 }
 
-export default function CodeBlock({ command, language, label }: CodeBlockProps) {
+const CodeBlock = memo(function CodeBlock({ command, language, label }: CodeBlockProps) {
   const [copied, setCopied] = useState<boolean>(false)
 
-  const handleCopy = async (): Promise<void> => {
+  const handleCopy = useCallback(async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(command)
       setCopied(true)
@@ -26,7 +26,7 @@ export default function CodeBlock({ command, language, label }: CodeBlockProps) 
       setCopied(true)
       setTimeout((): void => setCopied(false), 2000)
     }
-  }
+  }, [command])
 
   return (
     <div className="rounded-lg overflow-hidden border border-zinc-800 my-4">
@@ -41,7 +41,7 @@ export default function CodeBlock({ command, language, label }: CodeBlockProps) 
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-green-400 transition-colors"
+          className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-green-400 smooth-transition"
         >
           {copied ? (
             <>
@@ -61,4 +61,6 @@ export default function CodeBlock({ command, language, label }: CodeBlockProps) 
       </pre>
     </div>
   )
-}
+})
+
+export default CodeBlock

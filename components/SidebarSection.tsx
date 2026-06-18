@@ -41,17 +41,17 @@ export default function SidebarSection({
     <div className="mb-1">
       <button
         onClick={handleToggle}
-        className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-zinc-800/50 transition-colors"
+        className="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-zinc-800/50 smooth-transition"
       >
         <div className="flex items-center gap-2 min-w-0">
           <ChevronDown
-            className={`w-3.5 h-3.5 text-zinc-500 flex-shrink-0 transition-transform ${
+            className={`w-3.5 h-3.5 text-zinc-400 flex-shrink-0 smooth-transition ${
               expanded ? 'rotate-0' : '-rotate-90'
             }`}
           />
           <span className="text-sm font-medium text-zinc-300 truncate">{title}</span>
         </div>
-        <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded flex-shrink-0 ml-2">
+        <span className="text-xs text-zinc-400 bg-zinc-800 px-1.5 py-0.5 rounded flex-shrink-0 ml-2">
           {lessons.length}
         </span>
       </button>
@@ -65,7 +65,7 @@ export default function SidebarSection({
               <button
                 key={lesson.id}
                 onClick={(): void => onLessonClick(lesson.id)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-left transition-all ${
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-left smooth-transition ${
                   isActive
                     ? 'bg-green-500/10 text-green-400 border-l-2 border-green-500'
                     : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/30 border-l-2 border-transparent'

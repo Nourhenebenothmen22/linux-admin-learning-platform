@@ -1,5 +1,5 @@
 ﻿'use client'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Check, X } from 'lucide-react'
 
 interface QuizCardProps {
@@ -9,7 +9,7 @@ interface QuizCardProps {
   explanation: string
 }
 
-export default function QuizCard({ question, options, correctAnswer, explanation }: QuizCardProps) {
+const QuizCard = memo(function QuizCard({ question, options, correctAnswer, explanation }: QuizCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showExplanation, setShowExplanation] = useState<boolean>(false)
 
@@ -44,7 +44,7 @@ export default function QuizCard({ question, options, correctAnswer, explanation
               key={index}
               onClick={(): void => handleSelect(index)}
               disabled={selectedAnswer !== null}
-              className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border text-sm text-left transition-all ${optionStyle}`}
+              className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border text-sm text-left smooth-transition ${optionStyle}`}
             >
               <span className="flex-shrink-0 w-6 h-6 rounded-full border border-current flex items-center justify-center text-xs font-medium">
                 {String.fromCharCode(65 + index)}
@@ -69,4 +69,6 @@ export default function QuizCard({ question, options, correctAnswer, explanation
       )}
     </div>
   )
-}
+})
+
+export default QuizCard

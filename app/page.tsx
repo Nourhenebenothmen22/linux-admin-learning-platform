@@ -75,7 +75,7 @@ export default function Home() {
           </Link>
           <Link
             href="/course"
-            className="text-sm px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg transition-colors font-medium"
+            className="text-sm px-4 py-2 bg-green-500 hover:bg-green-400 text-black rounded-lg transition-colors font-medium"
           >
             Start Learning
           </Link>
@@ -103,7 +103,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <Link
                   href="/course"
-                  className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg transition-colors font-medium text-sm"
+                  className="flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-400 text-black rounded-lg transition-colors font-medium text-sm"
                 >
                   Start Learning
                   <ArrowRight className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-zinc-100 mb-3">
               What You Will Learn
             </h2>
-            <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+            <p className="text-sm text-zinc-400 max-w-xl mx-auto">
               A structured curriculum covering everything from the Linux command
               line to advanced system administration.
             </p>
@@ -142,7 +142,7 @@ export default function Home() {
                 <h3 className="text-sm font-semibold text-zinc-200 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-xs text-zinc-500 leading-relaxed">
+                <p className="text-xs text-zinc-400 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -161,7 +161,7 @@ export default function Home() {
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="text-xs text-zinc-500 ml-2">terminal</span>
+                  <span className="text-xs text-zinc-400 ml-2">terminal</span>
                 </div>
                 <pre className="p-4 md:p-6 overflow-x-auto">
                   <code className="text-xs md:text-sm font-mono leading-relaxed text-green-400">
@@ -190,7 +190,7 @@ Welcome to Linux Academy`}</code>
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-green-400" />
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-zinc-400">
               Linux System Admin Academy
             </span>
           </div>

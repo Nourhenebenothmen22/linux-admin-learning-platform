@@ -136,7 +136,7 @@ export default function RoadmapPage() {
       <main className="max-w-4xl mx-auto px-6 py-16">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-300 transition-colors mb-8"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Back to Home
@@ -146,7 +146,7 @@ export default function RoadmapPage() {
           <h1 className="text-3xl font-bold text-zinc-100 mb-3">
             Learning Roadmap
           </h1>
-          <p className="text-sm text-zinc-500 max-w-2xl">
+          <p className="text-sm text-zinc-400 max-w-2xl">
             Follow this structured path from Linux beginner to system
             administrator. Each step builds on the previous one, progressing
             through beginner, intermediate, and advanced topics.
@@ -189,7 +189,7 @@ export default function RoadmapPage() {
                           {step.level}
                         </span>
                       </div>
-                      <p className="text-sm text-zinc-500 leading-relaxed mt-2">
+                      <p className="text-sm text-zinc-400 leading-relaxed mt-2">
                         {step.description}
                       </p>
 
@@ -224,7 +224,7 @@ export default function RoadmapPage() {
         <div className="mt-12 text-center">
           <Link
             href="/course"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg transition-colors font-medium text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-400 text-black rounded-lg transition-colors font-medium text-sm"
           >
             Start Your First Lesson
             <ArrowLeft className="w-4 h-4 rotate-180" />

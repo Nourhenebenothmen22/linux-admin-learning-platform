@@ -21,10 +21,10 @@ export default function PracticeBox({ task, hint }: PracticeBoxProps) {
 
       <button
         onClick={(): void => setShowHint(!showHint)}
-        className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-green-400 transition-colors"
+        className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-green-400 smooth-transition"
       >
         <ChevronDown
-          className={`w-3.5 h-3.5 transition-transform ${showHint ? 'rotate-0' : '-rotate-90'}`}
+          className={`w-3.5 h-3.5 smooth-transition ${showHint ? 'rotate-0' : '-rotate-90'}`}
         />
         <span>{showHint ? 'Hide Hint' : 'Show Hint'}</span>
       </button>

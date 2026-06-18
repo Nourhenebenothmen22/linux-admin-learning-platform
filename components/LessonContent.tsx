@@ -1,5 +1,5 @@
 ﻿'use client'
-import { useEffect, useRef } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import { StickyNote, Briefcase, CheckCircle } from 'lucide-react'
 import type { Lesson, LessonLevel } from '../data/linuxCourse'
 import CodeBlock from './CodeBlock'
@@ -29,13 +29,13 @@ function TerminalIcon() {
 
 function ClockIcon() {
   return (
-    <svg className="w-3.5 h-3.5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg className="w-3.5 h-3.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   )
 }
 
-export default function LessonContent({ lesson, onMarkComplete, isCompleted }: LessonContentProps) {
+const LessonContent = memo(function LessonContent({ lesson, onMarkComplete, isCompleted }: LessonContentProps) {
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
       <div className="flex flex-col items-center justify-center h-full text-center px-8 animate-fade-in">
         <TerminalIcon />
         <h2 className="text-xl font-semibold text-zinc-300 mt-4">Welcome to Linux Academy</h2>
-        <p className="text-sm text-zinc-500 mt-2 max-w-md">
+        <p className="text-sm text-zinc-400 mt-2 max-w-md">
           Select a lesson from the sidebar to start learning Linux administration.
         </p>
       </div>
@@ -72,7 +72,7 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
 
       <div className="flex items-center gap-1.5 mb-6">
         <ClockIcon />
-        <span className="text-xs text-zinc-500">{lesson.estimatedTime}</span>
+        <span className="text-xs text-zinc-400">{lesson.estimatedTime}</span>
       </div>
 
       <p className="text-sm text-zinc-300 leading-relaxed mb-8">{lesson.description}</p>
@@ -110,12 +110,12 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
                   </div>
                 )}
 
-                <p className="text-xs text-zinc-500 mb-2">Example:</p>
+                <p className="text-xs text-zinc-400 mb-2">Example:</p>
                 <CodeBlock command={cmd.example} language="bash" />
 
                 {cmd.output && (
                   <>
-                    <p className="text-xs text-zinc-500 mb-2 mt-3">Output:</p>
+                    <p className="text-xs text-zinc-400 mb-2 mt-3">Output:</p>
                     <CodeBlock command={cmd.output} />
                   </>
                 )}
@@ -201,10 +201,10 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
         <button
           onClick={onMarkComplete}
           disabled={isCompleted}
-          className={`flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+          className={`flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg smooth-transition ${
             isCompleted
               ? 'bg-green-500/10 text-green-400 cursor-default'
-              : 'bg-green-600 hover:bg-green-500 text-white'
+              : 'bg-green-500 hover:bg-green-400 text-black'
           }`}
         >
           <CheckCircle className={`w-4 h-4 ${isCompleted ? 'fill-green-400/20' : ''}`} />
@@ -213,4 +213,6 @@ export default function LessonContent({ lesson, onMarkComplete, isCompleted }: L
       </div>
     </div>
   )
-}
+})
+
+export default LessonContent

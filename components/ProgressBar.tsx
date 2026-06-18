@@ -16,8 +16,11 @@ export default function ProgressBar({ completed, total }: ProgressBarProps) {
       </div>
       <div className="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
         <div
-          className="h-full bg-green-500 rounded-full animate-fill-bar"
-          style={{ width: `${percentage}%` }}
+          className="h-full bg-green-500 rounded-full animate-fill-bar gpu-accelerated"
+          style={{
+            transform: `scaleX(${percentage / 100})`,
+            transformOrigin: 'left',
+          }}
         />
       </div>
     </div>

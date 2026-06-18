@@ -1,10 +1,43 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
-import Sidebar from '../../components/Sidebar'
-import LessonContent from '../../components/LessonContent'
+import dynamic from 'next/dynamic'
+import { Suspense, useState, useCallback, useMemo } from 'react'
 import { linuxCourse } from '../../data/linuxCourse'
 import type { Lesson } from '../../data/linuxCourse'
+
+const Sidebar = dynamic(() => import('../../components/Sidebar'), {
+  loading: () => <SidebarSkeleton />,
+})
+
+const LessonContent = dynamic(() => import('../../components/LessonContent'), {
+  loading: () => <LessonSkeleton />,
+})
+
+function SidebarSkeleton() {
+  return (
+    <div className="w-72 h-screen bg-[#111111] border-r border-zinc-800 animate-pulse">
+      <div className="p-4 space-y-3">
+        {Array.from({ length: 8 }, (_: unknown, i: number) => (
+          <div key={i} className="h-8 bg-zinc-800 rounded-lg" />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function LessonSkeleton() {
+  return (
+    <div className="flex-1 p-8 space-y-6 animate-pulse">
+      <div className="h-8 bg-zinc-800 rounded-lg w-3/4" />
+      <div className="h-4 bg-zinc-800 rounded-lg w-1/4" />
+      <div className="space-y-3">
+        {Array.from({ length: 6 }, (_: unknown, i: number) => (
+          <div key={i} className="h-4 bg-zinc-800 rounded-lg" />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function CoursePage() {
   const [activeLessonId, setActiveLessonId] = useState<string>(
@@ -50,20 +83,24 @@ export default function CoursePage() {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar
-        sections={sidebarSections}
-        activeLessonId={activeLessonId}
-        onLessonClick={handleLessonClick}
-        completedLessons={completedLessons}
-        searchQuery={searchQuery}
-        onSearch={handleSearch}
-      />
-      <main className="flex-1 ml-72 min-h-screen">
-        <LessonContent
-          lesson={activeLesson}
-          onMarkComplete={handleMarkComplete}
-          isCompleted={completedLessons.includes(activeLessonId)}
+      <Suspense fallback={<SidebarSkeleton />}>
+        <Sidebar
+          sections={sidebarSections}
+          activeLessonId={activeLessonId}
+          onLessonClick={handleLessonClick}
+          completedLessons={completedLessons}
+          searchQuery={searchQuery}
+          onSearch={handleSearch}
         />
+      </Suspense>
+      <main className="flex-1 ml-72 min-h-screen">
+        <Suspense fallback={<LessonSkeleton />}>
+          <LessonContent
+            lesson={activeLesson}
+            onMarkComplete={handleMarkComplete}
+            isCompleted={completedLessons.includes(activeLessonId)}
+          />
+        </Suspense>
       </main>
     </div>
   )
