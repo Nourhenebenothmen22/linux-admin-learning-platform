@@ -107,7 +107,6 @@ export default function RootLayout({
           a{color:inherit;text-decoration:inherit}
           button{cursor:pointer;background-color:transparent;border:0;padding:0}
           .min-h-screen{min-height:100vh}
-          .flex{display:flex}
           .flex-col{flex-direction:column}
           .items-center{align-items:center}
           .justify-center{justify-content:center}
