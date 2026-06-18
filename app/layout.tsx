@@ -124,7 +124,7 @@ export default function RootLayout({
           content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed] font-sans">
+      <body className="min-h-full flex flex-col bg-zinc-950 text-[#ededed] font-sans">
         <Navbar />
         <ErrorBoundary>
           {children}

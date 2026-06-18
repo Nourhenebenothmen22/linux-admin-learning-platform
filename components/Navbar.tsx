@@ -13,7 +13,7 @@ const Navbar = memo(function Navbar(): JSX.Element {
 
   return (
     <header className={`sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl ${
-      isHome ? 'bg-zinc-950/80' : 'bg-zinc-950/95'
+      isHome ? 'bg-transparent' : 'bg-zinc-950/95'
     }`}>
       <nav
         aria-label="Main navigation"
