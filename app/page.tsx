@@ -3,8 +3,8 @@ import AnimatedHero from "@/components/home/AnimatedHero"
 
 export default function HomePage(): JSX.Element {
   return (
-    <div className="flex-1 flex flex-col lg:overflow-hidden">
+    <main className="flex-1 flex flex-col lg:overflow-hidden">
       <AnimatedHero />
-    </div>
+    </main>
   )
 }
