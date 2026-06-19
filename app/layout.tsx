@@ -22,10 +22,8 @@ const geistMono = Geist_Mono({
   adjustFontFallback: true,
 });
 
-const BASE_PATH = "/linux-admin-learning-platform";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nourhenebenothmen22.github.io/linux-admin-learning-platform"),
+  metadataBase: new URL("https://linux-academy.netlify.app"),
   title: {
     default: "Linux System Admin Academy",
     template: "%s | Linux System Admin Academy",
@@ -33,26 +31,26 @@ export const metadata: Metadata = {
   description:
     "Master Linux from beginner commands to real system administration. Interactive lessons, hands-on practice, and quizzes designed to take you from zero to system administrator.",
   keywords: ["Linux", "system administration", "terminal", "bash", "shell scripting", "sysadmin", "Linux tutorial"],
-  manifest: `${BASE_PATH}/site.webmanifest`,
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
       {
-        url: `${BASE_PATH}/Linux-Logo.jpg`,
+        url: "/Linux-Logo.jpg",
         type: "image/jpeg",
         sizes: "any",
       },
     ],
     apple: {
-      url: `${BASE_PATH}/Linux-Logo.jpg`,
+      url: "/Linux-Logo.jpg",
       type: "image/jpeg",
       sizes: "180x180",
     },
-    shortcut: `${BASE_PATH}/Linux-Logo.jpg`,
+    shortcut: "/Linux-Logo.jpg",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nourhenebenothmen22.github.io/linux-admin-learning-platform",
+    url: "https://linux-academy.netlify.app",
     siteName: "Linux System Admin Academy",
     title: "Linux System Admin Academy",
     description: "Master Linux from beginner commands to real system administration.",
@@ -94,9 +92,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" type="image/jpeg" href="/linux-admin-learning-platform/Linux-Logo.jpg" sizes="any" />
-        <link rel="apple-touch-icon" href="/linux-admin-learning-platform/Linux-Logo.jpg" />
-        <link rel="shortcut icon" href="/linux-admin-learning-platform/Linux-Logo.jpg" type="image/jpeg" />
+        <link rel="icon" type="image/jpeg" href="/Linux-Logo.jpg" sizes="any" />
+        <link rel="apple-touch-icon" href="/Linux-Logo.jpg" />
+        <link rel="shortcut icon" href="/Linux-Logo.jpg" type="image/jpeg" />
         <meta name="theme-color" content="#22c55e" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <style>{`
