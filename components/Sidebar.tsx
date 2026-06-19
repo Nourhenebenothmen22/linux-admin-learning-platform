@@ -44,12 +44,6 @@ function SidebarPanel({
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-4 py-4 border-b border-white/[0.06]">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-white/[0.06] flex items-center justify-center group-hover:border-green-500/30 smooth-transition">
-            <Terminal className="w-4 h-4 text-green-400" />
-          </div>
-          <span className="text-sm font-semibold text-zinc-100">Linux Academy</span>
-        </Link>
         {showClose && onClose && (
           <button
             onClick={onClose}
