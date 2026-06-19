@@ -14,7 +14,7 @@ const SearchLessons = memo(function SearchLessons({ onSearch }: SearchLessonsPro
 
   return (
     <div className="relative group">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-green-400 smooth-transition" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 group-focus-within:text-green-400 smooth-transition" />
       <input
         type="text"
         placeholder="Search lessons..."
