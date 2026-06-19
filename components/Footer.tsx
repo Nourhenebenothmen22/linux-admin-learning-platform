@@ -66,18 +66,18 @@ const Footer = memo(function Footer(): JSX.Element {
             <ul className="space-y-2.5">
               <li>
                 <Link
-                  href="/course"
-                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
-                >
-                  Full Course
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/roadmap"
                   className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
                 >
                   Learning Roadmap
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/course"
+                  className="text-sm text-zinc-400 hover:text-green-400 transition-colors"
+                >
+                  Full Course
                 </Link>
               </li>
               <li>

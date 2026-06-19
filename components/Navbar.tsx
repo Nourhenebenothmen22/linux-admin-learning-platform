@@ -44,16 +44,16 @@ const Navbar = memo(function Navbar(): JSX.Element {
         {/* Desktop links */}
         <div className="hidden items-center gap-6 md:flex">
           <Link
-            href="/course"
-            className="text-sm font-semibold text-zinc-400 hover:text-white transition-colors"
-          >
-            Course
-          </Link>
-          <Link
             href="/roadmap"
             className="text-sm font-semibold text-zinc-400 hover:text-white transition-colors"
           >
             Roadmap
+          </Link>
+          <Link
+            href="/course"
+            className="text-sm font-semibold text-zinc-400 hover:text-white transition-colors"
+          >
+            Course
           </Link>
           <Link
             href="/course"
@@ -80,18 +80,18 @@ const Navbar = memo(function Navbar(): JSX.Element {
         <div className="border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl md:hidden">
           <div className="px-4 py-4 flex flex-col gap-1">
             <Link
-              href="/course"
-              onClick={(): void => setMenuOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-400 hover:bg-white/5 hover:text-white transition-colors"
-            >
-              Course
-            </Link>
-            <Link
               href="/roadmap"
               onClick={(): void => setMenuOpen(false)}
               className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-400 hover:bg-white/5 hover:text-white transition-colors"
             >
               Roadmap
+            </Link>
+            <Link
+              href="/course"
+              onClick={(): void => setMenuOpen(false)}
+              className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-400 hover:bg-white/5 hover:text-white transition-colors"
+            >
+              Course
             </Link>
             <Link
               href="/course"
