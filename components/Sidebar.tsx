@@ -1,7 +1,5 @@
 ﻿'use client'
 import { memo } from 'react'
-import Link from 'next/link'
-import { Terminal, X } from 'lucide-react'
 import type { LessonLevel } from '../data/linuxCourse'
 import SearchLessons from './SearchLessons'
 import ProgressBar from './ProgressBar'
@@ -50,7 +48,6 @@ function SidebarPanel({
             className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.06] smooth-transition"
             aria-label="Close sidebar"
           >
-            <X className="w-4 h-4" />
           </button>
         )}
       </div>
