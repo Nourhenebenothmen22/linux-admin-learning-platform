@@ -35,12 +35,12 @@ const CodeBlock = memo(function CodeBlock({ command, language }: CodeBlockProps)
           <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           {language && (
-            <span className="ml-3 text-xs text-zinc-500 font-mono">{language}</span>
+            <span className="ml-3 text-xs text-zinc-400 font-mono">{language}</span>
           )}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-green-400 smooth-transition"
+          className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-green-400 smooth-transition"
         >
           {copied ? (
             <>
