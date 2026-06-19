@@ -1,11 +1,7 @@
-'use client'
-
-import { memo } from 'react'
 import Link from 'next/link'
-import type { JSX } from 'react'
 import { ExternalLink, Heart } from 'lucide-react'
 
-const Footer = memo(function Footer(): JSX.Element {
+export default function Footer() {
   const currentYear: number = new Date().getFullYear()
 
   return (
@@ -147,6 +143,4 @@ const Footer = memo(function Footer(): JSX.Element {
       </div>
     </footer>
   )
-})
-
-export default Footer
+}
