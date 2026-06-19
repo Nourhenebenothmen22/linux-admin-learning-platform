@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[47257,["/linux-admin-learning-platform /_next/static/chunks/1g4u82ugxtjc0.js","/linux-admin-learning-platform /_next/static/chunks/1pdf2fv_4_sp9.js"],"ClientPageRoot"]
-3:I[50909,["/linux-admin-learning-platform /_next/static/chunks/1g4u82ugxtjc0.js","/linux-admin-learning-platform /_next/static/chunks/1pdf2fv_4_sp9.js","/linux-admin-learning-platform /_next/static/chunks/0eagbavzp8djv.js","/linux-admin-learning-platform /_next/static/chunks/1khj29vvizdwa.js"],"default"]
-6:I[97367,["/linux-admin-learning-platform /_next/static/chunks/1g4u82ugxtjc0.js","/linux-admin-learning-platform /_next/static/chunks/1pdf2fv_4_sp9.js"],"OutletBoundary"]
+2:I[47257,["/linux-admin-learning-platform/_next/static/chunks/2nmwpblo7zb29.js","/linux-admin-learning-platform/_next/static/chunks/1pdf2fv_4_sp9.js"],"ClientPageRoot"]
+3:I[50909,["/linux-admin-learning-platform/_next/static/chunks/2nmwpblo7zb29.js","/linux-admin-learning-platform/_next/static/chunks/1pdf2fv_4_sp9.js","/linux-admin-learning-platform/_next/static/chunks/0eagbavzp8djv.js","/linux-admin-learning-platform/_next/static/chunks/1khj29vvizdwa.js"],"default"]
+6:I[97367,["/linux-admin-learning-platform/_next/static/chunks/2nmwpblo7zb29.js","/linux-admin-learning-platform/_next/static/chunks/1pdf2fv_4_sp9.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/linux-admin-learning-platform /_next/static/chunks/0eagbavzp8djv.js","async":true}],["$","script","script-1",{"src":"/linux-admin-learning-platform /_next/static/chunks/1khj29vvizdwa.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"7qbvfyWR7fz_YJ6pJ0taG"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/linux-admin-learning-platform/_next/static/chunks/0eagbavzp8djv.js","async":true}],["$","script","script-1",{"src":"/linux-admin-learning-platform/_next/static/chunks/1khj29vvizdwa.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"5xwctVPY4thyuVX32MOfK"}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null

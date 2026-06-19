@@ -1,2 +1,2 @@
-:HL["/linux-admin-learning-platform /_next/static/chunks/11mimcrkleocb.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"7qbvfyWR7fz_YJ6pJ0taG"}
+:HL["/linux-admin-learning-platform/_next/static/chunks/11mimcrkleocb.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"5xwctVPY4thyuVX32MOfK"}

@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[39756,["/linux-admin-learning-platform /_next/static/chunks/1g4u82ugxtjc0.js","/linux-admin-learning-platform /_next/static/chunks/1pdf2fv_4_sp9.js"],"default"]
-3:I[37457,["/linux-admin-learning-platform /_next/static/chunks/1g4u82ugxtjc0.js","/linux-admin-learning-platform /_next/static/chunks/1pdf2fv_4_sp9.js"],"default"]
+2:I[39756,["/linux-admin-learning-platform/_next/static/chunks/2nmwpblo7zb29.js","/linux-admin-learning-platform/_next/static/chunks/1pdf2fv_4_sp9.js"],"default"]
+3:I[37457,["/linux-admin-learning-platform/_next/static/chunks/2nmwpblo7zb29.js","/linux-admin-learning-platform/_next/static/chunks/1pdf2fv_4_sp9.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"7qbvfyWR7fz_YJ6pJ0taG"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"5xwctVPY4thyuVX32MOfK"}
