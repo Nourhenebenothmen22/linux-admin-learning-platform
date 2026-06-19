@@ -11,10 +11,10 @@ const ProgressBar = memo(function ProgressBar({ completed, total }: ProgressBarP
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-zinc-500">
+        <span className="text-xs text-zinc-400">
           {completed} of {total} lessons
         </span>
-        <span className="text-xs text-zinc-500">{percentage}%</span>
+        <span className="text-xs text-zinc-400">{percentage}%</span>
       </div>
       <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
         <div
