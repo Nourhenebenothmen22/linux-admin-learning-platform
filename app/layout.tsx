@@ -31,21 +31,21 @@ export const metadata: Metadata = {
   description:
     "Master Linux from beginner commands to real system administration. Interactive lessons, hands-on practice, and quizzes designed to take you from zero to system administrator.",
   keywords: ["Linux", "system administration", "terminal", "bash", "shell scripting", "sysadmin", "Linux tutorial"],
-  manifest: "/site.webmanifest",
+  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/site.webmanifest`,
   icons: {
     icon: [
       {
-        url: "/Linux-Logo.jpg",
+        url: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`,
         type: "image/jpeg",
         sizes: "any",
       },
     ],
     apple: {
-      url: "/Linux-Logo.jpg",
+      url: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`,
       type: "image/jpeg",
       sizes: "180x180",
     },
-    shortcut: "/Linux-Logo.jpg",
+    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`,
   },
   openGraph: {
     type: "website",
@@ -92,9 +92,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" type="image/jpeg" href="/Linux-Logo.jpg" sizes="any" />
-        <link rel="apple-touch-icon" href="/Linux-Logo.jpg" />
-        <link rel="shortcut icon" href="/Linux-Logo.jpg" type="image/jpeg" />
+        <link rel="icon" type="image/jpeg" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`} sizes="any" />
+        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`} />
+        <link rel="shortcut icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`} type="image/jpeg" />
         <meta name="theme-color" content="#22c55e" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <style>{`

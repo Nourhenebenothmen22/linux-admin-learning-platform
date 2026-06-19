@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
-    "deploy": "npm run type-check && npm run build && touch out/.nojekyll && npx gh-pages -d out -b gh-pages"
+    "deploy:gh": "set NEXT_PUBLIC_BASE_PATH=/linux-admin-learning-platform && npm run type-check && npm run build && type nul > out\\.nojekyll && npx gh-pages -d out -b gh-pages",
+    "deploy:netlify": "npm run build"
   },
   "dependencies": {
     "lucide-react": "^1.21.0",

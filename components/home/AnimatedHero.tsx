@@ -143,7 +143,7 @@ export default function AnimatedHero() {
                 <div className="w-full h-full rounded-full overflow-hidden bg-zinc-900 relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/Linux-Logo.jpg"
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`}
                     alt="Linux Tux Penguin Mascot"
                     width={380}
                     height={380}
