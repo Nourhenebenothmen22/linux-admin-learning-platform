@@ -1,12 +1,8 @@
-'use client'
-
-import { memo } from 'react'
 import Link from 'next/link'
-import type { JSX } from 'react'
 import { ArrowRight, BookOpen, Sparkles, Zap } from 'lucide-react'
 import DistroBadge from '@/components/icons/DistroBadge'
 
-const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
+export default function AnimatedHero() {
   return (
     <section
       aria-label="Hero"
@@ -151,7 +147,7 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
                     alt="Linux Tux Penguin Mascot"
                     width={380}
                     height={380}
-                    loading="eager"
+                    fetchPriority="high"
                     decoding="async"
                     className="w-full h-full object-cover"
                   />
@@ -227,6 +223,4 @@ const AnimatedHero = memo(function AnimatedHero(): JSX.Element {
       `}</style>
     </section>
   )
-})
-
-export default AnimatedHero
+}
