@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Linux System Admin Academy
+
+An interactive learning platform to master Linux system administration — from beginner commands to managing production servers. Built with Next.js, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **50+ interactive lessons** covering Linux basics, terminal commands, file systems, permissions, users & groups, package management, processes, shell scripting, networking, and system administration.
+- **Structured learning roadmap** from beginner through intermediate to advanced topics.
+- **Live terminal previews** showing real command output.
+- **Progress tracking** — mark lessons as complete and track your progress.
+- **Search & filter** to quickly find specific lessons.
+- **Fully responsive** — works on desktop, tablet, and mobile.
+- **100% free and open source.**
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) 16 (App Router, static export)
+- **Language:** TypeScript
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Fonts:** Geist (Sans & Mono) via `next/font`
+- **Deployment:** GitHub Pages
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+Static output is exported to the `out` directory.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+├── app/
+│   ├── course/       # Course page with lesson viewer and sidebar
+│   ├── roadmap/      # Structured learning roadmap
+│   ├── layout.tsx    # Root layout with navbar
+│   ├── page.tsx      # Homepage
+│   └── globals.css   # Global styles and Tailwind imports
+├── components/
+│   ├── home/         # Homepage sections (hero, features, terminal, etc.)
+│   ├── Navbar.tsx    # Main navigation
+│   ├── Footer.tsx    # Site footer
+│   ├── Sidebar.tsx   # Course sidebar with lesson navigation
+│   ├── LessonContent.tsx
+│   └── ...
+├── data/
+│   └── linuxCourse.ts  # Course content and lesson data
+├── public/
+│   └── linux-admin-learning-platform/
+└── ...
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
