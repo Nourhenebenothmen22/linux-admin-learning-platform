@@ -23,7 +23,6 @@ export default function Footer() {
               aria-label="Linux Academy home"
             >
               <div className="relative w-11 h-11 rounded-xl overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all bg-zinc-900">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`}
                   alt="Linux Academy logo"
