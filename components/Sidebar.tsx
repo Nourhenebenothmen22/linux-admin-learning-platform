@@ -1,5 +1,6 @@
 ﻿'use client'
 import { memo } from 'react'
+import { X } from 'lucide-react'
 import type { LessonLevel } from '../data/linuxCourse'
 import SearchLessons from './SearchLessons'
 import ProgressBar from './ProgressBar'
@@ -45,9 +46,10 @@ function SidebarPanel({
         {showClose && onClose && (
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.06] smooth-transition"
+            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06] smooth-transition"
             aria-label="Close sidebar"
           >
+            <X className="w-5 h-5" />
           </button>
         )}
       </div>
