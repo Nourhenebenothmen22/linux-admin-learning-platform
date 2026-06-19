@@ -1,0 +1,18 @@
+{
+  "name": "Linux System Admin Academy",
+  "short_name": "Linux Academy",
+  "description": "Master Linux from beginner to system administrator",
+  "start_url": "/linux-admin-learning-platform/",
+  "scope": "/linux-admin-learning-platform/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#22c55e",
+  "icons": [
+    {
+      "src": "/linux-admin-learning-platform/Linux-Logo.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

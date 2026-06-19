@@ -1,0 +1,18 @@
+/linux-admin-learning-platform/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/linux-admin-learning-platform/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/linux-admin-learning-platform/apple-icon.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/linux-admin-learning-platform/icon.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-XSS-Protection: 1; mode=block
