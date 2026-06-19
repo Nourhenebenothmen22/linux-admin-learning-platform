@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
+import Footer from "../../components/Footer";
 import {
   Terminal,
   BookOpen,
@@ -208,6 +209,7 @@ export default function RoadmapPage() {
           </Link>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
