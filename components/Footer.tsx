@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ExternalLink, Heart } from 'lucide-react'
+import { basePath } from '../lib/basePath'
 
 export default function Footer() {
   const currentYear: number = new Date().getFullYear()
@@ -24,7 +25,7 @@ export default function Footer() {
             >
               <div className="relative w-11 h-11 rounded-xl overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all bg-zinc-900">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`}
+                  src={`${basePath}/Linux-Logo.jpg`}
                   alt="Linux Academy logo"
                   width={44}
                   height={44}

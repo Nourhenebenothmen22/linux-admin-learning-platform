@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Navbar from "../components/Navbar";
+import { basePath } from "../lib/basePath";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,21 +37,21 @@ export const metadata: Metadata = {
   description:
     "Master Linux from beginner commands to real system administration. Interactive lessons, hands-on practice, and quizzes designed to take you from zero to system administrator.",
   keywords: ["Linux", "system administration", "terminal", "bash", "shell scripting", "sysadmin", "Linux tutorial"],
-  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/site.webmanifest`,
+  manifest: `${basePath}/site.webmanifest`,
   icons: {
     icon: [
       {
-        url: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`,
+        url: `${basePath}/Linux-Logo.jpg`,
         type: "image/jpeg",
         sizes: "any",
       },
     ],
     apple: {
-      url: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`,
+      url: `${basePath}/Linux-Logo.jpg`,
       type: "image/jpeg",
       sizes: "180x180",
     },
-    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`,
+    shortcut: `${basePath}/Linux-Logo.jpg`,
   },
   openGraph: {
     type: "website",
@@ -97,9 +98,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" type="image/jpeg" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`} sizes="any" />
-        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`} />
-        <link rel="shortcut icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`} type="image/jpeg" />
+        <link rel="icon" type="image/jpeg" href={`${basePath}/Linux-Logo.jpg`} sizes="any" />
+        <link rel="apple-touch-icon" href={`${basePath}/Linux-Logo.jpg`} />
+        <link rel="shortcut icon" href={`${basePath}/Linux-Logo.jpg`} type="image/jpeg" />
         <meta name="theme-color" content="#22c55e" />
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <style>{`

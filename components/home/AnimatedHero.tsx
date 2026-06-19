@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Sparkles, Zap } from 'lucide-react'
 import DistroBadge from '@/components/icons/DistroBadge'
+import { basePath } from '@/lib/basePath'
 
 export default function AnimatedHero() {
   return (
@@ -142,7 +143,7 @@ export default function AnimatedHero() {
                 {/* Image circle - black bg blends with dark frame */}
                 <div className="w-full h-full rounded-full overflow-hidden bg-zinc-900 relative">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`}
+                    src={`${basePath}/Linux-Logo.jpg`}
                     alt="Linux Tux Penguin Mascot"
                     width={380}
                     height={380}

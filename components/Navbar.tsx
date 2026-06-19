@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { JSX } from 'react'
 import { ArrowRight, Menu, X } from 'lucide-react'
+import { basePath } from '../lib/basePath'
 
 const Navbar = memo(function Navbar(): JSX.Element {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
@@ -26,7 +27,7 @@ const Navbar = memo(function Navbar(): JSX.Element {
         >
           <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-green-500/30 group-hover:ring-green-500/60 transition-all bg-zinc-900">
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Linux-Logo.jpg`}
+              src={`${basePath}/Linux-Logo.jpg`}
               alt="Linux Academy logo"
               width={36}
               height={36}
