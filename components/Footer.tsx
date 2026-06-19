@@ -130,7 +130,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-zinc-800/50 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-zinc-500 flex items-center gap-1.5 flex-wrap justify-center">
+          <p className="text-xs text-zinc-400 flex items-center gap-1.5 flex-wrap justify-center">
             &copy; {currentYear} Linux System Admin Academy. Built with
             <Heart className="w-3 h-3 text-red-500 fill-red-500" aria-hidden="true" />
             using Next.js.

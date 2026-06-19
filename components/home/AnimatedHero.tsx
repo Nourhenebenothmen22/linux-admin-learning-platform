@@ -90,7 +90,7 @@ export default function AnimatedHero() {
             </Link>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 animate-fade-up animation-delay-500">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400 animate-fade-up animation-delay-500">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-green-400" aria-hidden="true" />
               <span><strong className="text-white">50+</strong> Lessons</span>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Navbar from "../components/Navbar";
@@ -22,8 +22,13 @@ const geistMono = Geist_Mono({
   adjustFontFallback: true,
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://linux-academy.netlify.app"),
+  metadataBase: new URL("https://linuxacademy.netlify.app"),
   title: {
     default: "Linux System Admin Academy",
     template: "%s | Linux System Admin Academy",
@@ -50,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://linux-academy.netlify.app",
+    url: "https://linuxacademy.netlify.app",
     siteName: "Linux System Admin Academy",
     title: "Linux System Admin Academy",
     description: "Master Linux from beginner commands to real system administration.",

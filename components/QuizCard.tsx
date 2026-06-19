@@ -38,7 +38,7 @@ const QuizCard = memo(function QuizCard({ question, options, correctAnswer, expl
             } else if (index === selectedAnswer && !isCorrect) {
               optionStyle = 'bg-red-500/10 border-red-500/50 text-red-300'
             } else {
-              optionStyle = 'bg-white/[0.02] border-white/[0.04] text-zinc-500'
+              optionStyle = 'bg-white/[0.02] border-white/[0.04] text-zinc-400'
             }
           }
 

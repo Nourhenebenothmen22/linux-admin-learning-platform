@@ -35,7 +35,7 @@ const LiveTerminal = memo(function LiveTerminal(): JSX.Element {
             <div className="w-3 h-3 rounded-full bg-red-500/80" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
-            <span className="text-xs text-zinc-500 ml-2 font-mono">student@academy:~$</span>
+            <span className="text-xs text-zinc-400 ml-2 font-mono">student@academy:~$</span>
           </div>
           <pre className="p-4 md:p-6 overflow-x-auto">
             <code className="text-xs md:text-sm font-mono leading-relaxed text-green-400">

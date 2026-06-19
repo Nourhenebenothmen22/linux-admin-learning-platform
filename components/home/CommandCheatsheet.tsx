@@ -60,9 +60,9 @@ const CommandCheatsheet = memo(function CommandCheatsheet(): JSX.Element {
               {item.category}
             </span>
             <p className="font-mono text-sm font-semibold text-green-300 mb-1 group-hover:text-green-200 transition-colors">
-              <span className="text-zinc-500">$ </span>{item.cmd}
+              <span className="text-zinc-400">$ </span>{item.cmd}
             </p>
-            <p className="text-xs text-zinc-500">{item.description}</p>
+            <p className="text-xs text-zinc-400">{item.description}</p>
           </div>
         ))}
       </div>
