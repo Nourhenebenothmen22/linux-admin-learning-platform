@@ -63,7 +63,7 @@ const LessonContent = memo(function LessonContent({ lesson, onMarkComplete, isCo
           <Terminal className="w-10 h-10 text-green-500/40" />
         </div>
         <h2 className="text-xl font-semibold text-zinc-300">Welcome to Linux Academy</h2>
-        <p className="text-sm text-zinc-500 mt-2 max-w-md leading-relaxed">
+        <p className="text-sm text-zinc-400 mt-2 max-w-md leading-relaxed">
           Select a lesson from the sidebar to start learning Linux administration.
         </p>
       </div>
@@ -86,7 +86,7 @@ const LessonContent = memo(function LessonContent({ lesson, onMarkComplete, isCo
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 mb-4 text-zinc-500">
+        <div className="flex items-center gap-1.5 mb-4 text-zinc-400">
           <Clock className="w-3.5 h-3.5" />
           <span className="text-xs">{lesson.estimatedTime}</span>
         </div>
@@ -105,7 +105,7 @@ const LessonContent = memo(function LessonContent({ lesson, onMarkComplete, isCo
 
                 {cmd.options && cmd.options.length > 0 && (
                   <div className="mb-4">
-                    <p className="text-xs text-zinc-500 font-medium mb-2 uppercase tracking-wider">Common Options</p>
+                    <p className="text-xs text-zinc-400 font-medium mb-2 uppercase tracking-wider">Common Options</p>
                     <div className="overflow-x-auto rounded-xl border border-white/[0.06]">
                       <table className="w-full text-xs">
                         <thead>
@@ -127,12 +127,12 @@ const LessonContent = memo(function LessonContent({ lesson, onMarkComplete, isCo
                   </div>
                 )}
 
-                <p className="text-xs text-zinc-500 mb-2 font-medium">Example:</p>
+                <p className="text-xs text-zinc-400 mb-2 font-medium">Example:</p>
                 <CodeBlock command={cmd.example} language="bash" />
 
                 {cmd.output && (
                   <>
-                    <p className="text-xs text-zinc-500 mb-2 mt-4 font-medium">Output:</p>
+                    <p className="text-xs text-zinc-400 mb-2 mt-4 font-medium">Output:</p>
                     <CodeBlock command={cmd.output} />
                   </>
                 )}
