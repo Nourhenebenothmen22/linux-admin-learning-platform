@@ -1,8 +1,3 @@
-'use client'
-
-import { memo } from 'react'
-import type { JSX } from 'react'
-
 interface DistroBadgeProps {
   name: string
   letter: string
@@ -18,7 +13,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
   zinc: { bg: 'bg-zinc-800', text: 'text-zinc-300', border: 'border-zinc-700/30' },
 }
 
-const DistroBadge = memo(function DistroBadge({ name, letter, color }: DistroBadgeProps): JSX.Element {
+export default function DistroBadge({ name, letter, color }: DistroBadgeProps) {
   const styles = colorMap[color] ?? colorMap.zinc
 
   return (
@@ -29,6 +24,4 @@ const DistroBadge = memo(function DistroBadge({ name, letter, color }: DistroBad
       <span className={`text-xs font-semibold ${styles.text} pr-1`}>{name}</span>
     </div>
   )
-})
-
-export default DistroBadge
+}
