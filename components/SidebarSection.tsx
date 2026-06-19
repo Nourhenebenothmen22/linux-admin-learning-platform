@@ -59,7 +59,7 @@ const SidebarSection = memo(function SidebarSection({
           />
           <span className="text-sm font-medium truncate">{title}</span>
         </div>
-        <span className="text-xs text-zinc-500 bg-white/[0.06] px-1.5 py-0.5 rounded-md flex-shrink-0 ml-2 font-medium">
+        <span className="text-xs text-zinc-400 bg-white/[0.06] px-1.5 py-0.5 rounded-md flex-shrink-0 ml-2 font-medium">
           {lessons.length}
         </span>
       </button>
